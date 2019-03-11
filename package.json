@@ -1,0 +1,25 @@
+{
+  "name": "wikipedia-bot",
+  "version": "0.0.1",
+  "description": "A bot where you can search Wikipedia articles with it. Not affiliated with any service or product of the Wikimedia Foundation.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianYaman/wikipedia-bot.git"
+  },
+  "keywords": [
+    "wikipedia",
+    "discord",
+    "bot",
+    "discordjs"
+  ],
+  "author": "Julian Yaman <julianyaman@posteo.eu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/julianYaman/wikipedia-bot/issues"
+  },
+  "homepage": "https://github.com/julianYaman/wikipedia-bot#readme"
+}
