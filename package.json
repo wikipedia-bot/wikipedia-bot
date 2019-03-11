@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/julianYaman/wikipedia-bot/issues"
   },
-  "homepage": "https://github.com/julianYaman/wikipedia-bot#readme"
+  "homepage": "https://github.com/julianYaman/wikipedia-bot#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
 }

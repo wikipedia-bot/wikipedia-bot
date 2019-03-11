@@ -65,3 +65,4 @@ typings/
 
 # Project files:
 config.js
+package-lock.json
