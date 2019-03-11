@@ -14,6 +14,8 @@ const client = new Discord.Client();
 
 const config = require("./config")
 
+
+// Handling client events
 client.on('warn', console.warn)
 
 client.on('error', console.error)
@@ -37,5 +39,33 @@ client.on('message', msg => {
     msg.reply('pong');
   }
 });
+
+client.on('disconnect', () => console.log('I disconnected currently but I will try to reconnect!'))
+
+client.on('reconnecting', () => console.log('Reconnecting...'))
+
+// This event will be triggered when the bot joins a guild.
+client.on('guildCreate', guild => {
+  console.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`)
+  client.user.setPresence({
+    game: {
+      name: `on ${client.guilds.size} servers! ${PREFIX}help`
+    }
+  }).catch(e => {
+    console.error(e)
+  })
+})
+
+// This event will be triggered when the bot is removed from a guild.
+client.on('guildDelete', guild => {
+  console.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`)
+  client.user.setPresence({
+    game: {
+      name: `on ${client.guilds.size} servers! ${PREFIX}help`
+    }
+  }).catch(e => {
+    console.error(e)
+  })
+})
 
 client.login(config.token);
