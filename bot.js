@@ -10,7 +10,6 @@ try {
   console.error("In case you´ve not installed any required module: \nPlease run 'npm install' and ensure it passes with no errors!")
   process.exit()
 }
-const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const config = require("./config")
