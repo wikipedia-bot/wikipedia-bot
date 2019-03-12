@@ -27,6 +27,7 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "got": "^9.6.0"
   }
 }
