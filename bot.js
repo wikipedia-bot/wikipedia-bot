@@ -86,6 +86,8 @@ client.on('message', async msg => {
 
   if (msg.author.bot) return
   if (!msg.content.startsWith(PREFIX)) return undefined
+
+
 })
 
 client.login(TOKEN);
