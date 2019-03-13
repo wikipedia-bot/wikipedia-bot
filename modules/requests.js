@@ -65,7 +65,7 @@ exports.getWikipediaShortSummary = (msg, argument) => {
               description: summary,
               timestamp: new Date(),
               footer: {
-                icon_url: 'https://upload.wikimedia.org/wikipedia/en/2/28/WikipediaMobileAppLogo.png',
+                icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
                 text: 'Information by Wikipedia. wikipedia.org'
               }
             }
@@ -74,7 +74,7 @@ exports.getWikipediaShortSummary = (msg, argument) => {
           msg.react('⛔')
           msg.channel.send(
             'You got a very rare error here, how did you get that? Write it to our GitHub Repository\n' +
-            'https://github.com/sleme/pal-bot')
+            'https://github.com/julianYaman/wikipedia-bot')
         }
       })
     } catch (e) {
