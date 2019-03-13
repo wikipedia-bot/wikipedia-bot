@@ -45,5 +45,5 @@ exports.getDate = function (/** Object */date) {
  *
  */
 exports.betterError = (/**Message*/msg, /**String*/text) => {
-  console.log(`(${msg.guild.name} | ${msg.guild.id}) ${text}`)
+  console.log(`(${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`)
 }
