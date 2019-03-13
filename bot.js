@@ -89,13 +89,15 @@ client.on('message', async msg => {
   if (msg.author.bot) return
   if (!msg.content.startsWith(PREFIX)) return undefined
 
-  const args = msg.content.split(' ')
+  let args = msg.content.split(' ')
 
   let command = msg.content.toLowerCase().split(' ')[0]
   command = command.slice(PREFIX.length)
 
   // Command: wiki
   if (command === 'wiki'){
+
+    // console.log(args)
 
     if (!args[0]) {
       message.react('👎').catch((e) => {
@@ -104,6 +106,8 @@ client.on('message', async msg => {
       message.reply('you forgot to send us something to get data.``' + PREFIX + 'wiki [argument] | Example ' + PREFIX + 'wiki Rocket League``')
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
+      searchValue = searchValue.replace(PREFIX + command + ' ', "")
+      // console.log('search value: ' + searchValue)
       requests.getWikipediaShortSummary(msg, searchValue)
     }
 
