@@ -17,7 +17,7 @@ var {PREFIX, VERSION, TOKEN} = require("./config")
 
 // Modules
 const requests = require('./modules/requests')
-
+const Util = require('./modules/util')
 
 // Handling client events
 client.on('warn', console.warn)
@@ -108,6 +108,7 @@ client.on('message', async msg => {
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
       searchValue = searchValue.replace(PREFIX + command + ' ', "")
+
       // console.log('search value: ' + searchValue)
       requests.getWikipediaShortSummary(msg, searchValue)
     }

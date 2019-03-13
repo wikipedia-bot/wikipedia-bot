@@ -48,16 +48,3 @@ exports.betterError = (/**Message*/msg, /**String*/text) => {
 
 // TODO: Creating a function which logs normal information for checking if everything runs good and
 //  for logging errors which are not related to Discord but e.g. to requests.
-
-/**
- * Capitalizing the first letter of a string
- *
- * @param string {String} - A string
- * @since master
- *
- * @public
- *
- */
-exports.capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}

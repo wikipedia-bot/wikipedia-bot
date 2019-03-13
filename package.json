@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "discord.js": "^11.4.2",
-    "got": "^9.6.0"
+    "got": "^9.6.0",
+    "lodash": "^4.17.11"
   }
 }
