@@ -25,17 +25,15 @@ exports.roundNumber = (/** Number */ value, /** Integer */ precision) => {
  *
  * @public
  */
-exports.getDate = function (/** Object */date) {
-  /* We can use this later
+exports.getDate = function (/** Date */date) {
   let hours = date.getHours();
   let minutes = "0" + date.getMinutes();
   let seconds = "0" + date.getSeconds();
-  */
-  return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+  return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + " " + hours + ":" + minutes + ":" + seconds
 }
 
 /**
- * Better solution for logging errors
+ * Better solution for logging Discord-related errors
  *
  * @param msg - Message object
  * @param text - Text which should be sent in the console
@@ -45,5 +43,21 @@ exports.getDate = function (/** Object */date) {
  *
  */
 exports.betterError = (/**Message*/msg, /**String*/text) => {
-  console.log(`(${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`)
+  console.log(`[${this.getDate(Date())}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`)
+}
+
+// TODO: Creating a function which logs normal information for checking if everything runs good and
+//  for logging errors which are not related to Discord but e.g. to requests.
+
+/**
+ * Capitalizing the first letter of a string
+ *
+ * @param string {String} - A string
+ * @since master
+ *
+ * @public
+ *
+ */
+exports.capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

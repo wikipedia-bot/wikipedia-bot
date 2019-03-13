@@ -88,8 +88,9 @@ exports.getWikipediaShortSummary = (msg, argument) => {
     } catch (e) {
       msg.react('⛔')
       msg.channel.send(
-        'Cannot get data from Wikipedia. Please check your spelling and upper and lower case. (Mostly it is upper and lower case because Wikipedia pay attention to it.)\n' +
+        'Cannot get data from Wikipedia. Maybe your search term was not properly. If you did nothing wrong, write the command `!issue`.\n' +
         '```You´ve sent the value: ' + argument + '```')
+      Util.betterError(msg, e)
     }
   }).catch(error => {
     console.log(error.response.body)
