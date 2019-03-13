@@ -19,6 +19,8 @@ var {PREFIX, VERSION, TOKEN} = require("./config")
 const requests = require('./modules/requests')
 const Util = require('./modules/util')
 
+const _ = require('lodash')
+
 // Handling client events
 client.on('warn', console.warn)
 
@@ -108,6 +110,7 @@ client.on('message', async msg => {
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
       searchValue = searchValue.replace(PREFIX + command + ' ', "")
+      searchValue = _.startCase(searchValue)
 
       // console.log('search value: ' + searchValue)
       requests.getWikipediaShortSummary(msg, searchValue)
