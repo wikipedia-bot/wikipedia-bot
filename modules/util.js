@@ -43,7 +43,7 @@ exports.getDate = function (/** Date */date) {
  *
  */
 exports.betterError = (/**Message*/msg, /**String*/text) => {
-  console.log(`[${this.getDate(Date())}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`)
+  console.log(`[${this.getDate(new Date())}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`)
 }
 
 // TODO: Creating a function which logs normal information for checking if everything runs good and

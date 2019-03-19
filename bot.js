@@ -32,7 +32,7 @@ client.on('ready', async () => {
   client.user.setPresence({
     status: "online",
     game: {
-      name: `on ${client.guilds.size} servers! ${PREFIX}help`
+      name: `on ALPHA-0.0.1`
     }
   }).catch(e => {
     console.error(e)

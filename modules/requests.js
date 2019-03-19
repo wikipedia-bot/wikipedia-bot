@@ -38,12 +38,16 @@ exports.getWikipediaShortSummary = (msg, argument) => {
           // Get the value of the fullurl parameter
           let wikipediaArticleLink = pageObject[key[0]].fullurl
 
+          // console.log(pageObject)
+
           // Finalizing the result and now requesting the thumbnail of the wikipedia article by the Media Wikipedia API.
           got("https://en.wikipedia.org/api/rest_v1/page/media/" + argument).then(res => {
             try {
 
               let mediaJSON = JSON.parse(res.body).items[0]
               let thumbnailSource = mediaJSON.thumbnail.source
+
+              // console.log(mediaJSON)
 
               // Sending the final result of the two requests as an embed to the channel where the command
               // was executed.
