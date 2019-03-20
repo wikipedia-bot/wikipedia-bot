@@ -38,7 +38,7 @@ client.on('ready', async () => {
     client.user.setPresence({
       status: "idle",
       game: {
-        name: `on ALPHA-0.0.1`
+        name: `on ${VERSION}`
       }
     }).catch(e => {
       console.error(e)
@@ -49,7 +49,7 @@ client.on('ready', async () => {
     client.user.setPresence({
       status: "online",
       game: {
-        name: `on ALPHA-0.0.1`
+        name: `on ${client.guilds.size} servers`
       }
     }).catch(e => {
       console.error(e)
