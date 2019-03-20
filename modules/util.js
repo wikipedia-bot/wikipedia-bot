@@ -48,3 +48,33 @@ exports.betterError = (/**Message*/msg, /**String*/text) => {
 
 // TODO: Creating a function which logs normal information for checking if everything runs good and
 //  for logging errors which are not related to Discord but e.g. to requests.
+
+// Beginning of such an normal information log
+exports.log = (/**String*/text, optionalInput = "info log", type = 0) => {
+
+  // Types:
+  // 0 - information
+  // 1 - warning
+  // err - error -> use Util.betterError
+  // 2 - debug
+
+  let logType
+  switch (type) {
+    case 0:
+      logType = "INFO"
+      break
+    case 1:
+      logType = "WARN"
+      break
+    case 2:
+      logType = "DEBUG"
+      break
+    case "err":
+      logType = "ERR"
+      break
+    default:
+      logType = undefined
+  }
+
+  console.log(`[${logType}] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`)
+}

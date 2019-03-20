@@ -13,7 +13,7 @@ try {
 
 const client = new Discord.Client();
 
-var {PREFIX, VERSION, TOKEN} = require("./config")
+var {PREFIX, VERSION, TOKEN, DEVELOPMENT} = require("./config")
 
 // Modules
 const requests = require('./modules/requests')
@@ -29,15 +29,34 @@ client.on('error', console.error)
 client.on('ready', async () => {
   console.log('Starting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
   console.log('This Bot is online! Running on version ' + VERSION)
-  client.user.setPresence({
-    status: "online",
-    game: {
-      name: `on ALPHA-0.0.1`
-    }
-  }).catch(e => {
-    console.error(e)
-  })
-  console.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
+
+  // Different user presences for different development stages
+  // TRUE -> Active development / debugging
+  // FALSE -> Production usage
+
+  if (DEVELOPMENT === true){
+    client.user.setPresence({
+      status: "idle",
+      game: {
+        name: `on ALPHA-0.0.1`
+      }
+    }).catch(e => {
+      console.error(e)
+    })
+    Util.log("Bot is currently set on DEVELOPMENT = true", "Bot -> Warning", 1)
+
+  } else {
+    client.user.setPresence({
+      status: "online",
+      game: {
+        name: `on ALPHA-0.0.1`
+      }
+    }).catch(e => {
+      console.error(e)
+    })
+  }
+
+  Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
 })
 
 client.on('disconnect', () => console.log('I disconnected currently but I will try to reconnect!'))

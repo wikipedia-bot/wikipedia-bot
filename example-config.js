@@ -3,5 +3,6 @@
 module.exports = {
   PREFIX: "!",
   VERSION: "1.0.0",
-  TOKEN: "<token>"
+  TOKEN: "<token>",
+  DEVELOPMENT: true
 }
