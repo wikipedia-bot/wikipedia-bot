@@ -60,7 +60,7 @@ exports.betterError = (/**Message*/msg, /**String*/text) => {
 //  for logging errors which are not related to Discord but e.g. to requests.
 
 // Beginning of such an normal information log
-exports.log = (/**String*/text, optionalInput = "info log", type = 0) => {
+exports.log = (/**String*/text, optionalInput = "info log", type = 0, logInFile=false) => {
 
   // Types:
   // 0 - information
