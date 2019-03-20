@@ -2,6 +2,16 @@
  * @fileoverview Collection of functions to make the project development and features easier.
  * */
 
+const colors = require('colors')
+
+colors.setTheme({
+  info: 'green',
+  data: 'gray',
+  warn: 'yellow',
+  error: 'red',
+  debug: 'cyan',
+})
+
 /**
  * Returns a rounded number.
  *
@@ -43,7 +53,7 @@ exports.getDate = function (/** Date */date) {
  *
  */
 exports.betterError = (/**Message*/msg, /**String*/text) => {
-  console.log(`[${this.getDate(new Date())}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`)
+  console.log(`[${this.getDate(new Date())}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`.error)
 }
 
 // TODO: Creating a function which logs normal information for checking if everything runs good and
@@ -58,23 +68,22 @@ exports.log = (/**String*/text, optionalInput = "info log", type = 0) => {
   // err - error -> use Util.betterError
   // 2 - debug
 
-  let logType
   switch (type) {
     case 0:
-      logType = "INFO"
+      console.log(`[INFO] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.info)
       break
     case 1:
-      logType = "WARN"
+      console.log(`[WARN] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.warn)
       break
     case 2:
-      logType = "DEBUG"
+      console.log(`[DEBUG] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.debug)
       break
     case "err":
-      logType = "ERR"
+      console.log(`[ERR] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.error)
       break
     default:
-      logType = undefined
+      console.log(`[??] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`)
   }
 
-  console.log(`[${logType}] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`)
+
 }
