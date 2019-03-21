@@ -38,7 +38,7 @@ client.on('ready', async () => {
     client.user.setPresence({
       status: "idle",
       game: {
-        name: `on ${VERSION}`
+        name: `on ${VERSION} | ${PREFIX}help`
       }
     }).catch(e => {
       console.error(e)
@@ -49,7 +49,7 @@ client.on('ready', async () => {
     client.user.setPresence({
       status: "online",
       game: {
-        name: `on ${client.guilds.size} servers`
+        name: `on ${client.guilds.size} servers | ${PREFIX}help`
       }
     }).catch(e => {
       console.error(e)
@@ -87,52 +87,90 @@ client.on('guildDelete', guild => {
   })
 })
 
-client.on('message', async msg => {
-  if (msg.isMentioned(client.user)) {
-    msg.delete().catch(e => {
+client.on('message', async message => {
+  if (message.isMentioned(client.user)) {
+    message.delete().catch(e => {
       // console.error(e)
-      msg.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
+      message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
     })
-    msg.author.send({
+    message.author.send({
       embed: {
         color: 3447003,
-        title: 'Wikipedia -> Commands',
+        author: {
+          name: client.user.username
+        },
+        title: `${client.user.username} / Help command`,
+        description: "A full list of commands you can use with this bot",
+        timestamp: new Date(),
         fields: [
           {
-            name: PREFIX + 'help',
-            value: 'You´ll see this here'
+            name: `${PREFIX}help`,
+            value: "You get this list of commands with the help command."
+          },
+          {
+            name: `${PREFIX}wiki <search term>`,
+            value: "Search something on Wikipedia with this command and get a short summary of it."
           }
-        ],
-        timestamp: new Date()
+        ]
       }
     })
   }
 
-  if (msg.author.bot) return
-  if (!msg.content.startsWith(PREFIX)) return undefined
+  if (message.author.bot) return
+  if (!message.content.startsWith(PREFIX)) return undefined
 
-  let args = msg.content.split(' ')
+  let args = message.content.split(' ')
 
-  let command = msg.content.toLowerCase().split(' ')[0]
+  let command = message.content.toLowerCase().split(' ')[0]
   command = command.slice(PREFIX.length)
 
-  // Command: wiki
+
+  /**
+   * Command: help
+   * Description: The help command. Shows a full list of commands.
+   * */
+  if (command === "help"){
+
+    message.channel.send({
+      embed: {
+        color: 3447003,
+        title: `${client.user.username} / Help command\nGitHub: https://github.com/julianYaman/wikipedia-bot`,
+        description: "A full list of commands you can use with this bot",
+        timestamp: new Date(),
+        fields: [
+          {
+            name: `${PREFIX}help`,
+            value: "You get this list of commands with the help command."
+          },
+          {
+            name: `${PREFIX}wiki <search term>`,
+            value: "Search something on Wikipedia with this command and get a short summary of it."
+          }
+        ]
+      }
+    })
+  }
+
+  /**
+   * Command: wiki
+   * Description: The normal wiki command used for getting short summaries of something the user searched for.
+   * */
   if (command === 'wiki'){
 
     // console.log(args)
 
     if (!args[0]) {
       message.react('👎').catch((e) => {
-        // Util.betterError(message, `Wiki Command -> !args[0] -> message.react -> catch e: ${e}`)
+        Util.betterError(message, `Wiki Command -> !args[0] -> message.react -> catch e: ${e}`)
       })
-      message.reply('you forgot to send us something to get data.``' + PREFIX + 'wiki [argument] | Example ' + PREFIX + 'wiki Rocket League``')
+      message.reply('you forgot to search for something. -> ``' + PREFIX + 'wiki [argument] | Example ' + PREFIX + 'wiki Rocket League``')
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
       searchValue = searchValue.replace(PREFIX + command + ' ', "")
       searchValue = _.startCase(searchValue)
 
       // console.log('search value: ' + searchValue)
-      requests.getWikipediaShortSummary(msg, searchValue)
+      requests.getWikipediaShortSummary(message, searchValue)
     }
 
   }
