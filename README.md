@@ -19,4 +19,27 @@ description of something you want to know more about.
 Any type of contribution is welcome. Even reporting problems or giving feedback via the Issues section
 does help a lot to know how to improve the bot and to fix problems with the bot.
 
+Before developing, create a special branch for your features or fixes you want to made 
+(if you want to make a pull request to this repository).
+
+- *Fork the repository.*
+- ``git checkour -b branch-name `` *(e.g. issue-fix-#1 or so)*
+- ``git commit -am 'Added something / Fixed something'``
+- ``git push origin branch-name``
+- Make a **[pull request](https://github.com/julianYaman/iloveradio-discord-bot/pull/new/master)**. Someone will then review your code.
+
+## Installation guide
+
+Before doing any development and testing of the bot, you should install all packages 
+which are required with
+
+```npm install```
+
+Also check that you update **[Node.js](https://nodejs.org/en/)** and optionally install the packages again to update them.
+But in this case, [Dependabot](https://dependabot.com/) takes care of updating the *package.json* dependencies.
+
+- [x] Adding an installation guide
+- [ ] Adding cool looking badges
+- [ ] Adding more content to the README
+
 ### License: [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)
