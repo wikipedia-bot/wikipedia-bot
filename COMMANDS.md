@@ -4,10 +4,10 @@
 
 - ``!help`` - You guessed it!
 - ``!wiki <search term>`` - Gives you a short summary of a Wikipedia article you searched for! 
+- ``!issue`` - Sends you a link to the Issues section of this bot.
 
 ## Coming soon!
 
-- ``!issue``
 - ``!github``
 - ``!info``
 - ``!wiki-number``

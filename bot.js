@@ -112,6 +112,10 @@ client.on('message', async message => {
           {
             name: `${PREFIX}wiki <search term>`,
             value: "Search something on Wikipedia with this command and get a short summary of it."
+          },
+          {
+            name: `${PREFIX}issue`,
+            value: "Will send you a link to the issues section of the repository of the bot to give feedback or report an error."
           }
         ]
       }
@@ -182,8 +186,8 @@ client.on('message', async message => {
   }
 
   /**
-   * Command: wiki
-   * Description: The normal wiki command used for getting short summaries of something the user searched for.
+   * Command: issue
+   * Description: Sends a link to the Issues section of the repository.
    * */
   if (command === 'issue'){
 
