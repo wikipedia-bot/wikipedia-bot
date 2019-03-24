@@ -65,7 +65,7 @@ client.on('reconnecting', () => console.log('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', guild => {
-  console.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`)
+  Util.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`)
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`
@@ -77,7 +77,7 @@ client.on('guildCreate', guild => {
 
 // This event will be triggered when the bot is removed from a guild.
 client.on('guildDelete', guild => {
-  console.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`)
+  Util.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`)
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`

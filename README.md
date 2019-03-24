@@ -14,6 +14,12 @@ With this bot on your server, you can search articles on Wikipedia and get short
 With it, you can quickly share knowledge like how high the population in a country is or to get a
 description of something you want to know more about.
 
+**License: [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
+
+**[To-Do list](https://github.com/julianYaman/wikipedia-bot/blob/master/TODO.md)**
+
+**[Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)**
+
 ## Contribution
 
 Any type of contribution is welcome. Even reporting problems or giving feedback via the Issues section
@@ -23,7 +29,7 @@ Before developing, create a special branch for your features or fixes you want t
 (if you want to make a pull request to this repository).
 
 - *Fork the repository.*
-- ``git checkour -b branch-name `` *(e.g. issue-fix-#1 or so)*
+- ``git checkout -b branch-name `` *(e.g. issue-fix-#1 or so)*
 - ``git commit -am 'Added something / Fixed something'``
 - ``git push origin branch-name``
 - Make a **[pull request](https://github.com/julianYaman/iloveradio-discord-bot/pull/new/master)**. Someone will then review your code.
@@ -41,5 +47,3 @@ But in this case, [Dependabot](https://dependabot.com/) takes care of updating t
 - [x] Adding an installation guide
 - [ ] Adding cool looking badges
 - [ ] Adding more content to the README
-
-### License: [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)
