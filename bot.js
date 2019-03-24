@@ -38,7 +38,8 @@ client.on('ready', async () => {
     client.user.setPresence({
       status: "idle",
       game: {
-        name: `on ${VERSION} | ${PREFIX}help`
+        name: `on ${VERSION} | ${PREFIX}help`,
+        type: 'WATCHING'
       }
     }).catch(e => {
       console.error(e)
@@ -49,7 +50,8 @@ client.on('ready', async () => {
     client.user.setPresence({
       status: "online",
       game: {
-        name: `on ${client.guilds.size} servers | ${PREFIX}help`
+        name: `on ${client.guilds.size} servers | ${PREFIX}help`,
+        type: 'WATCHING'
       }
     }).catch(e => {
       console.error(e)
@@ -91,7 +93,7 @@ client.on('message', async message => {
   if (message.isMentioned(client.user)) {
     message.delete().catch(e => {
       // console.error(e)
-      message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
+      // message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
     })
     message.author.send({
       embed: {
@@ -145,6 +147,10 @@ client.on('message', async message => {
           {
             name: `${PREFIX}wiki <search term>`,
             value: "Search something on Wikipedia with this command and get a short summary of it."
+          },
+          {
+            name: `${PREFIX}issue`,
+            value: "Will send you a link to the issues section of the repository of the bot to give feedback or report an error."
           }
         ]
       }
@@ -172,6 +178,20 @@ client.on('message', async message => {
       // console.log('search value: ' + searchValue)
       requests.getWikipediaShortSummary(message, searchValue)
     }
+
+  }
+
+  /**
+   * Command: wiki
+   * Description: The normal wiki command used for getting short summaries of something the user searched for.
+   * */
+  if (command === 'issue'){
+
+    message.delete().catch(e => {
+      // TODO: How to handle this properly and user-friendly?
+    })
+    message.author.send("You found an error? Please write an issue in our repository: https://github.com/julianYaman/wikipedia-bot/issues/new\n" +
+      "Write exactly what you did when the error occurred (e.g. send wiki command). With your help, we can fix this issue and improve the bot!")
 
   }
 
