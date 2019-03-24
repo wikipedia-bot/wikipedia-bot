@@ -16,9 +16,9 @@ description of something you want to know more about.
 
 **License: [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
 
-**[To-Do list](https://github.com/julianYaman/wikipedia-bot/blob/master/TODO.md)**
+### [To-Do list](https://github.com/julianYaman/wikipedia-bot/blob/master/TODO.md)
 
-**[Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)**
+### [Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)
 
 ## Contribution
 
