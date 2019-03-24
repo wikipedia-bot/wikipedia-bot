@@ -5,13 +5,14 @@ Updates or fixes which are not mentioned here are possible.
 
 - [ ] Fixing https://github.com/julianYaman/wikipedia-bot/issues/1 .
 - [ ] ``github`` command
-- [ ] ``info`` command 
 (bot information -> total amount of servers and members the bot is serving, etc.)
 - [ ] Writing all commands into COMMANDS.md.
 - [ ] Saving log events into a file. (Util)
 - [ ] Supporting the DiscordBots.org API
 - [ ] Customizable prefixes
+- [ ] Having a good looking commands site.
 
 # Done
 All tasks which were done and the commit related to the done task.
 - [x] ``issue`` command for getting a direct link to the Issues section of the repository.
+- [x] ``info`` command 

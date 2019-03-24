@@ -155,6 +155,10 @@ client.on('message', async message => {
           {
             name: `${PREFIX}issue`,
             value: "Will send you a link to the issues section of the repository of the bot to give feedback or report an error."
+          },
+          {
+            name: `${PREFIX}information`,
+            value: "Gives you some information about the bot."
           }
         ]
       }
@@ -196,6 +200,44 @@ client.on('message', async message => {
     })
     message.author.send("You found an error? Please write an issue in our repository: https://github.com/julianYaman/wikipedia-bot/issues/new\n" +
       "Write exactly what you did when the error occurred (e.g. send wiki command). With your help, we can fix this issue and improve the bot!")
+
+  }
+
+  /**
+   * Command: info
+   * Description: Sends an embed with information about the bot.
+   * */
+  if (command === 'info'){
+
+    message.channel.send({
+      embed: {
+        title: "Information about the Wikipedia Bot",
+        color: 3447003,
+        fields: [
+          {
+            name: "Repository",
+            value: "https://github.com/julianYaman/wikipedia-bot",
+            inline: true
+          },
+          {
+            name: "Serving on .. servers in total",
+            value: client.guilds.size,
+            inline: true
+          },
+          {
+            name: "Serving for .. members in total",
+            value: client.users.size,
+            inline: true
+          },
+          {
+            name: "Version",
+            value: VERSION,
+            inline: true
+          }
+        ],
+        timestamp: new Date()
+      }
+    })
 
   }
 
