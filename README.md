@@ -32,7 +32,7 @@ Before developing, create a special branch for your features or fixes you want t
 - ``git checkout -b branch-name `` *(e.g. issue-fix-#1 or so)*
 - ``git commit -am 'Added something / Fixed something'``
 - ``git push origin branch-name``
-- Make a **[pull request](https://github.com/julianYaman/iloveradio-discord-bot/pull/new/master)**. Someone will then review your code.
+- Make a **[pull request](https://github.com/julianYaman/wikipedia-bot/pull/new/master)**. Someone will then review your code.
 
 ## Installation guide
 

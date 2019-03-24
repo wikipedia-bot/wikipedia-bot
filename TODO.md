@@ -10,6 +10,7 @@ Updates or fixes which are not mentioned here are possible.
 (bot information -> total amount of servers and members the bot is serving, etc.)
 - [ ] Writing all commands into COMMANDS.md.
 - [ ] Saving log events into a file. (Util)
+- [ ] Supporting the DiscordBots.org API
 
 # Done
 All tasks which were done and the commit related to the done task.
