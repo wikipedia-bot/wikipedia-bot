@@ -4,7 +4,7 @@
 // Optional: DISCORDBOTS_TOKEN
 module.exports = {
   PREFIX: "!",
-  VERSION: "1.1.2",
+  VERSION: "1.1.4",
   TOKEN: "<token>",
   DEVELOPMENT: true,
   DISCORDBOTS_TOKEN: "optional"

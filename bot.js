@@ -138,6 +138,14 @@ client.on('message', async message => {
           {
             name: `${PREFIX}issue`,
             value: "Will send you a link to the issues section of the repository of the bot to give feedback or report an error."
+          },
+          {
+            name: `${PREFIX}info`,
+            value: "Gives you some information about the bot."
+          },
+          {
+            name: `${PREFIX}history / ${PREFIX}history-discord`,
+            value: "**PROMOTION:** Sends you an invite link to The History Discord as a private link."
           }
         ]
       }
@@ -190,6 +198,10 @@ client.on('message', async message => {
           {
             name: `${PREFIX}info`,
             value: "Gives you some information about the bot."
+          },
+          {
+            name: `${PREFIX}history / ${PREFIX}history-discord`,
+            value: "**PROMOTION:** Sends you an invite link to The History Discord as a private link."
           }
         ]
       }
@@ -202,7 +214,11 @@ client.on('message', async message => {
    * */
   if (command === 'wiki'){
 
-    Util.log(`${PREFIX + command} (args: ${args}) used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
+    if(message.channel.type === 'dm'){
+      Util.log(`${PREFIX + command} (args: [${args}]) used by ${message.author.username + '#' + message.author.discriminator}`, `Check log for any incoming errors for fixing new bugs!`)
+    }else{
+      Util.log(`${PREFIX + command} (args: [${args}]) used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
+    }
 
     // console.log(args)
     // TODO: Fixing #1
@@ -277,6 +293,21 @@ client.on('message', async message => {
       }
     })
 
+  }
+
+  /**
+   * Command: history & history-discord
+   * Description: Sends an invite to the featured and promoted The History Discord server.
+   * */
+  if (command === 'history' || command === 'history-discord'){
+
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
+
+    message.delete().catch(e => {
+      // TODO: How to handle this properly and user-friendly?
+    })
+    message.author.send('You are interested in history? You would like to know more about historic events? \nThen **The History Discord** is' +
+      'the perfect place for you! -> https://discord.gg/XSG3YZ9 \nhttps://discordbots.org/servers/463373602687942667')
   }
 
 })
