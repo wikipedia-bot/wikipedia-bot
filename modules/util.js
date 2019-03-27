@@ -3,6 +3,7 @@
  * */
 
 const colors = require('colors')
+const dateTime = require('date-time')
 
 colors.setTheme({
   info: 'green',
@@ -28,21 +29,6 @@ exports.roundNumber = (/** Number */ value, /** Integer */ precision) => {
 }
 
 /**
- * Returns a formatted time string with a millisecond timestamp.
- *
- * @param date - The Date() Object.
- * @since 1.0.0
- *
- * @public
- */
-exports.getDate = function (/** Date */date) {
-  let hours = date.getHours();
-  let minutes = "0" + date.getMinutes();
-  let seconds = "0" + date.getSeconds();
-  return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + " " + hours + ":" + minutes + ":" + seconds
-}
-
-/**
  * Better solution for logging Discord-related errors
  *
  * @param msg - Message object
@@ -53,7 +39,7 @@ exports.getDate = function (/** Date */date) {
  *
  */
 exports.betterError = (/**Message*/msg, /**String*/text) => {
-  console.log(`[${this.getDate(new Date())}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`.error)
+  console.log(`[${dateTime({local: true, showTimeZone: true})}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`.error)
 }
 
 // TODO: Creating a function which logs normal information for checking if everything runs good and
@@ -70,19 +56,19 @@ exports.log = (/**String*/text, optionalInput = "info log", type = 0, logInFile=
 
   switch (type) {
     case 0:
-      console.log(`[INFO] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.info)
+      console.log(`[INFO] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`.info)
       break
     case 1:
-      console.log(`[WARN] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.warn)
+      console.log(`[WARN] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`.warn)
       break
     case 2:
-      console.log(`[DEBUG] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.debug)
+      console.log(`[DEBUG] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`.debug)
       break
     case "err":
-      console.log(`[ERR] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`.error)
+      console.log(`[ERR] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`.error)
       break
     default:
-      console.log(`[??] [${this.getDate(new Date())}] (${optionalInput}) -> ${text}`)
+      console.log(`[??] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`)
   }
 
 
