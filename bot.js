@@ -89,9 +89,12 @@ client.on('guildDelete', guild => {
   })
 })
 
+// TODO: Adding a !github command
+
 client.on('message', async message => {
   if (message.isMentioned(client.user)) {
     message.delete().catch(e => {
+      // TODO: How to handle this properly?
       // console.error(e)
       // message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
     })
@@ -137,6 +140,8 @@ client.on('message', async message => {
    * */
   if (command === "help"){
 
+    // TODO: Instead of sending an embed, send a link to a good looking commands page.
+
     message.channel.send({
       embed: {
         color: 3447003,
@@ -157,7 +162,7 @@ client.on('message', async message => {
             value: "Will send you a link to the issues section of the repository of the bot to give feedback or report an error."
           },
           {
-            name: `${PREFIX}information`,
+            name: `${PREFIX}info`,
             value: "Gives you some information about the bot."
           }
         ]
@@ -172,6 +177,7 @@ client.on('message', async message => {
   if (command === 'wiki'){
 
     // console.log(args)
+    // TODO: Fixing #1
 
     if (!args[0]) {
       message.react('👎').catch((e) => {
