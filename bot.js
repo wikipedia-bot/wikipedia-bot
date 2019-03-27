@@ -76,7 +76,9 @@ client.on('reconnecting', () => console.log('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', guild => {
-  Util.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`)
+
+  Util.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`, 'BOT EVENT')
+  Util.log(`Send a message to the owner of ${guild.name} ${guild.owner.username + '#' + guild.owner.discriminator}.`, 'BOT EVENT -> Guild Owner Message')
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`
@@ -87,11 +89,12 @@ client.on('guildCreate', guild => {
 
   guild.owner.send('Thank you for using Wikipedia Bot. The bot is in an early stage of development. If there are any problems with the bot, just write: ``' + PREFIX + 'issue`` in a channel.')
 
+
 })
 
 // This event will be triggered when the bot is removed from a guild.
 client.on('guildDelete', guild => {
-  Util.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`)
+  Util.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`, 'BOT EVENT')
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`
@@ -142,6 +145,10 @@ client.on('message', async message => {
           {
             name: `${PREFIX}info`,
             value: "Gives you some information about the bot."
+          },
+          {
+            name: `${PREFIX}bot / ${PREFIX}bot-invite / ${PREFIX}invite`,
+            value: "Sends you a link where you can invite the bot to your own server!"
           },
           {
             name: `${PREFIX}history / ${PREFIX}history-discord`,
@@ -198,6 +205,10 @@ client.on('message', async message => {
           {
             name: `${PREFIX}info`,
             value: "Gives you some information about the bot."
+          },
+          {
+            name: `${PREFIX}bot / ${PREFIX}bot-invite / ${PREFIX}invite`,
+            value: "Sends you a link where you can invite the bot to your own server!"
           },
           {
             name: `${PREFIX}history / ${PREFIX}history-discord`,
@@ -308,6 +319,20 @@ client.on('message', async message => {
     })
     message.author.send('You are interested in history? You would like to know more about historic events? \nThen **The History Discord** is' +
       'the perfect place for you! -> https://discord.gg/XSG3YZ9 \nhttps://discordbots.org/servers/463373602687942667')
+  }
+
+  /**
+   * Command: bot & bot-invite & invite
+   * Description: Sends a link to invite the bot to your server.
+   * */
+  if (command === 'bot' || command === 'bot-invite' || command === 'invite'){
+
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
+
+    message.delete().catch(e => {
+      // TODO: How to handle this properly and user-friendly?
+    })
+    message.author.send('If you want to use the bot on your own server, just click on the Discord Bot Invite link -> https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328')
   }
 
 })

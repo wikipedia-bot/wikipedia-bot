@@ -7,12 +7,12 @@
 - ``!issue`` - Sends you a link to the Issues section of this bot.
 - ``!info`` - Gives you some information about the bot.
 - ``!history`` // ``!history-discord`` - Sends you a direct invite link to **The History Discord** via DM.
-
+- ``!bot`` // ``!bot-invite`` // ``!invite`` - Sends you a bot invite link with which you can invite the bot
+to your own server. 
 
 ## Coming soon!
 
 - ``!github``
 - ``!wiki-number``
-- ``!bot-invite``
 - ``!contribution`` // ``!contribute``
 - and more..
