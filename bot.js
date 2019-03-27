@@ -13,11 +13,15 @@ try {
 
 const client = new Discord.Client();
 
-var {PREFIX, VERSION, TOKEN, DEVELOPMENT} = require("./config")
+var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require("./config")
 
 // Modules
 const requests = require('./modules/requests')
 const Util = require('./modules/util')
+
+// DiscordBots.org API
+const DBL = require("dblapi.js");
+const dbl = new DBL(DISCORDBOTS_TOKEN, client);
 
 const _ = require('lodash')
 
@@ -56,6 +60,11 @@ client.on('ready', async () => {
     }).catch(e => {
       console.error(e)
     })
+
+    setInterval(() => {
+      dbl.postStats(client.guilds.size, client.shards.Id, client.shards.total);
+    }, 1800000);
+
   }
 
   Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
