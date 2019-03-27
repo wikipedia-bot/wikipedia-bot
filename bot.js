@@ -62,7 +62,7 @@ client.on('ready', async () => {
     })
 
     setInterval(() => {
-      dbl.postStats(client.guilds.size, client.shards.Id, client.shards.total);
+      dbl.postStats(client.guilds.size);
     }, 1800000);
 
   }
@@ -160,8 +160,15 @@ client.on('message', async message => {
   if (command === "help"){
 
     // TODO: Instead of sending an embed, send a link to a good looking commands page.
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
 
-    message.channel.send({
+    message.delete().catch(e => {
+      // TODO: How to handle this properly?
+      // console.error(e)
+      // message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
+    })
+
+    message.author.send({
       embed: {
         color: 3447003,
         title: `${client.user.username} / Help command\nGitHub: https://github.com/julianYaman/wikipedia-bot`,
@@ -222,6 +229,8 @@ client.on('message', async message => {
    * */
   if (command === 'issue'){
 
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
+
     message.delete().catch(e => {
       // TODO: How to handle this properly and user-friendly?
     })
@@ -236,6 +245,8 @@ client.on('message', async message => {
    * */
   if (command === 'info'){
 
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
+
     message.channel.send({
       embed: {
         title: "Information about the Wikipedia Bot",
@@ -244,7 +255,7 @@ client.on('message', async message => {
           {
             name: "Repository",
             value: "https://github.com/julianYaman/wikipedia-bot",
-            inline: true
+            inline: false
           },
           {
             name: "Serving on .. servers in total",
@@ -259,7 +270,7 @@ client.on('message', async message => {
           {
             name: "Version",
             value: VERSION,
-            inline: true
+            inline: false
           }
         ],
         timestamp: new Date()
