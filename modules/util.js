@@ -39,7 +39,9 @@ exports.roundNumber = (/** Number */ value, /** Integer */ precision) => {
  *
  */
 exports.betterError = (/**Message*/msg, /**String*/text) => {
-  console.log(`[${dateTime({local: true, showTimeZone: true})}] (${msg.guild.name} | ${msg.guild.id}) [ERROR] -> ${text}`.error)
+  console.log(`[ERR] [${dateTime({local: true, showTimeZone: true})}] (${msg.guild.name} | ${msg.guild.id}) -> ${text}`.error)
+  console.log("Raw error log:".underline.error)
+  console.log(text)
 }
 
 // TODO: Creating a function which logs normal information for checking if everything runs good and

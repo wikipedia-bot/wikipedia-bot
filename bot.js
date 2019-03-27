@@ -31,8 +31,8 @@ client.on('warn', console.warn)
 client.on('error', console.error)
 
 client.on('ready', async () => {
-  console.log('Starting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
-  console.log('This Bot is online! Running on version ' + VERSION)
+  Util.log('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n', 'READY LOG')
+  Util.log('\nThis Bot is online! Running on version: ' + VERSION + '\n', 'READY LOG')
 
   // Different user presences for different development stages
   // TRUE -> Active development / debugging
@@ -185,12 +185,14 @@ client.on('message', async message => {
    * */
   if (command === 'wiki'){
 
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
+
     // console.log(args)
     // TODO: Fixing #1
 
     if (!args[0]) {
       message.react('👎').catch((e) => {
-        Util.betterError(message, `Wiki Command -> !args[0] -> message.react -> catch e: ${e}`)
+        Util.log(`Wiki Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
       })
       message.reply('you forgot to search for something. -> ``' + PREFIX + 'wiki [argument] | Example ' + PREFIX + 'wiki Rocket League``')
     } else {

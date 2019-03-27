@@ -6,6 +6,7 @@
 // Modules needed for requests
 const got = require('got')
 const Util = require('./util')
+var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../config')
 
 /**
  * Function which gets data from Wikipedia to send a short summary into the channel.
@@ -75,8 +76,7 @@ exports.getWikipediaShortSummary = (msg, argument) => {
             }catch (e) {
               msg.react('⛔')
               msg.channel.send(
-                'You got a very rare error here, how did you get that? Write it to our GitHub Repository\n' +
-                'https://github.com/julianYaman/wikipedia-bot')
+                `You got a very rare error here! Write it to our GitHub Repository -> ${PREFIX}issue`)
               Util.betterError(msg, e)
             }
 
@@ -84,8 +84,7 @@ exports.getWikipediaShortSummary = (msg, argument) => {
         } catch (e) {
           msg.react('⛔')
           msg.channel.send(
-            'You got a very rare error here, how did you get that? Write it to our GitHub Repository\n' +
-            'https://github.com/julianYaman/wikipedia-bot')
+            `You got a very rare error here! Write it to our GitHub Repository -> ${PREFIX}issue`)
           Util.betterError(msg, e)
         }
       })
