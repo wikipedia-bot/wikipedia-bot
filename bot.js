@@ -84,6 +84,9 @@ client.on('guildCreate', guild => {
   }).catch(e => {
     console.error(e)
   })
+
+  guild.owner.send('Thank you for using Wikipedia Bot. The bot is in an early stage of development. If there are any problems with the bot, just write: ``' + PREFIX + 'issue`` in a channel.')
+
 })
 
 // This event will be triggered when the bot is removed from a guild.
@@ -100,6 +103,10 @@ client.on('guildDelete', guild => {
 
 // TODO: Adding a !github command
 
+// We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
+// for the beginning of the development. After the main bugs are fixed (see Issues e.g. #1), logging may be turned off for
+// the main features and commands. The data will only be used for analysis and to know what we may need to change and to fix.
+
 client.on('message', async message => {
   if (message.isMentioned(client.user)) {
     message.delete().catch(e => {
@@ -107,6 +114,9 @@ client.on('message', async message => {
       // console.error(e)
       // message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
     })
+
+    Util.log(`Got mentioned on ${message.guild.name} (${message.guild.id})`)
+
     message.author.send({
       embed: {
         color: 3447003,
@@ -185,7 +195,7 @@ client.on('message', async message => {
    * */
   if (command === 'wiki'){
 
-    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
+    Util.log(`${PREFIX + command} (args: ${args}) used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
 
     // console.log(args)
     // TODO: Fixing #1
