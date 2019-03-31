@@ -4,6 +4,10 @@
 
 **Our Discord server: [join](https://discord.gg/yAUmDNb)**
 
+<a href="https://discordbots.org/bot/554751047030013953" >
+  <img src="https://discordbots.org/api/widget/554751047030013953.svg" alt="Wikipedia" />
+</a>
+
 ## Introduction
 
 ### What is this bot all about?
