@@ -242,7 +242,9 @@ client.on('message', async message => {
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
       searchValue = searchValue.replace(PREFIX + command + ' ', "")
-      searchValue = _.startCase(searchValue)
+      // console.log('search value -> ' + searchValue)
+      // searchValue = _.startCase(searchValue)
+      // console.log('search value -> ' + searchValue)
 
       // console.log('search value: ' + searchValue)
       requests.getWikipediaShortSummary(message, searchValue)
@@ -317,7 +319,7 @@ client.on('message', async message => {
     message.delete().catch(e => {
       // TODO: How to handle this properly and user-friendly?
     })
-    message.author.send('You are interested in history? You would like to know more about historic events? \nThen **The History Discord** is' +
+    message.author.send('You are interested in history? You would like to know more about historic events? \nThen **The History Discord** is ' +
       'the perfect place for you! -> https://discord.gg/XSG3YZ9 \nhttps://discordbots.org/servers/463373602687942667')
   }
 

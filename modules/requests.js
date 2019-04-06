@@ -6,6 +6,8 @@
 // Modules needed for requests
 const got = require('got')
 const Util = require('./util')
+const wiki = require('wikijs').default
+const _ = require('lodash')
 var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../config')
 
 /**
@@ -17,86 +19,53 @@ var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../con
  * */
 exports.getWikipediaShortSummary = (msg, argument) => {
 
-  // Beginning with the sequence of requests for the wikipedia article
-  got("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&exsentences=2&titles=" + argument).then(res => {
-    try {
-      let pageContent = JSON.parse(res.body).query.pages
-      let keys = Object.keys(pageContent)
-
-      let summary
-
-      // Replacing all HTML Tags included in the text
-      summary = pageContent[keys[0]].extract.replace(/<(?:.|\n)*?>/gm, '')
-
-      // HTTPS Request for receiving the URL of the article by giving the page ID as the value for the pageids parameter in the API request to Wikipedia
-      got('https://en.wikipedia.org/w/api.php?action=query&prop=info&format=json&inprop=url&pageids=' + pageContent[keys[0]].pageid).then(pageres => {
-        try {
-          // JSON data of the page with the page id pageid
-          let pageObject = JSON.parse(pageres.body).query.pages
-
-          let key = Object.keys(pageObject)
-
-          // Get the value of the fullurl parameter
-          let wikipediaArticleLink = pageObject[key[0]].fullurl
-
-          // console.log(pageObject)
-
-          // Finalizing the result and now requesting the thumbnail of the wikipedia article by the Media Wikipedia API.
-          got("https://en.wikipedia.org/api/rest_v1/page/media/" + argument).then(res => {
-            try {
-
-              let mediaJSON = JSON.parse(res.body).items[0]
-              let thumbnailSource = mediaJSON.thumbnail.source
-
-              // console.log(mediaJSON)
-
-              // Sending the final result of the two requests as an embed to the channel where the command
-              // was executed.
-              msg.channel.send({
-                embed: {
-                  color: 3447003,
-                  author: {
-                    icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
-                    name: 'Wikipedia'
-                  },
-                  title: pageContent[keys[0]].title + ' (wikipedia article)',
-                  url: wikipediaArticleLink,
-                  description: summary,
-                  timestamp: new Date(),
-                  thumbnail: {
-                    url: thumbnailSource
-                  },
-                  footer: {
-                    icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
-                    text: 'Information by Wikipedia. wikipedia.org'
-                  }
-                }
-              })
-
-            }catch (e) {
-              msg.react('⛔')
-              msg.channel.send(
-                `You got a very rare error here! Write it to our GitHub Repository -> ${PREFIX}issue`)
-              Util.betterError(msg, e)
+  /**
+   * @since 1.2.0
+   * New function for getting summaries of Wikipedia articles.
+   * */
+  wiki().search(argument).then(data => {
+    // Getting the first result of the search results
+    // TODO: Find a way to handle 'refer to...' pages
+    let bestResult = data.results[0]
+    // Getting the summary of the first result's page
+    wiki().page(bestResult).then(page => {
+      page.summary().then(summary => {
+        // Shorten the summary to 768 chars...
+        let shortedSummary = summary.split('\n')
+        shortedSummary = _.take(shortedSummary, 2)
+        shortedSummary = shortedSummary.toString().substring(0,768) + "..."
+        // Getting the image of the page
+        // TODO: Get the real (svg) thumbnail from some pages
+        page.mainImage().then(image => {
+          msg.channel.send({
+            embed: {
+              color: 3447003,
+              author: {
+                icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                name: 'Wikipedia'
+              },
+              thumbnail: {
+                url: image
+              },
+              title: bestResult,
+              url: page.raw.fullurl,
+              description: shortedSummary,
+              timestamp: new Date(),
+              footer: {
+                icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                text: 'Information by Wikipedia. wikipedia.org'
+              }
             }
-
           })
-        } catch (e) {
-          msg.react('⛔')
-          msg.channel.send(
-            `You got a very rare error here! Write it to our GitHub Repository -> ${PREFIX}issue`)
+        }).catch(e => {
           Util.betterError(msg, e)
-        }
+        })
       })
-    } catch (e) {
-      msg.react('⛔')
-      msg.channel.send(
-        'Cannot get data from Wikipedia. Maybe your search term was not properly. If you did nothing wrong, write the command `!issue`.\n' +
-        '```You´ve sent the value: ' + argument + '```')
+    }).catch(e => {
       Util.betterError(msg, e)
-    }
-  }).catch(error => {
-    console.log(error.response.body)
+    })
+  }).catch(e => {
+    Util.betterError(msg, e)
   })
 
 }

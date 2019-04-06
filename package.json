@@ -1,6 +1,6 @@
 {
   "name": "wikipedia-bot",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "A bot where you can search Wikipedia articles with it. Not affiliated with any service or product of the Wikimedia Foundation.",
   "main": "bot.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.4.2",
     "got": "^9.6.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "wikijs": "^4.13.0"
   }
 }
