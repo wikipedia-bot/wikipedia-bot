@@ -9,6 +9,8 @@
 </a></p>
 
 ## Introduction
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_shield)
+
 
 ### What is this bot all about?
 
@@ -51,3 +53,7 @@ But in this case, [Dependabot](https://dependabot.com/) takes care of updating t
 - [x] Adding an installation guide
 - [ ] Adding cool looking badges
 - [ ] Adding more content to the README
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)
