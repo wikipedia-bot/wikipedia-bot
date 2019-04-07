@@ -8,7 +8,8 @@
 - ``!info`` - Gives you some information about the bot.
 - ``!history`` // ``!history-discord`` - Sends you a direct invite link to **The History Discord** via DM.
 - ``!bot`` // ``!bot-invite`` // ``!invite`` - Sends you a bot invite link with which you can invite the bot
-to your own server. 
+to your own server.
+- ``!vote`` - Vote for the bot on DiscordBots.org. 
 
 ## Coming soon!
 

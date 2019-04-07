@@ -151,6 +151,10 @@ client.on('message', async message => {
             value: "Sends you a link where you can invite the bot to your own server!"
           },
           {
+            name: `${PREFIX}vote`,
+            value: "**SUPPORT US WITH A VOTE:** Vote for the bot on DiscordBots.org."
+          },
+          {
             name: `${PREFIX}history / ${PREFIX}history-discord`,
             value: "**PROMOTION:** Sends you an invite link to The History Discord as a private link."
           }
@@ -211,6 +215,10 @@ client.on('message', async message => {
             value: "Sends you a link where you can invite the bot to your own server!"
           },
           {
+            name: `${PREFIX}vote`,
+            value: "**SUPPORT US WITH A VOTE:** Vote for the bot on DiscordBots.org."
+          },
+          {
             name: `${PREFIX}history / ${PREFIX}history-discord`,
             value: "**PROMOTION:** Sends you an invite link to The History Discord as a private link."
           }
@@ -231,10 +239,7 @@ client.on('message', async message => {
       Util.log(`${PREFIX + command} (args: [${args}]) used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
     }
 
-    // console.log(args)
-    // TODO: Fixing #1
-
-    if (!args[0]) {
+    if (!args[1]) {
       message.react('👎').catch((e) => {
         Util.log(`Wiki Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
       })
@@ -335,6 +340,20 @@ client.on('message', async message => {
       // TODO: How to handle this properly and user-friendly?
     })
     message.author.send('If you want to use the bot on your own server, just click on the Discord Bot Invite link -> https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328')
+  }
+
+  /**
+   * Command: vote
+   * Description: Sends a link for voting the bot on DiscordBots.org.
+   * */
+  if (command === 'vote'){
+
+    Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
+
+    message.delete().catch(e => {
+      // TODO: How to handle this properly and user-friendly?
+    })
+    message.author.send('Here is the link to the bot on DiscordBots.org. With your vote, the bot will become more and more popular and used by more servers. We appreciate it very much! -> https://discordbots.org/bot/554751047030013953')
   }
 
 })
