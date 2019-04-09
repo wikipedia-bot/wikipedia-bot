@@ -70,15 +70,15 @@ client.on('ready', async () => {
   Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
 })
 
-client.on('disconnect', () => console.log('I disconnected currently but I will try to reconnect!'))
+client.on('disconnect', () => Util.log('I disconnected currently but I will try to reconnect!'))
 
-client.on('reconnecting', () => console.log('Reconnecting...'))
+client.on('reconnecting', () => Util.log('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', guild => {
 
   Util.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`, 'BOT EVENT')
-  Util.log(`Send a message to the owner of ${guild.name} ${guild.owner.username + '#' + guild.owner.discriminator}.`, 'BOT EVENT -> Guild Owner Message')
+  Util.log(`Send a message to the owner of ${guild.name} ${guild.owner.user.username + '#' + guild.owner.user.discriminator}.`, 'BOT EVENT -> Guild Owner Message')
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`
@@ -232,7 +232,6 @@ client.on('message', async message => {
    * Description: The normal wiki command used for getting short summaries of something the user searched for.
    * */
   if (command === 'wiki'){
-
     if(message.channel.type === 'dm'){
       Util.log(`${PREFIX + command} (args: [${args}]) used by ${message.author.username + '#' + message.author.discriminator}`, `Check log for any incoming errors for fixing new bugs!`)
     }else{
@@ -278,7 +277,6 @@ client.on('message', async message => {
    * Description: Sends an embed with information about the bot.
    * */
   if (command === 'info'){
-
     Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
 
     message.channel.send({
@@ -333,7 +331,6 @@ client.on('message', async message => {
    * Description: Sends a link to invite the bot to your server.
    * */
   if (command === 'bot' || command === 'bot-invite' || command === 'invite'){
-
     Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
 
     message.delete().catch(e => {
@@ -347,7 +344,6 @@ client.on('message', async message => {
    * Description: Sends a link for voting the bot on DiscordBots.org.
    * */
   if (command === 'vote'){
-
     Util.log(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id})`)
 
     message.delete().catch(e => {

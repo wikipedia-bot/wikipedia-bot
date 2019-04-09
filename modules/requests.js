@@ -58,13 +58,16 @@ exports.getWikipediaShortSummary = (msg, argument) => {
             }
           })
         }).catch(e => {
+          Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}` , 2)
           Util.betterError(msg, e)
         })
       })
     }).catch(e => {
+      Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 2)
       Util.betterError(msg, e)
     })
   }).catch(e => {
+    Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 2)
     Util.betterError(msg, e)
   })
 
