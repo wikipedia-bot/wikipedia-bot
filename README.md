@@ -33,6 +33,7 @@ Before developing, create a special branch for your features or fixes you want t
 (if you want to make a pull request to this repository).
 
 - *Fork the repository.*
+- *Optional: Check the ToDOs in the code!*
 - ``git checkout -b branch-name `` *(e.g. issue-fix-#1 or so)*
 - ``git commit -am 'Added something / Fixed something'``
 - ``git push origin branch-name``
