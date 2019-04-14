@@ -13,7 +13,7 @@ try {
 
 const client = new Discord.Client();
 
-var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require("./config")
+var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_TOKEN} = require("./config")
 
 // Modules
 const requests = require('./modules/requests')
@@ -24,6 +24,7 @@ const DBL = require("dblapi.js");
 const dbl = new DBL(DISCORDBOTS_TOKEN, client);
 
 const _ = require('lodash')
+const got = require('got')
 
 // Handling client events
 client.on('warn', console.warn)
@@ -46,7 +47,7 @@ client.on('ready', async () => {
         type: 'WATCHING'
       }
     }).catch(e => {
-      console.error(e)
+      Util.betterError(e)
     })
     Util.log("Bot is currently set on DEVELOPMENT = true", "Bot -> Warning", 1)
 
@@ -58,12 +59,32 @@ client.on('ready', async () => {
         type: 'WATCHING'
       }
     }).catch(e => {
-      console.error(e)
+      Util.betterError(e)
     })
 
+    // Interval for updating the amount of servers the bot is used on on DiscordBots.org every 30 minutes
     setInterval(() => {
       dbl.postStats(client.guilds.size);
     }, 1800000);
+
+    // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 5 minutes
+    setInterval(() => {
+      got.post('https://bots.ondiscord.xyz/bot-api/bots/554751047030013953/guilds', {
+        headers: {
+          'Authorization': ONDISCORDXYZ_TOKEN
+        },
+        json: true,
+        method: 'POST',
+        body: {
+          "guildCount": client.guilds.size
+        }
+      }).then(res => {
+        console.log(res)
+      }).catch(e => {
+        console.log(e)
+      })
+    }, 300000);
+
 
   }
 
