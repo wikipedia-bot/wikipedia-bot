@@ -13,7 +13,7 @@ try {
 
 const client = new Discord.Client();
 
-var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_TOKEN} = require("./config")
+var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN} = require("./config")
 
 // Modules
 const requests = require('./modules/requests')
@@ -69,7 +69,7 @@ client.on('ready', async () => {
 
     // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 5 minutes
     setInterval(() => {
-      got.post('https://bots.ondiscord.xyz/bot-api/bots/554751047030013953/guilds', {
+      got.post(`https://bots.ondiscord.xyz/bot-api/bots/${ONDISCORDXYZ_BOTID}/guilds`, {
         headers: {
           'Authorization': ONDISCORDXYZ_TOKEN
         },
@@ -93,6 +93,7 @@ client.on('ready', async () => {
   Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
 })
 
+// DiscordBots.org events
 dbl.on('posted', () => {
   Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
 })
@@ -101,6 +102,7 @@ dbl.on('error', e => {
   Util.log("Error occurred while trying to update the server amount on discordbots.org!", `Bot List - discordbots.org`, "err", e)
 })
 
+// Continuing with Discord client events
 client.on('disconnect', () => Util.log('I disconnected currently but I will try to reconnect!'))
 
 client.on('reconnecting', () => Util.log('Reconnecting...'))
@@ -108,8 +110,10 @@ client.on('reconnecting', () => Util.log('Reconnecting...'))
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', guild => {
 
+  // Logging the event
   Util.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`, 'BOT EVENT')
   Util.log(`Send a message to the owner of ${guild.name} ${guild.owner.user.username + '#' + guild.owner.user.discriminator}.`, 'BOT EVENT -> Guild Owner Message')
+  // Updating the presence of the bot with the new server amount
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`
@@ -117,7 +121,7 @@ client.on('guildCreate', guild => {
   }).catch(e => {
     console.error(e)
   })
-
+  // Sending a "Thank you" message to the owner of the guild
   guild.owner.send('Thank you for using Wikipedia Bot. The bot is in an early stage of development. If there are any problems with the bot, just write: ``' + PREFIX + 'issue`` in a channel.')
 
 
@@ -125,7 +129,10 @@ client.on('guildCreate', guild => {
 
 // This event will be triggered when the bot is removed from a guild.
 client.on('guildDelete', guild => {
+
+  // Logging the event
   Util.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`, 'BOT EVENT')
+  // Updating the presence of the bot with the new server amount
   client.user.setPresence({
     game: {
       name: `on ${client.guilds.size} servers! ${PREFIX}help`
