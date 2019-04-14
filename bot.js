@@ -80,8 +80,8 @@ client.on('ready', async () => {
         }
       }).then(res => {
         res.statusCode === 204 ?
-          Util.log("Server amount updated on bots.ondiscord.xyz!", `statusCode: ${res.statusCode}`) :
-          Util.log("Error occured when trying to update the server amount on bots.ondiscord.xyz!", "REQUEST", "err", res)
+          Util.log("Server amount updated on bots.ondiscord.xyz!", `Bot List - bots.ondiscord.xyz / statusCode: ${res.statusCode}`) :
+          Util.log("Error occured when trying to update the server amount on bots.ondiscord.xyz!", "Bot List - bots.ondiscord.xyz", "err", res)
       }).catch(e => {
         console.log(e)
       })
@@ -91,6 +91,14 @@ client.on('ready', async () => {
   }
 
   Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
+})
+
+dbl.on('posted', () => {
+  Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
+})
+
+dbl.on('error', e => {
+  Util.log("Error occurred while trying to update the server amount on discordbots.org!", `Bot List - discordbots.org`, "err", e)
 })
 
 client.on('disconnect', () => Util.log('I disconnected currently but I will try to reconnect!'))
