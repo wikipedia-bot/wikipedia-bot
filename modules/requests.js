@@ -25,7 +25,7 @@ exports.getWikipediaShortSummary = (msg, argument) => {
    * */
   wiki().search(argument).then(data => {
     // Getting the first result of the search results
-    // TODO: Find a way to handle 'refer to...' pages
+    // TODO: Find a way to handle disambiguation pages
     let bestResult = data.results[0]
     // Getting the summary of the first result's page
     wiki().page(bestResult).then(page => {
@@ -58,16 +58,17 @@ exports.getWikipediaShortSummary = (msg, argument) => {
             }
           })
         }).catch(e => {
-          Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}` , 2)
+          // TODO: User should get a reply when an error is occuring!
+          Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}` , 1)
           Util.betterError(msg, e)
         })
       })
     }).catch(e => {
-      Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 2)
+      Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 1)
       Util.betterError(msg, e)
     })
   }).catch(e => {
-    Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 2)
+    Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 1)
     Util.betterError(msg, e)
   })
 

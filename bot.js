@@ -79,7 +79,9 @@ client.on('ready', async () => {
           "guildCount": client.guilds.size
         }
       }).then(res => {
-        console.log(res)
+        res.statusCode === 204 ?
+          Util.log("Server amount updated on bots.ondiscord.xyz!", `statusCode: ${res.statusCode}`) :
+          Util.log("Error occured when trying to update the server amount on bots.ondiscord.xyz!", "REQUEST", "err", res)
       }).catch(e => {
         console.log(e)
       })
