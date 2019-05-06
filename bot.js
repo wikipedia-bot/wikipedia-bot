@@ -224,7 +224,11 @@ client.on('message', async message => {
   let command = message.content.toLowerCase().split(' ')[0]
   command = command.slice(PREFIX.length)
 
+  // What should the bot do with an unknown command?
   if (!client.commands.has(command)) return;
+
+  // Preventing the execution of the template command file
+  if (_.lowerCase(command) === '_template') return;
 
   try {
     client.commands.get(command).execute(message, args, {PREFIX, VERSION});
