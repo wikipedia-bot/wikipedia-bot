@@ -25,6 +25,19 @@ const dbl = new DBL(DISCORDBOTS_TOKEN, client);
 
 const _ = require('lodash')
 const got = require('got')
+const fs = require('fs');
+
+// Creating a collection for the commands
+client.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+
+  // set a new item in the Collection
+  // with the key as the command name and the value as the exported module
+  client.commands.set(command.name, command);
+}
+
 
 // Handling client events
 client.on('warn', console.warn)
@@ -148,6 +161,8 @@ client.on('guildDelete', guild => {
 // for the beginning of the development. After the main bugs are fixed (see Issues e.g. #1), logging may be turned off for
 // the main features and commands. The data will only be used for analysis and to know what we may need to change and to fix.
 
+/* COMMANDS */
+
 client.on('message', async message => {
   if (message.isMentioned(client.user)) {
     message.delete().catch(e => {
@@ -209,6 +224,14 @@ client.on('message', async message => {
   let command = message.content.toLowerCase().split(' ')[0]
   command = command.slice(PREFIX.length)
 
+  if (!client.commands.has(command)) return;
+
+  try {
+    client.commands.get(command).execute(message, args, {PREFIX, VERSION});
+  } catch (error) {
+    console.error(error);
+    message.reply('there was an error trying to execute that command!');
+  }
 
   /**
    * Command: help
@@ -265,34 +288,6 @@ client.on('message', async message => {
     })
   }
 
-  /**
-   * Command: wiki
-   * Description: The normal wiki command used for getting short summaries of something the user searched for.
-   * */
-  if (command === 'wiki'){
-    if(message.channel.type === 'dm'){
-      Util.log(`${PREFIX + command} (args: [${args}]) used by ${message.author.username + '#' + message.author.discriminator}`, `Check log for any incoming errors for fixing new bugs!`)
-    }else{
-      Util.log(`${PREFIX + command} (args: [${args}]) used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
-    }
-
-    if (!args[1]) {
-      message.react('👎').catch((e) => {
-        Util.log(`Wiki Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
-      })
-      message.reply('you forgot to search for something. -> ``' + PREFIX + 'wiki [argument] | Example ' + PREFIX + 'wiki Rocket League``')
-    } else {
-      let searchValue = args.toString().replace(/,/g, ' ')
-      searchValue = searchValue.replace(PREFIX + command + ' ', "")
-      // console.log('search value -> ' + searchValue)
-      // searchValue = _.startCase(searchValue)
-      // console.log('search value -> ' + searchValue)
-
-      // console.log('search value: ' + searchValue)
-      requests.getWikipediaShortSummary(message, searchValue)
-    }
-
-  }
 
   /**
    * Command: issue
