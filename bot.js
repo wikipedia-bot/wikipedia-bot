@@ -79,7 +79,7 @@ client.on('ready', async () => {
       dbl.postStats(client.guilds.size);
     }, 1800000);
 
-    // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 5 minutes
+    // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
     setInterval(() => {
       got.post(`https://bots.ondiscord.xyz/bot-api/bots/${ONDISCORDXYZ_BOTID}/guilds`, {
         headers: {
@@ -97,7 +97,7 @@ client.on('ready', async () => {
       }).catch(e => {
         console.log(e)
       })
-    }, 300000);
+    }, 600000);
 
 
   }
