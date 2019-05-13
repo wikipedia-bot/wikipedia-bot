@@ -32,7 +32,6 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-
   // set a new item in the Collection
   // with the key as the command name and the value as the exported module
   client.commands.set(command.name, command);
@@ -187,9 +186,6 @@ client.on('message', async message => {
 
   // What should the bot do with an unknown command?
   if (!client.commands.has(command)) return;
-
-  // Preventing the execution of the template command file
-  if (_.lowerCase(command) === '_template') return;
 
   try {
     client.commands.get(command).execute(message, args, {PREFIX, VERSION});

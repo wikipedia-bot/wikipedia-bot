@@ -19,10 +19,6 @@ var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../con
  * */
 exports.getWikipediaShortSummary = (msg, argument) => {
 
-  /**
-   * @since 1.2.0
-   * New function for getting summaries of Wikipedia articles.
-   * */
   wiki().search(argument).then(data => {
     // Getting the first result of the search results
     // TODO: Find a way to handle disambiguation pages
@@ -69,6 +65,34 @@ exports.getWikipediaShortSummary = (msg, argument) => {
     })
   }).catch(e => {
     Util.log("An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 1)
+    Util.betterError(msg, e)
+  })
+
+}
+
+/**
+ * Function which gets data from Wikipedia to send a short summary into the channel.
+ *
+ * @param {Message} msg - Message class of Discord.js
+ * @param {String} argument - Argument sent by the user (!wiki-info [info] [argument])
+ *
+ * */
+exports.getWikipediaShortInformation = (msg, argument) => {
+
+  wiki().search(argument).then(data => {
+    // Getting the first result of the search results
+    // TODO: Find a way to handle disambiguation pages
+    let bestResult = data.results[0]
+    wiki().page(bestResult).then(page => {
+
+      page.fullInfo().then(info => console.log(info))
+
+    }).catch(e => {
+      Util.log("An error occurred while requesting the data from Wikipedia", ` Searched for: ${argument} - Best Result: ${bestResult}`, 1)
+      Util.betterError(msg, e)
+    })
+  }).catch(e => {
+    Util.log("An error occurred while requesting the data from Wikipedia", `Searched for: ${argument} - Best Result: failed to do that`, 1)
     Util.betterError(msg, e)
   })
 
