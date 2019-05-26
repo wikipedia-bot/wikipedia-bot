@@ -102,7 +102,7 @@ client.on('ready', async () => {
 
   }
 
-  Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${client.users.size} users.`)
+  Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${this.totalMembers()} users.`)
 })
 
 // DiscordBots.org events
@@ -153,6 +153,21 @@ client.on('guildDelete', guild => {
     console.error(e)
   })
 })
+
+/**
+ * Returns the total amount of users (including bots (sadly...)) who use the bot.
+ * */
+// TODO: How to just return the "normal" users amount without the bots??
+exports.totalMembers = () =>  {
+  let totalMembersArray = client.guilds.map( guild => {
+    return guild.memberCount
+  })
+  let total = 0;
+  for(i = 0; i < totalMembersArray.length; i++){
+    total = total + totalMembersArray[i]
+  }
+  return total
+}
 
 // TODO: Adding a !github command
 

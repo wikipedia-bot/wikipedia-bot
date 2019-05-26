@@ -1,5 +1,6 @@
 const Util = require('./../modules/util')
 const requests = require('./../modules/requests')
+const bot = require('../bot')
 
 /**
  * Command: info
@@ -13,14 +14,9 @@ module.exports = {
 
     message.channel.send({
       embed: {
-        title: "Information about the Wikipedia Bot",
+        title: "Wikipedia Bot Information",
         color: 3447003,
         fields: [
-          {
-            name: "Repository",
-            value: "https://github.com/julianYaman/wikipedia-bot",
-            inline: false
-          },
           {
             name: "Serving on .. servers in total",
             value: message.client.guilds.size,
@@ -28,7 +24,7 @@ module.exports = {
           },
           {
             name: "Serving for .. members in total",
-            value: message.client.users.size,
+            value: bot.totalMembers(),
             inline: true
           },
           {
