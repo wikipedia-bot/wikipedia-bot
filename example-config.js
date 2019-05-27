@@ -4,7 +4,7 @@
 // Optional: DISCORDBOTS_TOKEN (discordbots.org) , ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN (both related to bots.ondiscord.xyz)
 module.exports = {
   PREFIX: "!",
-  VERSION: "1.2",
+  VERSION: "1.3",
   TOKEN: "<token>",
   DEVELOPMENT: true,
   DISCORDBOTS_TOKEN: "optional",

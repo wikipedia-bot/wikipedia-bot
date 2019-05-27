@@ -42,7 +42,11 @@ module.exports = {
             value: "Gives you some information about the bot."
           },
           {
-            name: `${config.PREFIX}bot / ${config.PREFIX}bot-invite / ${config.PREFIX}invite`,
+            name: `${config.PREFIX}github`,
+            value: "Sends you a direct link to the GitHub of the repository."
+          },
+          {
+            name: `${config.PREFIX}bot`,
             value: "Sends you a link where you can invite the bot to your own server!"
           },
           {
@@ -50,7 +54,7 @@ module.exports = {
             value: "**SUPPORT US WITH A VOTE:** Vote for the bot on DiscordBots.org."
           },
           {
-            name: `${config.PREFIX}history / ${config.PREFIX}history-discord`,
+            name: `${config.PREFIX}history`,
             value: "**PROMOTION:** Sends you an invite link to The History Discord as a private link."
           }
         ]

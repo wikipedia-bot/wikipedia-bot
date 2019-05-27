@@ -1,5 +1,4 @@
 const Util = require('./../modules/util')
-const requests = require('./../modules/requests')
 const bot = require('../bot')
 
 /**
