@@ -107,5 +107,42 @@ exports.getWikipediaShortInformation = (msg, argument) => {
  *
  * */
 exports.getWikipediaReferences = (msg, search, range="all") => {
-  // TODO: code this
+  // check if a range was given
+  if(range !== "all"){
+    // split range into min and max range
+    let ranges = _.split(range, "-")
+    let minRange = _.toNumber(ranges[0]) - 1
+    let maxRange = _.toNumber(ranges[1])
+
+    // If no maximum range was given but just one number
+    if (_.isNaN(maxRange)){
+      // Set maxRange to the single number
+      maxRange = minRange
+      // Set minRange to 0 to get the sources from the beginning down to the maxRange given by the user
+      minRange = 0
+    }
+
+    console.log(search, ranges, minRange, maxRange)
+
+    // Search for the results
+    wiki().search(search).then(data => {
+      // Getting the first result of the search results
+      // TODO: Find a way to handle disambiguation pages
+      let bestResult = data.results[0]
+      wiki().page(bestResult).then(page => {
+
+        // page.references().then(console.log)
+
+      }).catch(e => {
+        Util.log("An error occurred while requesting the sources from a Wikipedia article", ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
+        Util.betterError(msg, e)
+      })
+    }).catch(e => {
+      Util.log("An error occurred while requesting the sources from a Wikipedia article", `Searched for: ${search} - Best Result: failed to do that`, 1)
+      Util.betterError(msg, e)
+    })
+
+  }else{
+
+  }
 }
