@@ -112,15 +112,21 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
     // split range into min and max range
     let ranges = _.split(range, "-")
     let minRange = _.toNumber(ranges[0]) - 1
-    let maxRange = _.toNumber(ranges[1])
+    let maxRange = _.toNumber(ranges[1]) - 1
 
-    // If no maximum range was given but just one number
-    if (_.isNaN(maxRange)){
+    // If no maximum range was given but just one number, then the user should get only the specific reference
+    if (_.isNaN(maxRange)) {
       // Set maxRange to the single number
       maxRange = minRange
-      // Set minRange to 0 to get the sources from the beginning down to the maxRange given by the user
-      minRange = 0
     }
+
+    // What to do when a number is not in the allowed range
+    if((minRange < 0 || maxRange < 1) && minRange!==maxRange){
+      minRange = 0
+      maxRange = 1
+      msg.reply("you can't set the minimum range under or equal 0 and the maximum range under 2.")
+    }
+
 
     console.log(search, ranges, minRange, maxRange)
 
@@ -143,6 +149,8 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
     })
 
   }else{
+
+    console.log(search, range)
 
   }
 }
