@@ -102,9 +102,10 @@ exports.getWikipediaShortInformation = (msg, argument) => {
  * Function to get the references of a Wikipedia article
  *
  * @param {Message} msg - Message class of Discord.js
- * @param {String} argument - Argument sent by the user (!wiki-info [info] [argument])
+ * @param {String} search - Search value written by the user
+ * @param range - The range of how many sources the user want
  *
  * */
-exports.getWikipediaReferences = (msg, argument) => {
+exports.getWikipediaReferences = (msg, search, range="all") => {
   // TODO: code this
 }
