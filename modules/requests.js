@@ -138,8 +138,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
       maxRange = minRange
     }
 
-    // TODO: SET MAX RANGE DISTANCE TO 25!!!
-    // TODO: Check for the amount of references which can be accessed!
+    // TODO: SET A MAXIMUM RANGE!!
 
     // What to do when a number is not in the allowed range
     if((minRange < 0 || maxRange < 1) && minRange!==maxRange){
@@ -154,7 +153,6 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
     // Search for the results
     wiki().search(search).then(data => {
       // Getting the first result of the search results
-      // TODO: Find a way to handle disambiguation pages
       let bestResult = data.results[0]
       wiki().page(bestResult).then(page => {
 
