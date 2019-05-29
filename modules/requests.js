@@ -148,14 +148,32 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
         // Getting the references / sources of a Wikipedia article with WikiJS
         page.references().then( async references => {
 
+          // How many references exists?
           let referencesAmount = references.length
 
           // Check if the range numbers are the same
           if (minRange === maxRange) {
-            let sources = references[minRange]
+            // Since it takes some time to create the array, just let the user know the bot is working with starting the 'type' thing
+            msg.channel.startTyping();
+
+            let source = references[minRange]
             // console.log(sources)
 
-            if (sources !== undefined) {
+            if (source !== undefined) {
+              let sourceToUser = []
+
+              // getting the title of the reference
+              await this.parseTitleFromWebsite(source).then(($) => {
+                // add the data to the array which will be then send to the user
+                sourceToUser[0] = {
+                  name: `Reference ${minRange + 1}`,
+                  value: `${$('title').text()}\n${source}`
+                }
+              }).catch(err => {
+                // any errors?
+                Util.betterError(msg, err)
+              })
+
               // Sending an embed with the reference the user wanted
               msg.channel.send({
                 embed: {
@@ -164,16 +182,15 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                     icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
                     name: 'Wikipedia'
                   },
-                  title: `References of ${search}`,
+                  title: `References of ${bestResult}`,
                   timestamp: new Date(),
-                  fields: [
-                    {
-                      name: `Reference ${minRange + 1}`,
-                      value: sources
-                    }
-                  ]
+                  fields: sourceToUser
                 }
               })
+
+              // Then we should stop typing since we do nothing lol
+              msg.channel.stopTyping();
+
             } else {
               msg.channel.send({
                 embed: {
@@ -230,6 +247,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
               }
             })
 
+            // Then we should stop typing since we do nothing lol
             msg.channel.stopTyping();
 
           }
