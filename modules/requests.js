@@ -120,6 +120,9 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
       maxRange = minRange
     }
 
+    // TODO: SET MAX RANGE DISTANCE TO 25!!!
+    // TODO: Check for the amount of references which can be accessed!
+
     // What to do when a number is not in the allowed range
     if((minRange < 0 || maxRange < 1) && minRange!==maxRange){
       minRange = 0
@@ -127,7 +130,7 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
       msg.reply("you can't set the minimum range under or equal 0 and the maximum range under 2.")
     }
 
-
+    // "debugging" :D
     console.log(search, ranges, minRange, maxRange)
 
     // Search for the results
@@ -137,14 +140,78 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
       let bestResult = data.results[0]
       wiki().page(bestResult).then(page => {
 
-        // page.references().then(console.log)
+        // Getting the references / sources of a Wikipedia article with WikiJS
+        page.references().then( references =>  {
+
+          // Check if the range numbers are the same
+          if(minRange === maxRange){
+            let sources = references[minRange]
+            // console.log(sources)
+
+            // Sending an embed with the reference the user wanted
+            msg.channel.send({
+              embed: {
+                color: 3447003,
+                author: {
+                  icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                  name: 'Wikipedia'
+                },
+                title: `References of ${search}`,
+                timestamp: new Date(),
+                fields: [
+                  {
+                    name: `Reference ${minRange + 1}`,
+                    value: sources
+                  }
+                ]
+              }
+            })
+
+          }else{
+            // if not, then get the sources the user want with his given range..
+            let sources = references.slice(minRange, maxRange + 1)
+
+            // Create a proper array as the value for the embed fields key
+            let sourcesSendToUser = [];
+            for (let i = 0; i < sources.length; i++){
+              sourcesSendToUser[i] = {
+                name: `Reference ${i + 1}`,
+                value: `${sources[i]}`
+              }
+              console.log(sourcesSendToUser)
+            }
+
+            // console.log(sourcesSendToUser, sources)
+
+            // Sending an embed with all the sources the user wanted
+            msg.channel.send({
+              embed: {
+                color: 3447003,
+                author: {
+                  icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                  name: 'Wikipedia'
+                },
+                title: `References of ${search}`,
+                timestamp: new Date(),
+                fields: sourcesSendToUser
+              }
+            })
+
+          }
+
+        }).catch(e => {
+          Util.log("[3] An error occurred while requesting the sources from a Wikipedia article", ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
+          Util.betterError(msg, e)
+        })
 
       }).catch(e => {
-        Util.log("An error occurred while requesting the sources from a Wikipedia article", ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
+        Util.log("[2] An error occurred before requesting the sources from a Wikipedia article while getting the page content",
+          ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
         Util.betterError(msg, e)
       })
     }).catch(e => {
-      Util.log("An error occurred while requesting the sources from a Wikipedia article", `Searched for: ${search} - Best Result: failed to do that`, 1)
+      Util.log("[1] An error occurred before requesting the sources from a Wikipedia article while searching for the article the user wanted",
+        `Searched for: ${search} - Best Result: failed to do that`, 1)
       Util.betterError(msg, e)
     })
 
