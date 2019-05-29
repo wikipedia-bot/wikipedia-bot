@@ -143,29 +143,46 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
         // Getting the references / sources of a Wikipedia article with WikiJS
         page.references().then( references =>  {
 
+          let referencesAmount = references.length
+
           // Check if the range numbers are the same
           if(minRange === maxRange){
             let sources = references[minRange]
             // console.log(sources)
 
-            // Sending an embed with the reference the user wanted
-            msg.channel.send({
-              embed: {
-                color: 3447003,
-                author: {
-                  icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
-                  name: 'Wikipedia'
-                },
-                title: `References of ${search}`,
-                timestamp: new Date(),
-                fields: [
-                  {
-                    name: `Reference ${minRange + 1}`,
-                    value: sources
-                  }
-                ]
-              }
-            })
+            if (sources !== undefined) {
+              // Sending an embed with the reference the user wanted
+              msg.channel.send({
+                embed: {
+                  color: 3447003,
+                  author: {
+                    icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                    name: 'Wikipedia'
+                  },
+                  title: `References of ${search}`,
+                  timestamp: new Date(),
+                  fields: [
+                    {
+                      name: `Reference ${minRange + 1}`,
+                      value: sources
+                    }
+                  ]
+                }
+              })
+            }else{
+              msg.channel.send({
+                embed: {
+                  color: 3447003,
+                  author: {
+                    icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                    name: 'Wikipedia'
+                  },
+                  title: `References of ${search}`,
+                  timestamp: new Date(),
+                  description: `Cannot send any information because the given reference number is not valid. (Max references for *${search}:* **${referencesAmount}**)`
+                }
+              })
+            }
 
           }else{
             // if not, then get the sources the user want with his given range..
