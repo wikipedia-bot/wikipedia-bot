@@ -182,7 +182,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                     icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
                     name: 'Wikipedia'
                   },
-                  title: `References of ${search}`,
+                  title: `References of ${bestResult}`,
                   timestamp: new Date(),
                   description: `Cannot send any information because the given reference number is not valid. (Max references for *${search}:* **${referencesAmount}**)`
                 }
@@ -224,7 +224,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                   icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
                   name: 'Wikipedia'
                 },
-                title: `References of ${search}`,
+                title: `References of ${bestResult}`,
                 timestamp: new Date(),
                 fields: sourcesSendToUser
               }
@@ -237,21 +237,31 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
         }).catch(e => {
           Util.log("[3] An error occurred while requesting the sources from a Wikipedia article", ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
           Util.betterError(msg, e)
+
+          // Error handling 101
+          msg.reply("sorry, an error occurrred while trying to execute your command. Please check your spelling or try another keyword.")
         })
 
       }).catch(e => {
         Util.log("[2] An error occurred before requesting the sources from a Wikipedia article while getting the page content",
           ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
         Util.betterError(msg, e)
+
+        // Error handling 101
+        msg.reply("sorry, an error occurrred while trying to execute your command. Please check your spelling or try another keyword.")
       })
     }).catch(e => {
       Util.log("[1] An error occurred before requesting the sources from a Wikipedia article while searching for the article the user wanted",
         `Searched for: ${search} - Best Result: failed to do that`, 1)
       Util.betterError(msg, e)
+
+      // Error handling 101
+      msg.reply("sorry, an error occurrred while trying to execute your command. Please check your spelling or try another keyword.")
     })
 
   }else{
-
+    let formattedURI = "https://en.wikipedia.org/wiki/" + search.replace(" ", "_") + "#References"
+    msg.reply("here is a full list of all references to your keyword: " + formattedURI)
   }
 }
 
