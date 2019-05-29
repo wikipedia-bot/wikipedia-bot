@@ -175,7 +175,7 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
             let sourcesSendToUser = [];
             for (let i = 0; i < sources.length; i++){
               sourcesSendToUser[i] = {
-                name: `Reference ${i + 1}`,
+                name: `Reference ${minRange + i + 1}`,
                 value: `${sources[i]}`
               }
               console.log(sourcesSendToUser)
