@@ -252,8 +252,6 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
 
   }else{
 
-    console.log(search, range)
-
   }
 }
 
@@ -261,6 +259,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
  * Get data from a web page. Yeah, that's everything...
  *
  * @param {String} uri - URI from a website of your choice.
+ * @since 1.4 (development version)
  * */
 exports.parseTitleFromWebsite = (uri) => {
 
