@@ -8,6 +8,8 @@ const got = require('got')
 const Util = require('./util')
 const wiki = require('wikijs').default
 const _ = require('lodash')
+const cheerio = require('cheerio')
+const request = require('request')
 var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../config')
 
 /**
@@ -237,4 +239,29 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
     console.log(search, range)
 
   }
+}
+
+/**
+ * Get data from a web page. Yeah, that's everything...
+ *
+ * @param {String} url - URL from a website of your choice.
+ *
+ * */
+exports.parseTitleFromWebsite = (url) => {
+
+  // Do the request!
+  request(url, (err, res, body) => {
+    if (err) {
+      Util.log(`Error occurred when trying to get data from ${url}`, "Module: requests", "err", err)
+      // TODO: return value!!!
+    }
+    if(res.statusCode === 200){
+      // Parse the document body
+      let $ = cheerio.load(body);
+      return $('title').text()
+    }
+
+
+  })
+
 }
