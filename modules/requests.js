@@ -9,7 +9,10 @@ const Util = require('./util')
 const wiki = require('wikijs').default
 const _ = require('lodash')
 const cheerio = require('cheerio')
+
 const request = require('request')
+const rp = require('request-promise')
+
 var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../config')
 
 /**
@@ -108,7 +111,7 @@ exports.getWikipediaShortInformation = (msg, argument) => {
  * @param range - The range of how many sources the user want
  *
  * */
-exports.getWikipediaReferences = (msg, search, range="all") => {
+exports.getWikipediaReferences = async (msg, search, range="all") => {
   // check if a range was given
   if(range !== "all"){
     // split range into min and max range
@@ -143,12 +146,12 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
       wiki().page(bestResult).then(page => {
 
         // Getting the references / sources of a Wikipedia article with WikiJS
-        page.references().then( references =>  {
+        page.references().then( async references => {
 
           let referencesAmount = references.length
 
           // Check if the range numbers are the same
-          if(minRange === maxRange){
+          if (minRange === maxRange) {
             let sources = references[minRange]
             // console.log(sources)
 
@@ -171,7 +174,7 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
                   ]
                 }
               })
-            }else{
+            } else {
               msg.channel.send({
                 embed: {
                   color: 3447003,
@@ -186,21 +189,32 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
               })
             }
 
-          }else{
+          } else {
             // if not, then get the sources the user want with his given range..
             let sources = references.slice(minRange, maxRange + 1)
 
-            // Create a proper array as the value for the embed fields key
+            // Create an array as the value for the embed fields key
             let sourcesSendToUser = [];
-            for (let i = 0; i < sources.length; i++){
-              sourcesSendToUser[i] = {
-                name: `Reference ${minRange + i + 1}`,
-                value: `${sources[i]}`
-              }
-              console.log(sourcesSendToUser)
-            }
 
-            // console.log(sourcesSendToUser, sources)
+            // Since it takes some time to create the array, just let the user know the bot is working with starting the 'type' thing
+            msg.channel.startTyping();
+
+            // for loop for every reference
+            for (let i = 0; i < sources.length; i++) {
+
+              // getting the title of any reference
+              await this.parseTitleFromWebsite(sources[i]).then(($) => {
+                // add the data to the array which will be then send to the user
+                sourcesSendToUser[i] = {
+                  name: `Reference ${minRange + i + 1}`,
+                  value: `${$('title').text()}\n${sources[i]}`
+                }
+              }).catch(err => {
+                // any errors?
+                Util.betterError(msg, err)
+              })
+
+            }
 
             // Sending an embed with all the sources the user wanted
             msg.channel.send({
@@ -215,6 +229,8 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
                 fields: sourcesSendToUser
               }
             })
+
+            msg.channel.stopTyping();
 
           }
 
@@ -244,24 +260,17 @@ exports.getWikipediaReferences = (msg, search, range="all") => {
 /**
  * Get data from a web page. Yeah, that's everything...
  *
- * @param {String} url - URL from a website of your choice.
- *
+ * @param {String} uri - URI from a website of your choice.
  * */
-exports.parseTitleFromWebsite = (url) => {
+exports.parseTitleFromWebsite = (uri) => {
 
+  let options = {
+    uri: uri,
+    transform: function (body) {
+      return cheerio.load(body)
+    }
+  }
   // Do the request!
-  request(url, (err, res, body) => {
-    if (err) {
-      Util.log(`Error occurred when trying to get data from ${url}`, "Module: requests", "err", err)
-      // TODO: return value!!!
-    }
-    if(res.statusCode === 200){
-      // Parse the document body
-      let $ = cheerio.load(body);
-      return $('title').text()
-    }
-
-
-  })
+  return rp(options)
 
 }
