@@ -10,7 +10,15 @@ module.exports = {
   description: 'The help command shows a full list of all commands.',
   execute(message, args, config) {
     // TODO: Instead of sending an embed, send a link to a good looking commands page.
-    Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
+
+    // Check in what type of channel the command was executed
+    if(message.channel.type === "dm" || message.channel.type === "group"){
+      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      Util.log(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
+    }else{
+      // If it was somewhere else, then log normally like before.
+      Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
+    }
 
     message.delete().catch(e => {
       // TODO: How to handle this properly?
@@ -32,6 +40,10 @@ module.exports = {
           {
             name: `${config.PREFIX}wiki <search term>`,
             value: "Search something on Wikipedia with this command and get a short summary of it."
+          },
+          {
+            name: `${config.PREFIX}sources <search term> <range>`,
+            value: `Write ${config.PREFIX}sources to get an explanation of this command.`
           },
           {
             name: `${config.PREFIX}issue`,

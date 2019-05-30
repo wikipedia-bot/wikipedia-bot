@@ -10,9 +10,12 @@ module.exports = {
   description: 'Search something on Wikipedia with this command and get a short summary of it.',
   execute(message, args, config) {
 
-    if(message.channel.type === 'dm'){
-      Util.log(`${config.PREFIX + this.name} (args: [${args}]) used by ${message.author.username + '#' + message.author.discriminator}`, `Check log for any incoming errors for fixing new bugs!`)
+    // Check in what type of channel the command was executed
+    if(message.channel.type === "dm" || message.channel.type === "group"){
+      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      Util.log(`${config.PREFIX + this.name} (args: [${args}]) used in a private ${message.channel.type}.`, `Check log for any incoming errors for fixing new bugs!`)
     }else{
+      // If it was somewhere else, then log normally like before.
       Util.log(`${config.PREFIX + this.name} (args: [${args}]) used on ${message.guild.name} (${message.guild.id})`, `Check log for any incoming errors for fixing new bugs!`)
     }
 
