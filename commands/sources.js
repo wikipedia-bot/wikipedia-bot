@@ -12,7 +12,14 @@ module.exports = {
   description: 'Sends you a full list of all sources of a Wikipedia article',
   execute(message, args, config){
     // Log the command
-    Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
+    // Check in what type of channel the command was executed
+    if(message.channel.type === "dm" || message.channel.type === "group"){
+      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      Util.log(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
+    }else{
+      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
+    }
 
     if(!args[1]){
 

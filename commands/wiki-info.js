@@ -10,6 +10,15 @@ module.exports = {
   description: 'It helps you to get specific information about a specific topic (e.g. dates, numbers, etc.)',
   execute(message, args, config){
 
+    // Check in what type of channel the command was executed
+    if(message.channel.type === "dm" || message.channel.type === "group"){
+      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      Util.log(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
+    }else{
+      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
+    }
+
     // USAGE: !wiki-info [TYPE OF INFORMATION] [ARGUMENT]
     if (!args[1]) {
       message.react('👎').catch((e) => {
