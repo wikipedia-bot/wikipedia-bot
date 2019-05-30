@@ -263,7 +263,13 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
               }).catch(err => {
                 // any errors?
                 Util.betterError(msg, err)
-                msg.reply("something went wrong here. Try it again or change the range you gave.")
+
+                // Write into the embed field value that there was an error
+                sourcesSendToUser[i] = {
+                  name: `Reference ${minRange + i + 1}`,
+                  value: `*Cannot get the title from the page...*\n${sources[i]}`
+                }
+
               })
 
             }
@@ -315,7 +321,18 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
   }else{
     // Sending a link to the reference list of the wikipedia Article
     let formattedURI = "https://en.wikipedia.org/wiki/" + search.replace(" ", "_") + "#References"
-    msg.reply("here is a full list of all references to your keyword: " + formattedURI)
+    msg.channel.send({
+      embed: {
+        color: 3447003,
+        author: {
+          icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+          name: 'Wikipedia'
+        },
+        title: `References of ${_.startCase(search)}`,
+        timestamp: new Date(),
+        description: `${formattedURI}`
+      }
+    })
   }
 }
 
