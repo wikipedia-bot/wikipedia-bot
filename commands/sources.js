@@ -14,17 +14,52 @@ module.exports = {
     // Log the command
     Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
 
-    let commandArgs = message.content.replace(`${config.PREFIX}${this.name} `, "")
-    // https://regex101.com/r/qa3KxQ/1/ and https://stackoverflow.com/questions/2817646/javascript-split-string-on-space-or-on-quotes-to-array
-    commandArgs = commandArgs.match(/[^\s"']+|"([^"]*)"+|'([^']*)'/gmi)
+    if(!args[1]){
 
-    // Search value -> "search"
-    let searchValue = commandArgs[0].replace(/["']/g, "")
-    // Range -> e.g.: 1-30 or 30-40 or all
-    let range = commandArgs[1]
+      // Send an embed which explains this command
+      message.channel.send({
+        embed: {
+          color: 3447003,
+          author: {
+            icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+            name: 'Wikipedia'
+          },
+          title: `Sources Command 101`,
+          timestamp: new Date(),
+          description: "This helps to understand how this command works.",
+          fields: [
+            {
+              name: "Generally the command works like this:",
+              value: '`' + config.PREFIX + this.name + ' "<search argument>" <range>` \n\n' +
+                '**Example:** ' + '`' + config.PREFIX + this.name + ' "Elon Musk" 1-5`\n ' +
+                'You give a search term and a specific range from which \nto which reference you want to get the link of.'
+            },
+            {
+              name: "\nYou can also get some information about the references\nof a Wikipedia article with setting range to *info*",
+              value: '**Example:** ' + '`' + config.PREFIX + this.name + ' "Elon Musk" info`\n '
+            },
+            {
+              name: "\nIf you leave the range empty or write *all* as the range, \nyou'll get the link to the Wikipedia article references",
+              value: '**Example:** ' + '`' + config.PREFIX + this.name + ' "Elon Musk" all`\n '
+            }
+          ]
+        }
+      })
 
-    // Do the request!
-    requests.getWikipediaReferences(message, searchValue, range)
+    }else {
+      // Get the command arguments
+      let commandArgs = message.content.replace(`${config.PREFIX}${this.name} `, "")
+      // https://regex101.com/r/qa3KxQ/1/ and https://stackoverflow.com/questions/2817646/javascript-split-string-on-space-or-on-quotes-to-array
+      commandArgs = commandArgs.match(/[^\s"']+|"([^"]*)"+|'([^']*)'/gmi)
+
+      // Search value -> "search"
+      let searchValue = commandArgs[0].replace(/["']/g, "")
+      // Range -> e.g.: 1-30 or 30-40 or all
+      let range = commandArgs[1]
+
+      // Do the request!
+      requests.getWikipediaReferences(message, searchValue, range)
+    }
 
   }
 }
