@@ -24,6 +24,7 @@ var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../con
  * */
 exports.getWikipediaShortSummary = (msg, argument) => {
 
+  // Searching for the article the user want
   wiki().search(argument).then(data => {
     // Getting the first result of the search results
     // TODO: Find a way to handle disambiguation pages
@@ -59,24 +60,24 @@ exports.getWikipediaShortSummary = (msg, argument) => {
             }
           })
         }).catch(e => {
+          // Logging the error
           Util.log("[3] An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}` , 1)
           Util.betterError(msg, e)
-
           // Error handling 101
           msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
         })
       })
     }).catch(e => {
+      // Logging the error
       Util.log("[2] An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 1)
       Util.betterError(msg, e)
-
       // Error handling 101
       msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
     })
   }).catch(e => {
+    // Logging the error
     Util.log("[1] An error occurred while requesting the data from Wikipedia", `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 1)
     Util.betterError(msg, e)
-
     // Error handling 101
     msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
   })
@@ -101,15 +102,16 @@ exports.getWikipediaShortInformation = (msg, argument) => {
       page.fullInfo().then(info => console.log(info))
 
     }).catch(e => {
+      // Logging the error
       Util.log("[2] An error occurred while requesting the data from Wikipedia", ` Searched for: ${argument} - Best Result: ${bestResult}`, 1)
       Util.betterError(msg, e)
       // Error handling 101
       msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
     })
   }).catch(e => {
+    // Logging the error
     Util.log("[1] An error occurred while requesting the data from Wikipedia", `Searched for: ${argument} - Best Result: failed to do that`, 1)
     Util.betterError(msg, e)
-
     // Error handling 101
     msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
   })
@@ -240,6 +242,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
               }).catch(err => {
                 // any errors?
                 Util.betterError(msg, err)
+                msg.reply("something went wrong here. Try it again or change the range you gave.")
               })
 
             }
@@ -264,26 +267,26 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
           }
 
         }).catch(e => {
+          // Logging the error
           Util.log("[3] An error occurred while requesting the sources from a Wikipedia article", ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
           Util.betterError(msg, e)
-
           // Error handling 101
           msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
         })
 
       }).catch(e => {
+        // Logging the error
         Util.log("[2] An error occurred before requesting the sources from a Wikipedia article while getting the page content",
           ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
         Util.betterError(msg, e)
-
         // Error handling 101
         msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
       })
     }).catch(e => {
+      // Logging the error
       Util.log("[1] An error occurred before requesting the sources from a Wikipedia article while searching for the article the user wanted",
         `Searched for: ${search} - Best Result: failed to do that`, 1)
       Util.betterError(msg, e)
-
       // Error handling 101
       msg.reply("sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.")
     })
