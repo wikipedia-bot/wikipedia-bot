@@ -43,7 +43,7 @@ exports.betterError = (/**Message*/msg, /**String*/text) => {
     // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
     console.log(`[ERR] [${dateTime({local: true, showTimeZone: true})}] Private Direct Message Channel -> ${text}`.error)
   }else{
-    // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+    // If it was somewhere else, then log normally like before.
     console.log(`[ERR] [${dateTime({local: true, showTimeZone: true})}] (${msg.guild.name} | ${msg.guild.id}) -> ${text}`.error)
   }
   console.log("Raw error log:".underline.error)

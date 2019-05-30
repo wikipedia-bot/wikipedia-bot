@@ -14,7 +14,7 @@ module.exports = {
       // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
       Util.log(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
     }else{
-      // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
+      // If it was somewhere else, then log normally like before.
       Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
     }
 
