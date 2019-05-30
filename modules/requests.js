@@ -135,7 +135,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
     let maxRange = _.toNumber(ranges[1]) - 1
 
     // If no maximum range was given but just one number, then the user should get only the specific reference
-    if (_.isNaN(maxRange)) {
+    if (_.isNaN(maxRange) && range!=="info") {
       // Set maxRange to the single number
       maxRange = minRange
     }
@@ -143,7 +143,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
     // TODO: SET A MAXIMUM RANGE!!
 
     // What to do when a number is not in the allowed range
-    if((minRange < 0 || maxRange < 1) && minRange!==maxRange){
+    if((minRange < 0 || maxRange < 1) && minRange!==maxRange && range!=="info"){
       minRange = 0
       maxRange = 1
       msg.reply("you can't set the minimum range under or equal 0 and the maximum range under 2.")
@@ -163,6 +163,27 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
 
           // How many references exists?
           let referencesAmount = references.length
+
+          // If range is equal to "info" then just send the information, how many references exists for this Wikipedia article
+          if(ranges[0] === "info"){
+            // Sending a link to the reference list of the wikipedia Article
+            let formattedURI = "https://en.wikipedia.org/wiki/" + search.replace(" ", "_") + "#References"
+
+            // Sending an embed with the reference the user wanted
+            msg.channel.send({
+              embed: {
+                color: 3447003,
+                author: {
+                  icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+                  name: 'Wikipedia'
+                },
+                title: `References of ${bestResult} - Check out this list: ${formattedURI}`,
+                timestamp: new Date(),
+                description: `There are a total of ${referencesAmount} references for the Wikipedia article about ${bestResult}.`
+              }
+            })
+            return;
+          }
 
           // Check if the range numbers are the same
           if (minRange === maxRange) {
@@ -292,6 +313,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
     })
 
   }else{
+    // Sending a link to the reference list of the wikipedia Article
     let formattedURI = "https://en.wikipedia.org/wiki/" + search.replace(" ", "_") + "#References"
     msg.reply("here is a full list of all references to your keyword: " + formattedURI)
   }
