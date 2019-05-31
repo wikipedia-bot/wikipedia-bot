@@ -4,9 +4,14 @@
 
 **Our Discord server: [join](https://discord.gg/yAUmDNb)**
 
-<p align="center"><a href="https://discordbots.org/bot/554751047030013953" >
+<p align="center">
+<a href="https://discordbots.org/bot/554751047030013953" >
   <img src="https://discordbots.org/api/widget/554751047030013953.svg" alt="Wikipedia" />
-</a></p>
+</a>
+<a href="https://bots.ondiscord.xyz/bots/554751047030013953">
+    <img src="https://bots.ondiscord.xyz/bots/554751047030013953/embed?theme=dark&showGuilds=true" alt="Wikipedia" />
+</a>
+</p>
 
 ## Introduction
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_shield)
