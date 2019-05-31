@@ -21,6 +21,11 @@ module.exports = {
     message.delete().catch(e => {
       // TODO: How to handle this properly and user-friendly?
     })
-    message.author.send('Here is the link to the bot on DiscordBots.org. With your vote, the bot will become more and more popular and used by more servers. We appreciate it very much! -> https://discordbots.org/bot/554751047030013953')
+
+    message.author.send("Hi, I'm the developer of this bot you are using right now! Thank you for supporting the effort behind this project.\n\n" +
+      "Currently the bot is listed on two sites. With your help, the bot will reach a much greater popularity and will be used by more people.\n\n" +
+      "Please vote on one or both sites:\nhttps://bots.ondiscord.xyz/bots/554751047030013953 \nhttps://discordbots.org/bot/554751047030013953 \n\n" +
+      "Thank you very much!")
+
   }
 }
