@@ -12,7 +12,16 @@ the changes you made. In future, a special code style will be enforced in all Ja
 3. Before doing any development, run `npm install`.
 4. *Optionally, you can create a development branch.* 
 The name should contain the type of change you are doing (e.g. `update-wiki-command`). *You don't have to do this.*
-5. Code what you want.
+5. Code what you want. (Read **What you need to consider when you code**)
 6. Try out your changes and new features with `npm run dev`.
 7. [Submit a pull request.](https://github.com/julianYaman/wikipedia-bot/pull/new/master)
+
+When you submit a pull request, please follow the template.
+
+## What you need to consider when you code:
+
+In the root directory, you need to create a file called `config.js`, otherwise the bot won't start.
+
+The template for this file can be found in `example-config.js`.
+
 
