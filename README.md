@@ -21,9 +21,11 @@
 
 *TL;DR - it's just a amazing bot!*
 
-With this bot on your server, you can search articles on Wikipedia and get short summaries of them.
-With it, you can quickly share knowledge like how high the population in a country is or to get a
-description of something you want to know more about.
+The Wikipedia Bot sends you short summaries of a Wikipedia article you searched for. 
+
+You can quickly share the information about a topic on your Discord server, for example you want information about a game or a person.
+
+In future updates, it will also read articles for you with text-to-speech support and it will be able to send you a list of the references used in a Wikipedia article.
 
 **License: [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
 
