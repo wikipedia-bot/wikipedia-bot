@@ -2,8 +2,6 @@
 
 <h2 align="center"> <a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> > Invite the bot to your server < </a></h2>
 
-**Our Discord server: [join](https://discord.gg/yAUmDNb)**
-
 <p align="center">
 <a href="https://discordbots.org/bot/554751047030013953" >
   <img src="https://discordbots.org/api/widget/554751047030013953.svg" alt="Wikipedia" />
