@@ -17,6 +17,9 @@
 <a href="https://discord.gg/yAUmDNb">
     <img src="https://discordapp.com/api/guilds/358751806697897984/embed.png" alt="Discord Server Shield"/>
 </a>
+<a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328">
+    <img src="https://img.shields.io/badge/Discord-Add%20Bot-7289DA.svg"/>
+</a>
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_shield" alt="FOSSA Status">
     <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=shield"/>
 </a>
