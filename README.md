@@ -13,9 +13,18 @@
 </a>
 </p>
 
-## Introduction
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_shield)
+<p align="center">
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_shield" alt="FOSSA Status">
+    <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=shield"/>
+</a>
+</p>
 
+## Introduction
+
+- ### [Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)
+- **[License](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
+- [**Contributing guidelines**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CONTRIBUTING.md)
+- [**Code of Conduct**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CODE_OF_CONDUCT.md)
 
 ### What is this bot all about?
 
@@ -27,39 +36,16 @@ You can quickly share the information about a topic on your Discord server, for 
 
 In future updates, it will also read articles for you with text-to-speech support and it will be able to send you a list of the references used in a Wikipedia article.
 
-**License: [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
 
-### [Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)
+## Contributing
 
-## Contribution
+Any type of contribution is welcome. Even reporting problems or suggesting new features 
+does help a lot to improve the bot.
 
-Any type of contribution is welcome. Even reporting problems or giving feedback via the Issues section
-does help a lot to know how to improve the bot and to fix problems with the bot.
+**If you want to contribute to the codebase of this project, please follow the 
+[contributing guidelines](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CONTRIBUTING.md).**
 
-Before developing, create a special branch for your features or fixes you want to made 
-(if you want to make a pull request to this repository).
+Also, we recommend to read the [**Code of Conduct**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CODE_OF_CONDUCT.md).
 
-- *Fork the repository.*
-- *Optional: Check the ToDOs in the code!*
-- ``git checkout -b branch-name `` *(e.g. issue-fix-#1 or so)*
-- ``git commit -am 'Added something / Fixed something'``
-- ``git push origin branch-name``
-- Make a **[pull request](https://github.com/julianYaman/wikipedia-bot/pull/new/master)**. Someone will then review your code.
-
-## Installation guide
-
-Before doing any development and testing of the bot, you should install all packages 
-which are required with
-
-```npm install```
-
-Also check that you update **[Node.js](https://nodejs.org/en/)** and optionally install the packages again to update them.
-But in this case, [Dependabot](https://dependabot.com/) takes care of updating the *package.json* dependencies.
-
-- [x] Adding an installation guide
-- [ ] Adding cool looking badges
-- [ ] Adding more content to the README
-
-
-## License
+## License status
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)
