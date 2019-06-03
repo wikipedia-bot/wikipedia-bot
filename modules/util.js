@@ -74,7 +74,9 @@ exports.log = (/**String*/text, optionalInput = "info log", type = 0, rawOutput 
       break
     case "err":
       console.log(`[ERR] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`.error)
-      console.log(rawOutput)
+      if(rawOutput !== undefined) {
+        console.log(rawOutput)
+      }
       break
     default:
       console.log(`[??] [${dateTime({local: true, showTimeZone: true})}] (${optionalInput}) -> ${text}`)

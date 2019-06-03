@@ -206,8 +206,8 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                   value: `${$('title').text()}\n${source}`
                 }
               }).catch(err => {
-                if(err.statusCode === 404){
-                  Util.betterError(msg, `${err.name} 404 Error while trying to access: ${source}`)
+                if(err.statusCode){
+                  Util.log( `${err.name} ${err.statusCode} Error while trying to access: ${source}`, "Sources Cmd - Request Error", "err")
                 }else{
                   Util.betterError(msg, err)
                 }
@@ -273,8 +273,8 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                 }
               }).catch(err => {
                 // any errors?
-                if(err.statusCode === 404){
-                  Util.betterError(msg, `${err.name} 404 Error while trying to access: ${sources[i]}`)
+                if(err.statusCode){
+                  Util.log( `${err.name} ${err.statusCode} Error while trying to access: ${sources[i]}`, "Sources Cmd - Request Error", "err")
                 }else{
                   Util.betterError(msg, err)
                 }
