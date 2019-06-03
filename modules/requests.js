@@ -140,6 +140,8 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
       maxRange = minRange
     }
 
+    console.log()
+
     // TODO: SET A MAXIMUM RANGE!!
 
     // What to do when a number is not in the allowed range
@@ -204,8 +206,17 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                   value: `${$('title').text()}\n${source}`
                 }
               }).catch(err => {
-                // any errors?
-                Util.betterError(msg, err)
+                if(err.statusCode === 404){
+                  Util.betterError(msg, `${err.name} 404 Error while trying to access: ${source}`)
+                }else{
+                  Util.betterError(msg, err)
+                }
+
+                sourceToUser[0] = {
+                  name: `Reference ${minRange + 1}`,
+                  value: `*Cannot get the title from the page...*\n${source}`
+                }
+
               })
 
               // Sending an embed with the reference the user wanted
@@ -262,7 +273,11 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
                 }
               }).catch(err => {
                 // any errors?
-                Util.betterError(msg, err)
+                if(err.statusCode === 404){
+                  Util.betterError(msg, `${err.name} 404 Error while trying to access: ${source}`)
+                }else{
+                  Util.betterError(msg, err)
+                }
 
                 // Write into the embed field value that there was an error
                 sourcesSendToUser[i] = {
