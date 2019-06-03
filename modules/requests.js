@@ -274,7 +274,7 @@ exports.getWikipediaReferences = async (msg, search, range="all") => {
               }).catch(err => {
                 // any errors?
                 if(err.statusCode === 404){
-                  Util.betterError(msg, `${err.name} 404 Error while trying to access: ${source}`)
+                  Util.betterError(msg, `${err.name} 404 Error while trying to access: ${sources[i]}`)
                 }else{
                   Util.betterError(msg, err)
                 }
