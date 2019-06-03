@@ -46,10 +46,6 @@ module.exports = {
             value: `Write ${config.PREFIX}sources to get an explanation of this command.`
           },
           {
-            name: `${config.PREFIX}issue`,
-            value: "Will send you a link to the issues section of the repository of the bot to give feedback or report an error."
-          },
-          {
             name: `${config.PREFIX}info`,
             value: "Gives you some information about the bot."
           },

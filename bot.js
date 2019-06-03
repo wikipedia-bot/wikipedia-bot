@@ -134,7 +134,7 @@ client.on('guildCreate', guild => {
     console.error(e)
   })
   // Sending a "Thank you" message to the owner of the guild
-  guild.owner.send('Thank you for using Wikipedia Bot. The bot is in an early stage of development. If there are any problems with the bot, just write: ``' + PREFIX + 'issue`` in a channel.')
+  guild.owner.send('Thank you for using Wikipedia Bot. Please help us promoting the bot with writing **' + PREFIX + 'vote** in this channel.')
 
 
 })
