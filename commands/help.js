@@ -59,7 +59,7 @@ module.exports = {
           },
           {
             name: `${config.PREFIX}vote`,
-            value: "**SUPPORT US WITH A VOTE:** Vote for the bot on DiscordBots.org."
+            value: "**Support the developers by voting the bot on two Discord Bot list sites**"
           },
           {
             name: `${config.PREFIX}history`,
