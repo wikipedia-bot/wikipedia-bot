@@ -11,7 +11,7 @@
 to your own server.
 
 ## -- Support the developers effort by promoting --
-- ``!vote`` - Vote for the bot on DiscordBots.org. 
+- ``!vote`` - Vote for the bot on the Discord Bot list sites the bot is listed on. 
 
 ## Miscellaneous
 - ``!issue`` - Sends you a link to the Issues section of the repository of the bot.

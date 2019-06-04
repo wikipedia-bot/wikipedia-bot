@@ -42,8 +42,8 @@ module.exports = {
             value: "Search something on Wikipedia with this command and get a short summary of it."
           },
           {
-            name: `${config.PREFIX}sources <search term> <range>`,
-            value: `Write ${config.PREFIX}sources to get an explanation of this command.`
+            name: `${config.PREFIX}sources "<search term>" <range>`,
+            value: `**NEW** - More details 👉 Write **${config.PREFIX}sources**`
           },
           {
             name: `${config.PREFIX}info`,
@@ -59,7 +59,7 @@ module.exports = {
           },
           {
             name: `${config.PREFIX}vote`,
-            value: "**Support the developers by voting the bot on two Discord Bot list sites**"
+            value: "**Support the developers by voting the bot on Discord Bot list sites**"
           },
           {
             name: `${config.PREFIX}history`,
