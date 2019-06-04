@@ -9,6 +9,11 @@
 <a href="https://bots.ondiscord.xyz/bots/554751047030013953">
     <img src="https://bots.ondiscord.xyz/bots/554751047030013953/embed?theme=dark&showGuilds=true" alt="Wikipedia" />
 </a>
+<a href="https://discordbotlist.com/bots/554751047030013953">
+    <img width="380" height="140" 
+        src="https://discordbotlist.com/bots/554751047030013953/widget" 
+        alt="Wikipedia Bot on Discord Bot List">
+</a>
 </p>
 
 <p align="center">
