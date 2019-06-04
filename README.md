@@ -30,6 +30,14 @@
 
 ## Introduction
 
+### Want to give Feedback?
+You can reach me out here:
+- **[E-Mail](mailto:julianyaman@posteo.eu)** - julianyaman@posteo.eu 
+- **[Twitter: @yamanstudios](https://twitter.com/yamanstudios)**
+- **[Discord](https://discord.gg/yAUmDNb)**
+
+### Short links
+
 - ### [Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)
 - **[License](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
 - [**Contributing guidelines**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CONTRIBUTING.md)
