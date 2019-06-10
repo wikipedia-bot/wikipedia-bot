@@ -13,7 +13,14 @@ try {
 
 const client = new Discord.Client();
 
-var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN} = require("./config")
+const devMode = require("./config").DEVELOPMENT
+
+// Checking if the bot is in production mode...
+if(devMode){
+  var {PREFIX, VERSION, TOKEN, DEVELOPMENT} = require("./config")
+}else{
+  var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN, DISCORDBOTLIST_TOKEN} = require("./config")
+}
 
 // Modules
 const requests = require('./modules/requests')
@@ -107,11 +114,15 @@ client.on('ready', async () => {
 
 // DiscordBots.org events
 dbl.on('posted', () => {
-  Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
+  if (DEVELOPMENT !== true) {
+    Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
+  }
 })
 
 dbl.on('error', e => {
-  Util.log("Error occurred while trying to update the server amount on discordbots.org!", `Bot List - discordbots.org`, "err", e)
+  if (DEVELOPMENT !== true) {
+    Util.log("Error occurred while trying to update the server amount on discordbots.org!", `Bot List - discordbots.org`, "err", e)
+  }
 })
 
 // Continuing with Discord client events
