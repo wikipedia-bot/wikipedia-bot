@@ -24,7 +24,7 @@ module.exports = {
       message.react('👎').catch((e) => {
         Util.log(`wiki-info Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
       })
-      message.reply('you forgot to search for something. -> ``' + config.PREFIX + 'wiki-info [argument] | Example ' + config.PREFIX + 'wiki-info Rocket League``')
+      message.reply('you forgot to search for something. -> ``' + config.PREFIX + 'wiki-info [argument] | Example ' + config.PREFIX + 'wiki-info "Rocket League"``')
     } else {
 
       let informationArguments = message.content.replace(`${config.PREFIX}${this.name} `, "")
