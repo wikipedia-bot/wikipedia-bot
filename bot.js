@@ -111,7 +111,7 @@ client.on('ready', async () => {
       const bot = this
       got.post(`https://discordbotlist.com/api/bots/${ONDISCORDXYZ_BOTID}/stats`, {
         headers: {
-          'Authorization': DISCORDBOTLIST_TOKEN
+          'Authorization': "Bot " + DISCORDBOTLIST_TOKEN
         },
         json: true,
         method: 'POST',
