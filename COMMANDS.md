@@ -6,6 +6,10 @@
 
 - ``!help`` - You guessed it!
 - ``!wiki <search term>`` - Gives you a short summary of a Wikipedia article you searched for! 
+- ``!sources "<search>" <range>`` - This command sends you the references used in a Wikipedia article. (Example: ``!sources "GitHub" 1-5``) *(more help needed? -> Write ``!sources`` in a channel)*
+
+
+## Bot related commands:
 - ``!info`` - Information and stats about the bot.
 - ``!bot`` - Sends you a bot invite link with which you can invite the bot
 to your own server.
