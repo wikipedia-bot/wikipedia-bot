@@ -98,9 +98,9 @@ client.on('ready', async () => {
           "guildCount": client.guilds.size
         }
       }).then(res => {
-        res.statusCode === 204 ?
-          Util.log("Server amount updated on bots.ondiscord.xyz!", `Bot List - bots.ondiscord.xyz / statusCode: ${res.statusCode}`) :
-          Util.log("Error occured when trying to update the server amount on bots.ondiscord.xyz!", "Bot List - bots.ondiscord.xyz", "err", res)
+        if(res.statusCode !== 204) {
+          Util.log("Error occured when trying to update the server amount on discordbotlist.com!", "", "err", res)
+        }
       }).catch(e => {
         console.log(e)
       })
@@ -121,9 +121,9 @@ client.on('ready', async () => {
           "voice_connections": client.voiceConnections.size
         }
       }).then(res => {
-        res.statusCode === 204 ?
-          Util.log("Server amount updated on discordbotlist.com!", `${res.statusCode}`) :
+        if(res.statusCode !== 204) {
           Util.log("Error occured when trying to update the server amount on discordbotlist.com!", "", "err", res)
+        }
       }).catch(e => {
         console.log(e)
       })
@@ -136,11 +136,11 @@ client.on('ready', async () => {
 })
 
 // DiscordBots.org events
-dbl.on('posted', () => {
-  if (DEVELOPMENT !== true) {
-    Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
-  }
-})
+// dbl.on('posted', () => {
+//   if (DEVELOPMENT !== true) {
+//     Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
+//   }
+// })
 
 dbl.on('error', e => {
   if (DEVELOPMENT !== true) {
