@@ -29,8 +29,8 @@ module.exports = {
     message.author.send({
       embed: {
         color: 3447003,
-        title: `${message.client.user.username} / Help command\nGitHub: https://github.com/julianYaman/wikipedia-bot`,
-        description: "A full list of commands you can use with this bot",
+        title: `${message.client.user.username} / Help command\nWebsite: https://www.julianyaman.de/`,
+        description: "OUTDATED: Checkout the website to get a better list of commands!",
         timestamp: new Date(),
         fields: [
           {

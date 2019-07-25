@@ -24,6 +24,11 @@ module.exports = {
         color: 3447003,
         fields: [
           {
+            name: "Official website:",
+            value: "https://www.julianyaman.de/",
+            inline: false
+          },
+          {
             name: "Serving on .. servers in total",
             value: message.client.guilds.size,
             inline: true
