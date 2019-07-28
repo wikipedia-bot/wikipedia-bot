@@ -28,42 +28,20 @@ module.exports = {
 
     message.author.send({
       embed: {
-        color: 3447003,
-        title: `${message.client.user.username} / Help command\nWebsite: https://www.julianyaman.de/`,
-        description: "OUTDATED: Checkout the website to get a better list of commands!",
-        timestamp: new Date(),
+        color: 0xffffff,
+        title: message.client.user.username,
         fields: [
           {
-            name: `${config.PREFIX}help`,
-            value: "You get this list of commands with the help command."
+            name: "Commands",
+            value: "[Click here](https://www.julianyaman.de/) to see all commands."
           },
           {
-            name: `${config.PREFIX}wiki <search term>`,
-            value: "Search something on Wikipedia with this command and get a short summary of it."
+            name: "Invite",
+            value: "[Click here](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328) to add the bot to your server."
           },
           {
-            name: `${config.PREFIX}sources "<search term>" <range>`,
-            value: `**NEW** - More details 👉 Write **${config.PREFIX}sources**`
-          },
-          {
-            name: `${config.PREFIX}info`,
-            value: "Gives you some information about the bot."
-          },
-          {
-            name: `${config.PREFIX}github`,
-            value: "Sends you a direct link to the GitHub of the repository."
-          },
-          {
-            name: `${config.PREFIX}bot`,
-            value: "Sends you a link where you can invite the bot to your own server!"
-          },
-          {
-            name: `${config.PREFIX}vote`,
-            value: "**Support the developers by voting the bot on Discord Bot list sites**"
-          },
-          {
-            name: `${config.PREFIX}history`,
-            value: "**PROMOTION:** Sends you an invite link to The History Discord as a private link."
+            name: "Feedback & Support",
+            value: "Join the [Discord Server](https://discord.gg/yAUmDNb) to get support if you're having problems with using the bot."
           }
         ]
       }
