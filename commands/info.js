@@ -21,6 +21,7 @@ module.exports = {
     message.channel.send({
       embed: {
         title: "Wikipedia Bot Information",
+        description: `*If you need help, type **${config.PREFIX}help***`,
         color: 3447003,
         fields: [
           {
