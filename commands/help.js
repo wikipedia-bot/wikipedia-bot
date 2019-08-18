@@ -40,6 +40,10 @@ module.exports = {
             value: "[Click here](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328) to add the bot to your server."
           },
           {
+            name: "Donate",
+            value: "You can [donate on Patreon](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328). Thank you very much for your help :)"
+          },
+          {
             name: "Feedback & Support",
             value: "Join the [Discord Server](https://discord.gg/yAUmDNb) to get support if you're having problems with using the bot."
           }
