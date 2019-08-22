@@ -41,7 +41,7 @@ module.exports = {
           },
           {
             name: "Donate",
-            value: "You can [donate on Patreon](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328). Thank you very much for your help :)"
+            value: "You can [donate on Patreon](https://www.patreon.com/user?u=23070184). Thank you very much for your help :)"
           },
           {
             name: "Feedback & Support",
