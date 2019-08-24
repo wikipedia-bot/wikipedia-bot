@@ -47,12 +47,14 @@ You can reach me out here:
 
 *TL;DR - it's just a amazing bot!*
 
-The Wikipedia Bot sends you short summaries of a Wikipedia article you searched for. 
+The Wikipedia Bot sends you short summaries of a Wikipedia article you searched for.
 
-You can quickly share the information about a topic on your Discord server, for example you want information about a game or a person.
+You can quickly share the information about a topic on your Discord server, for example if you want information about a country, a game or a person.
+
+This bot is especially focusing one goal: to deliver and share information about the world.
+This bot always gets updates to provide a better service.
 
 In future updates, it will also read articles for you with text-to-speech support and it will be able to send you a list of the references used in a Wikipedia article.
-
 
 ## Contributing
 
