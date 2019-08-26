@@ -86,7 +86,7 @@ client.on('ready', async () => {
       dbl.postStats(client.guilds.size);
     }, 1800000);
 
-    // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 5 minutes
+    // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
     setInterval(() => {
       got.post(`https://bots.ondiscord.xyz/bot-api/bots/${ONDISCORDXYZ_BOTID}/guilds`, {
         headers: {
@@ -99,12 +99,12 @@ client.on('ready', async () => {
         }
       }).then(res => {
         if(res.statusCode !== 204) {
-          Util.log("Error occured when trying to update the server amount on discordbotlist.com!", "", "err", res)
+          Util.log("Error occured when trying to update the server amount on bots.ondiscord.com!", "", "err", res)
         }
       }).catch(e => {
         console.log(e)
       })
-    }, 300000);
+    }, 600000);
 
     // Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
     setInterval(() => {
