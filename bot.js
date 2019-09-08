@@ -2,7 +2,7 @@
 try {
   var Discord = require('discord.js')
   if (process.version.slice(1).split('.')[0] < 8) {
-    throw new Error('Node 8.0.0 or higher is required. Please upgrade / update Node.js on your computer / server.')
+    throw new Error('Node 8.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
   }
 } catch (e) {
   console.error(e.stack)
@@ -149,7 +149,7 @@ dbl.on('error', e => {
 })
 
 // Continuing with Discord client events
-client.on('disconnect', () => Util.log('I disconnected currently but I will try to reconnect!'))
+client.on('disconnect', () => Util.log('Disconnected!'))
 
 client.on('reconnecting', () => Util.log('Reconnecting...'))
 
@@ -157,8 +157,7 @@ client.on('reconnecting', () => Util.log('Reconnecting...'))
 client.on('guildCreate', guild => {
 
   // Logging the event
-  Util.log(`Joined a new guild -> ${guild.name}. (id: ${guild.id}) This guild has ${guild.memberCount} members!`, 'BOT EVENT')
-  Util.log(`Send a message to the owner of ${guild.name} ${guild.owner.user.username + '#' + guild.owner.user.discriminator}.`, 'BOT EVENT -> Guild Owner Message')
+  Util.log(`Joined a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
   // Updating the presence of the bot with the new server amount
   client.user.setPresence({
     game: {
@@ -168,7 +167,7 @@ client.on('guildCreate', guild => {
     console.error(e)
   })
   // Sending a "Thank you" message to the owner of the guild
-  guild.owner.send('Thank you for using Wikipedia Bot. Please help us promoting the bot with writing **' + PREFIX + 'vote** in this channel.')
+  guild.owner.send('Thank you for using Wikipedia Bot. Please help us promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
 
 
 })
@@ -177,7 +176,7 @@ client.on('guildCreate', guild => {
 client.on('guildDelete', guild => {
 
   // Logging the event
-  Util.log(`I have been removed from -> ${guild.name}. (id: ${guild.id})`, 'BOT EVENT')
+  Util.log(`Left a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
   // Updating the presence of the bot with the new server amount
   client.user.setPresence({
     game: {
@@ -202,8 +201,6 @@ exports.totalMembers = () =>  {
   }
   return total
 }
-
-// TODO: Adding a !github command
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
 // for the beginning of the development. After the main bugs are fixed (see Issues e.g. #1), logging may be turned off for
@@ -246,3 +243,5 @@ client.on('message', async message => {
 })
 
 client.login(TOKEN);
+
+process.on('unhandledRejection', (PromiseRejection) => console.error(`Promise Error -> ${PromiseRejection}`))
