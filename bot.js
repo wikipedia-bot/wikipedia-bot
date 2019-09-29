@@ -42,6 +42,12 @@ for (const file of commandFiles) {
   // set a new item in the Collection
   // with the key as the command name and the value as the exported module
   client.commands.set(command.name, command);
+  // Check if any alias does exist and add if they do
+  if(command.alias){
+    for(const alias of command.alias){
+      client.commands.set(alias, command)
+    }
+  }
 }
 
 

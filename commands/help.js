@@ -7,6 +7,7 @@ const requests = require('./../modules/requests')
  * */
 module.exports = {
   name: 'help',
+  alias: ['invite', 'bot'],
   description: 'The help command shows a full list of all commands.',
   execute(message, args, config) {
     // TODO: Instead of sending an embed, send a link to a good looking commands page.
