@@ -7,8 +7,18 @@ const requests = require('./../modules/requests')
  * */
 module.exports = {
   name: 'wiki',
+  alias: ['wiki-de', 'wiki-es'],
   description: 'Search something on Wikipedia with this command and get a short summary of it.',
   execute(message, args, config) {
+
+    const command = args[0].slice(config.PREFIX.length)
+
+    let requestLang = 'en';
+    for(const lang of this.alias){
+      if(command === lang){
+        requestLang = lang.replace('wiki-', '')
+      }
+    }
 
     // Check in what type of channel the command was executed
     if(message.channel.type === "dm" || message.channel.type === "group"){
@@ -23,16 +33,16 @@ module.exports = {
       message.react('👎').catch((e) => {
         Util.log(`Wiki Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
       })
-      message.reply('you forgot to search for something. -> ``' + config.PREFIX + 'wiki [argument] | Example ' + config.PREFIX + 'wiki Rocket League``')
+      message.reply('you forgot to search for something. -> \n``' + config.PREFIX + 'wiki [topic] | Example ' + config.PREFIX + 'wiki Rocket League``')
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
-      searchValue = searchValue.replace(config.PREFIX + this.name + ' ', "")
+      searchValue = searchValue.replace(config.PREFIX + command + ' ', "")
       // console.log('search value -> ' + searchValue)
       // searchValue = _.startCase(searchValue)
       // console.log('search value -> ' + searchValue)
 
       // console.log('search value: ' + searchValue)
-      requests.getWikipediaShortSummary(message, searchValue)
+      requests.getWikipediaShortSummary(message, searchValue, requestLang)
     }
 
   }

@@ -37,6 +37,7 @@ exports.getWikipediaShortSummary = (msg, argument, lang) => {
     // Getting the first result of the search results
     // TODO: Find a way to handle disambiguation pages
     let bestResult = data.results[0]
+    console.log(argument)
     // Getting the summary of the first result's page
     wiki({ apiUrl: apiUrl[lang]}).page(bestResult).then(page => {
       page.summary().then(summary => {
