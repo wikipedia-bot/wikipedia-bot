@@ -21,13 +21,7 @@ module.exports = {
       Util.log(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id})`)
     }
 
-    message.delete().catch(e => {
-      // TODO: How to handle this properly?
-      // console.error(e)
-      // message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
-    })
-
-    message.author.send({
+    message.channel.send({
       embed: {
         color: 0xffffff,
         title: message.client.user.username,
