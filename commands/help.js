@@ -36,7 +36,7 @@ module.exports = {
           },
           {
             name: "Donate",
-            value: "You can [donate on Patreon](https://www.patreon.com/user?u=23070184). Thank you very much for your help :)"
+            value: "You can [donate here](https://streamlabs.com/yaman071/tip). Thank you very much for your help :)"
           },
           {
             name: "Feedback & Support",
