@@ -7,16 +7,21 @@ const requests = require('./../modules/requests')
  * */
 module.exports = {
   name: 'wiki',
-  alias: ['wiki-de', 'wiki-es'],
+  alias: ['wiki-de', 'wiki-es', 'wiki-fr'],
   description: 'Search something on Wikipedia with this command and get a short summary of it.',
   execute(message, args, config) {
 
     const command = args[0].slice(config.PREFIX.length)
 
     let requestLang = 'en';
-    for(const lang of this.alias){
-      if(command === lang){
-        requestLang = lang.replace('wiki-', '')
+    // Checking if the main command was used.
+    // When not, it will check what language you want to use.
+    // Otherwise, it will just skip the for loop.
+    if(command !== this.name) {
+      for (const lang of this.alias) {
+        if (command === lang) {
+          requestLang = lang.replace('wiki-', '')
+        }
       }
     }
 

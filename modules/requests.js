@@ -13,11 +13,14 @@ const cheerio = require('cheerio')
 const request = require('request')
 const rp = require('request-promise')
 
+// All languages supported by the bot.
+// Before adding any additional API URLs, add an alias for this new language in commands/wiki.js.
 const apiUrl =
   {
     'de' : 'https://de.wikipedia.org/w/api.php',
     'en' : 'https://en.wikipedia.org/w/api.php',
-    'es' : 'https://es.wikipedia.org/w/api.php'
+    'es' : 'https://es.wikipedia.org/w/api.php',
+    'fr' : 'https://fr.wikipedia.org/w/api.php',
   }
 
 var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../config')
