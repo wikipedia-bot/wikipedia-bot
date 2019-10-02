@@ -13,6 +13,13 @@ const cheerio = require('cheerio')
 const request = require('request')
 const rp = require('request-promise')
 
+const apiUrl =
+  {
+    'de' : 'https://de.wikipedia.org/w/api.php',
+    'en' : 'https://en.wikipedia.org/w/api.php',
+    'es' : 'https://es.wikipedia.org/w/api.php'
+  }
+
 var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../config')
 
 /**
@@ -20,17 +27,18 @@ var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN} = require('./../con
  *
  * @param {Message} msg - Message class of Discord.js
  * @param {String} argument - Argument sent by the user (!wiki [argument])
+ * @param {String} lang - Language in which the result should be sent.
  *
  * */
-exports.getWikipediaShortSummary = (msg, argument) => {
+exports.getWikipediaShortSummary = (msg, argument, lang) => {
 
   // Searching for the article the user want
-  wiki().search(argument).then(data => {
+  wiki({ apiUrl: apiUrl[lang]}).search(argument).then(data => {
     // Getting the first result of the search results
     // TODO: Find a way to handle disambiguation pages
     let bestResult = data.results[0]
     // Getting the summary of the first result's page
-    wiki().page(bestResult).then(page => {
+    wiki({ apiUrl: apiUrl[lang]}).page(bestResult).then(page => {
       page.summary().then(summary => {
         // Shorten the summary to 768 chars...
         let shortedSummary = summary.split('\n')
