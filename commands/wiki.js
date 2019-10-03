@@ -38,7 +38,7 @@ module.exports = {
       message.react('👎').catch((e) => {
         Util.log(`Wiki Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
       })
-      message.reply('you forgot to search for something. -> \n``' + config.PREFIX + 'wiki [topic] | Example ' + config.PREFIX + 'wiki Rocket League``')
+      message.reply('you forgot to search for something. -> \n``' + config.PREFIX + command + ' [topic] | Example ' + config.PREFIX + 'wiki Rocket League``')
     } else {
       let searchValue = args.toString().replace(/,/g, ' ')
       searchValue = searchValue.replace(config.PREFIX + command + ' ', "")
