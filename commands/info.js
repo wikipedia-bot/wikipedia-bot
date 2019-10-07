@@ -38,11 +38,6 @@ module.exports = {
             name: "Serving for .. members in total",
             value: bot.totalMembers(),
             inline: true
-          },
-          {
-            name: "Version",
-            value: config.VERSION,
-            inline: false
           }
         ],
         timestamp: new Date()
