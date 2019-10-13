@@ -10,8 +10,8 @@
     <img src="https://bots.ondiscord.xyz/bots/554751047030013953/embed?theme=dark&showGuilds=true" alt="Wikipedia" />
 </a>
 <a href="https://discordbotlist.com/bots/554751047030013953">
-    <img width="380" height="140" 
-        src="https://discordbotlist.com/bots/554751047030013953/widget" 
+    <img width="380" height="140"
+        src="https://discordbotlist.com/bots/554751047030013953/widget"
         alt="Wikipedia Bot on Discord Bot List">
 </a>
 </p>
@@ -32,7 +32,7 @@
 
 ### Want to give Feedback?
 You can reach me out here:
-- **[E-Mail](mailto:julianyaman@posteo.eu)** - julianyaman@posteo.eu 
+- **[E-Mail](mailto:julianyaman@posteo.eu)** - julianyaman@posteo.eu
 - **[Twitter: @yamanstudios](https://twitter.com/yamanstudios)**
 - **[Discord](https://discord.gg/yAUmDNb)**
 
@@ -58,13 +58,17 @@ In future updates, it will also read articles for you with text-to-speech suppor
 
 ## Contributing
 
-Any type of contribution is welcome. Even reporting problems or suggesting new features 
+Any type of contribution is welcome. Even reporting problems or suggesting new features
 does help a lot to improve the bot.
 
-**If you want to contribute to the codebase of this project, please follow the 
+**If you want to contribute to the codebase of this project, please follow the
 [contributing guidelines](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CONTRIBUTING.md).**
 
 Also, we recommend to read the [**Code of Conduct**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CODE_OF_CONDUCT.md).
+
+## Heroku 1 Click Deployment
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ## License status
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)

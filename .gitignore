@@ -64,5 +64,4 @@ typings/
 .idea
 
 # Project files:
-config.js
 package-lock.json

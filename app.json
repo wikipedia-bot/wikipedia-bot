@@ -1,0 +1,20 @@
+{
+  "name": "wikipedia-bot",
+  "description": "A Discord bot where you can search articles on Wikipedia and extend your knowledge about the world!",
+  "keywords": [
+    "discord",
+    "bot",
+    "wikipedia"
+  ],
+  "website": "https://www.julianyaman.de/",
+  "env": {
+    "DISCORD_PREFIX": {
+      "description": "Prefix of your Discord bot. !help ^help &help >help",
+      "required": true
+    },
+    "DISCORD_TOKEN": {
+      "description": "The token of your Discord bot application. Get it from here: https://discordapp.com/developers/applications/",
+      "required": true
+    }
+  }
+}
