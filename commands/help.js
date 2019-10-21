@@ -28,7 +28,7 @@ module.exports = {
         fields: [
           {
             name: "Commands",
-            value: "[Click here](https://www.julianyaman.de/) to see all commands."
+            value: "[Click here](https://www.julianyaman.de/#commands) to see all commands."
           },
           {
             name: "Invite",
