@@ -4,7 +4,6 @@ try {
   if (process.version.slice(1).split('.')[0] < 10) {
     throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
   }
-  process.exit()
 } catch (e) {
   console.error(e.stack)
   console.error('Current Node.js version: ' + process.version)

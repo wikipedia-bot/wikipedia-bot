@@ -10,8 +10,6 @@ module.exports = {
   alias: ['invite', 'bot'],
   description: 'The help command shows a full list of all commands.',
   execute(message, args, config) {
-    // TODO: Instead of sending an embed, send a link to a good looking commands page.
-
     // Check in what type of channel the command was executed
     if(message.channel.type === "dm" || message.channel.type === "group"){
       // If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
