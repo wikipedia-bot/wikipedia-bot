@@ -2,8 +2,8 @@ const Util = require('./../modules/util')
 const requests = require('./../modules/requests')
 
 /**
- * Command: help
- * Description: The help command. Shows a full list of commands.
+ * Command: experimental
+ * Description: List of all beta features which can be tested by selected testers.
  * */
 module.exports = {
   name: 'experimental',
