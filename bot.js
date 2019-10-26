@@ -1,25 +1,27 @@
 // Load up the discord.js library. Else throw an error.
 try {
-  var Discord = require('discord.js')
-  if (process.version.slice(1).split('.')[0] < 10) {
-    throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
-  }
-} catch (e) {
-  console.error(e.stack)
-  console.error('Current Node.js version: ' + process.version)
-  console.error("In case you´ve not installed any required module: \nPlease run 'npm install' and ensure it passes with no errors!")
-  process.exit()
+	var Discord = require('discord.js')
+	if (process.version.slice(1).split('.')[0] < 10) {
+		throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
+	}
+}
+catch (e) {
+	console.error(e.stack)
+	console.error('Current Node.js version: ' + process.version)
+	console.error('In case you´ve not installed any required module: \nPlease run \'npm install\' and ensure it passes with no errors!')
+	process.exit()
 }
 
 const client = new Discord.Client();
 
-const devMode = require("./config").DEVELOPMENT
+const devMode = require('./config').DEVELOPMENT
 
 // Checking if the bot is in production mode...
-if(devMode){
-  var {PREFIX, VERSION, TOKEN, DEVELOPMENT} = require("./config")
-}else{
-  var {PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN, DISCORDBOTLIST_TOKEN} = require("./config")
+if(devMode) {
+	var { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
+}
+else{
+	var { PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN, DISCORDBOTLIST_TOKEN } = require('./config')
 }
 
 // Modules
@@ -27,7 +29,7 @@ const requests = require('./modules/requests')
 const Util = require('./modules/util')
 
 // DiscordBots.org API
-const DBL = require("dblapi.js");
+const DBL = require('dblapi.js');
 const dbl = new DBL(DISCORDBOTS_TOKEN, client);
 
 const _ = require('lodash')
@@ -38,16 +40,16 @@ const fs = require('fs');
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  // set a new item in the Collection
-  // with the key as the command name and the value as the exported module
-  client.commands.set(command.name, command);
-  // Check if any alias does exist and add if they do
-  if(command.alias){
-    for(const alias of command.alias){
-      client.commands.set(alias, command)
-    }
-  }
+	const command = require(`./commands/${file}`);
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
+	// Check if any alias does exist and add if they do
+	if(command.alias) {
+		for(const alias of command.alias) {
+			client.commands.set(alias, command)
+		}
+	}
 }
 
 
@@ -57,88 +59,89 @@ client.on('warn', console.warn)
 client.on('error', console.error)
 
 client.on('ready', async () => {
-  Util.log('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n', 'READY LOG')
-  Util.log('\nThis Bot is online! Running on version: ' + VERSION + '\n', 'READY LOG')
+	Util.log('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n', 'READY LOG')
+	Util.log('\nThis Bot is online! Running on version: ' + VERSION + '\n', 'READY LOG')
 
-  // Different user presences for different development stages
-  // TRUE -> Active development / debugging
-  // FALSE -> Production usage
+	// Different user presences for different development stages
+	// TRUE -> Active development / debugging
+	// FALSE -> Production usage
 
-  if (DEVELOPMENT === true){
-    client.user.setPresence({
-      status: "idle",
-      game: {
-        name: `on ${VERSION} | ${PREFIX}help`,
-        type: 'WATCHING'
-      }
-    }).catch(e => {
-      Util.betterError(e)
-    })
-    Util.log("Bot is currently set on DEVELOPMENT = true", "Bot -> Warning", 1)
+	if (DEVELOPMENT === true) {
+		client.user.setPresence({
+			status: 'idle',
+			game: {
+				name: `on ${VERSION} | ${PREFIX}help`,
+				type: 'WATCHING',
+			},
+		}).catch(e => {
+			Util.betterError(e)
+		})
+		Util.log('Bot is currently set on DEVELOPMENT = true', 'Bot -> Warning', 1)
 
-  } else {
-    client.user.setPresence({
-      status: "online",
-      game: {
-        name: `on ${client.guilds.size} servers | ${PREFIX}help`,
-        type: 'WATCHING'
-      }
-    }).catch(e => {
-      Util.betterError(e)
-    })
+	}
+	else {
+		client.user.setPresence({
+			status: 'online',
+			game: {
+				name: `on ${client.guilds.size} servers | ${PREFIX}help`,
+				type: 'WATCHING',
+			},
+		}).catch(e => {
+			Util.betterError(e)
+		})
 
-    // Interval for updating the amount of servers the bot is used on on DiscordBots.org every 30 minutes
-    setInterval(() => {
-      dbl.postStats(client.guilds.size);
-    }, 1800000);
+		// Interval for updating the amount of servers the bot is used on on DiscordBots.org every 30 minutes
+		setInterval(() => {
+			dbl.postStats(client.guilds.size);
+		}, 1800000);
 
-    // Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
-    setInterval(() => {
-      got.post(`https://bots.ondiscord.xyz/bot-api/bots/${ONDISCORDXYZ_BOTID}/guilds`, {
-        headers: {
-          'Authorization': ONDISCORDXYZ_TOKEN
-        },
-        json: true,
-        method: 'POST',
-        body: {
-          "guildCount": client.guilds.size
-        }
-      }).then(res => {
-        if(res.statusCode !== 204) {
-          Util.log("Error occured when trying to update the server amount on bots.ondiscord.com!", "", "err", res)
-        }
-      }).catch(e => {
-        console.log(e)
-      })
-    }, 600000);
+		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
+		setInterval(() => {
+			got.post(`https://bots.ondiscord.xyz/bot-api/bots/${ONDISCORDXYZ_BOTID}/guilds`, {
+				headers: {
+					'Authorization': ONDISCORDXYZ_TOKEN,
+				},
+				json: true,
+				method: 'POST',
+				body: {
+					'guildCount': client.guilds.size,
+				},
+			}).then(res => {
+				if(res.statusCode !== 204) {
+					Util.log('Error occured when trying to update the server amount on bots.ondiscord.com!', '', 'err', res)
+				}
+			}).catch(e => {
+				console.log(e)
+			})
+		}, 600000);
 
-    // Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
-    setInterval(() => {
-      const bot = this
-      got.post(`https://discordbotlist.com/api/bots/${ONDISCORDXYZ_BOTID}/stats`, {
-        headers: {
-          'Authorization': "Bot " + DISCORDBOTLIST_TOKEN
-        },
-        json: true,
-        method: 'POST',
-        body: {
-          "guilds": client.guilds.size,
-          "users": bot.totalMembers(),
-          "voice_connections": client.voiceConnections.size
-        }
-      }).then(res => {
-        if(res.statusCode !== 204) {
-          Util.log("Error occured when trying to update the server amount on discordbotlist.com!", "", "err", res)
-        }
-      }).catch(e => {
-        console.log(e)
-      })
-    }, 300000);
+		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
+		setInterval(() => {
+			const bot = this
+			got.post(`https://discordbotlist.com/api/bots/${ONDISCORDXYZ_BOTID}/stats`, {
+				headers: {
+					'Authorization': 'Bot ' + DISCORDBOTLIST_TOKEN,
+				},
+				json: true,
+				method: 'POST',
+				body: {
+					'guilds': client.guilds.size,
+					'users': bot.totalMembers(),
+					'voice_connections': client.voiceConnections.size,
+				},
+			}).then(res => {
+				if(res.statusCode !== 204) {
+					Util.log('Error occured when trying to update the server amount on discordbotlist.com!', '', 'err', res)
+				}
+			}).catch(e => {
+				console.log(e)
+			})
+		}, 300000);
 
 
-  }
+	}
 
-  Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${this.totalMembers()} users.`)
+	Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${this.totalMembers()} users.`)
 })
 
 // DiscordBots.org events
@@ -149,9 +152,9 @@ client.on('ready', async () => {
 // })
 
 dbl.on('error', e => {
-  if (DEVELOPMENT !== true) {
-    Util.log("Error occurred while trying to update the server amount on discordbots.org!", `Bot List - discordbots.org`, "err", e)
-  }
+	if (DEVELOPMENT !== true) {
+		Util.log('Error occurred while trying to update the server amount on discordbots.org!', 'Bot List - discordbots.org', 'err', e)
+	}
 })
 
 // Continuing with Discord client events
@@ -162,18 +165,18 @@ client.on('reconnecting', () => Util.log('Reconnecting...'))
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', guild => {
 
-  // Logging the event
-  Util.log(`Joined a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
-  // Updating the presence of the bot with the new server amount
-  client.user.setPresence({
-    game: {
-      name: `on ${client.guilds.size} servers! ${PREFIX}help`
-    }
-  }).catch(e => {
-    console.error(e)
-  })
-  // Sending a "Thank you" message to the owner of the guild
-  guild.owner.send('Thank you for using Wikipedia Bot. Please help us promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
+	// Logging the event
+	Util.log(`Joined a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
+	// Updating the presence of the bot with the new server amount
+	client.user.setPresence({
+		game: {
+			name: `on ${client.guilds.size} servers! ${PREFIX}help`,
+		},
+	}).catch(e => {
+		console.error(e)
+	})
+	// Sending a "Thank you" message to the owner of the guild
+	guild.owner.send('Thank you for using Wikipedia Bot. Please help us promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
 
 
 })
@@ -181,31 +184,31 @@ client.on('guildCreate', guild => {
 // This event will be triggered when the bot is removed from a guild.
 client.on('guildDelete', guild => {
 
-  // Logging the event
-  Util.log(`Left a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
-  // Updating the presence of the bot with the new server amount
-  client.user.setPresence({
-    game: {
-      name: `on ${client.guilds.size} servers! ${PREFIX}help`
-    }
-  }).catch(e => {
-    console.error(e)
-  })
+	// Logging the event
+	Util.log(`Left a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
+	// Updating the presence of the bot with the new server amount
+	client.user.setPresence({
+		game: {
+			name: `on ${client.guilds.size} servers! ${PREFIX}help`,
+		},
+	}).catch(e => {
+		console.error(e)
+	})
 })
 
 /**
  * Returns the total amount of users (including bots (sadly...)) who use the bot.
  * */
 // TODO: How to just return the "normal" users amount without the bots??
-exports.totalMembers = () =>  {
-  let totalMembersArray = client.guilds.map( guild => {
-    return guild.memberCount
-  })
-  let total = 0;
-  for(i = 0; i < totalMembersArray.length; i++){
-    total = total + totalMembersArray[i]
-  }
-  return total
+exports.totalMembers = () => {
+	const totalMembersArray = client.guilds.map(guild => {
+		return guild.memberCount
+	})
+	let total = 0;
+	for(i = 0; i < totalMembersArray.length; i++) {
+		total = total + totalMembersArray[i]
+	}
+	return total
 }
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
@@ -215,36 +218,37 @@ exports.totalMembers = () =>  {
 /* COMMANDS */
 
 client.on('message', async message => {
-  if (message.isMentioned(client.user)) {
-    message.delete().catch(e => {
-      // TODO: How to handle this properly?
-      // console.error(e)
-      // message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
-    })
+	if (message.isMentioned(client.user)) {
+		message.delete().catch(e => {
+			// TODO: How to handle this properly?
+			// console.error(e)
+			// message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
+		})
 
-    Util.log(`Got mentioned on ${message.guild.name} (${message.guild.id})`)
+		Util.log(`Got mentioned on ${message.guild.name} (${message.guild.id})`)
 
-    // Send the message of the help command as a response to the user
-    client.commands.get('help').execute(message, null, {PREFIX, VERSION})
-  }
+		// Send the message of the help command as a response to the user
+		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
+	}
 
-  if (message.author.bot) return
-  if (!message.content.startsWith(PREFIX)) return undefined
+	if (message.author.bot) return
+	if (!message.content.startsWith(PREFIX)) return undefined
 
-  let args = message.content.split(' ')
+	const args = message.content.split(' ')
 
-  let command = message.content.toLowerCase().split(' ')[0]
-  command = command.slice(PREFIX.length)
+	let command = message.content.toLowerCase().split(' ')[0]
+	command = command.slice(PREFIX.length)
 
-  // What should the bot do with an unknown command?
-  if (!client.commands.has(command)) return;
+	// What should the bot do with an unknown command?
+	if (!client.commands.has(command)) return;
 
-  try {
-    client.commands.get(command).execute(message, args, {PREFIX, VERSION});
-  } catch (error) {
-    console.error(error);
-    message.reply('there was an error trying to execute that command!');
-  }
+	try {
+		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
+	}
+	catch (error) {
+		console.error(error);
+		message.reply('there was an error trying to execute that command!');
+	}
 
 })
 
