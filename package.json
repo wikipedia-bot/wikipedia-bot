@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/julianYaman/wikipedia-bot#readme",
   "devDependencies": {
-    "nodemon": "^1.19.3"
+    "nodemon": "^2.0.0"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
