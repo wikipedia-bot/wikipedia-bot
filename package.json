@@ -33,7 +33,7 @@
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.5.1",
     "eslint": "^6.6.0",
-    "got": "^9.6.0",
+    "got": "^10.0.3",
     "lodash": "^4.17.11",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
