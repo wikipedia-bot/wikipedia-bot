@@ -205,7 +205,7 @@ exports.totalMembers = () => {
 		return guild.memberCount
 	})
 	let total = 0;
-	for(i = 0; i < totalMembersArray.length; i++) {
+	for(let i = 0; i < totalMembersArray.length; i++) {
 		total = total + totalMembersArray[i]
 	}
 	return total
