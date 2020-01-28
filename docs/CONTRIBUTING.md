@@ -3,7 +3,8 @@
 If you are interested into contributing to this project, feel free to fork this repository and to submit a pull request with 
 the changes you made. In future, a special code style will be enforced in all JavaScript files. 
 
-**The main recommendation is to use the *standard* code style.**
+**The main recommendation is to use *ESLint* for linting to make the code more consistent.**
+
 
 ## Checklist and Contributing guidelines
 
