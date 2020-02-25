@@ -18,6 +18,8 @@ const apiUrl = {
 	'en': 'https://en.wikipedia.org/w/api.php',
 	'es': 'https://es.wikipedia.org/w/api.php',
 	'fr': 'https://fr.wikipedia.org/w/api.php',
+	'ru': 'https://ru.wikipedia.org/w/api.php',
+	'sl': 'https://sl.wikipedia.org/w/api.php',
 }
 
 /**
