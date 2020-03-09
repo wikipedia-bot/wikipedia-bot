@@ -31,7 +31,7 @@
     "colors": "^1.4.0",
     "date-time": "^3.1.0",
     "dblapi.js": "^2.3.0",
-    "discord.js": "^11.5.1",
+    "discord.js": "^12.0.2",
     "eslint": "^6.6.0",
     "got": "^10.0.3",
     "lodash": "^4.17.11",
