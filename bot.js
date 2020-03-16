@@ -164,11 +164,11 @@ client.on('reconnecting', () => Util.log('Reconnecting...'))
 client.on('guildCreate', guild => {
 
 	// Logging the event
-	Util.log(`Joined a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
+	Util.log(`Joined a server. New guild amount: ${client.guilds.cache.size}`, 'BOT EVENT')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		game: {
-			name: `on ${client.guilds.size} servers! ${PREFIX}help`,
+			name: `on ${client.guilds.cache.size} servers! ${PREFIX}help`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -183,11 +183,11 @@ client.on('guildCreate', guild => {
 client.on('guildDelete', guild => {
 
 	// Logging the event
-	Util.log(`Left a server. New guild amount: ${client.guilds.size}`, 'BOT EVENT')
+	Util.log(`Left a server. New guild amount: ${client.guilds.cache.size}`, 'BOT EVENT')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		game: {
-			name: `on ${client.guilds.size} servers! ${PREFIX}help`,
+			name: `on ${client.guilds.cache.size} servers! ${PREFIX}help`,
 		},
 	}).catch(e => {
 		console.error(e)
