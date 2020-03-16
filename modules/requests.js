@@ -268,7 +268,7 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 						const sourcesSendToUser = [];
 
 						// Since it takes some time to create the array, just let the user know the bot is working with starting the 'type' thing
-						msg.channel.startTyping();
+						await msg.channel.startTyping();
 
 						// for loop for every reference
 						for (let i = 0; i < sources.length; i++) {
@@ -378,44 +378,5 @@ exports.parseTitleFromWebsite = (uri) => {
 	}
 	// Do the request!
 	return rp(options)
-
-}
-
-exports.getWikipediaSummaryTTS = (msg, arg) => {
-
-	// Searching for the article the user want
-	wiki().search(arg).then(data => {
-		// Getting the first result of the search results
-		// TODO: Find a way to handle disambiguation pages
-		const bestResult = data.results[0]
-		// Getting the summary of the first result's page
-		wiki().page(bestResult).then(page => {
-			page.summary().then(summary => {
-				// Shorten the summary to 768 chars...
-				let shortedSummary = summary.split('\n')
-				shortedSummary = _.take(shortedSummary, 2)
-				shortedSummary = shortedSummary.toString().substring(0, 768) + '...'
-
-
-				msg.member.voiceChannel.join().then(connection => {
-					connection.play
-				})
-
-			})
-		}).catch(e => {
-			// Logging the error
-			Util.log('[2] An error occurred while requesting the data from Wikipedia', `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 1)
-			Util.betterError(msg, e)
-			// Error handling 101
-			msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
-		})
-	}).catch(e => {
-		// Logging the error
-		Util.log('[1] An error occurred while requesting the data from Wikipedia', `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 1)
-		Util.betterError(msg, e)
-		// Error handling 101
-		msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
-	})
-
 
 }
