@@ -168,13 +168,13 @@ client.on('guildCreate', guild => {
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `on ${client.guilds.cache.size} servers! ${PREFIX}help`,
+			name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
 	})
 	// Sending a "Thank you" message to the owner of the guild
-	guild.owner.send('Thank you for using Wikipedia Bot. Please help us promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
+	guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
 
 
 })
@@ -187,7 +187,7 @@ client.on('guildDelete', guild => {
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `on ${client.guilds.cache.size} servers! ${PREFIX}help`,
+			name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
