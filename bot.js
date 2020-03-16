@@ -167,7 +167,7 @@ client.on('guildCreate', guild => {
 	Util.log(`Joined a server. New guild amount: ${client.guilds.cache.size}`, 'BOT EVENT')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
-		game: {
+		activity: {
 			name: `on ${client.guilds.cache.size} servers! ${PREFIX}help`,
 		},
 	}).catch(e => {
@@ -186,7 +186,7 @@ client.on('guildDelete', guild => {
 	Util.log(`Left a server. New guild amount: ${client.guilds.cache.size}`, 'BOT EVENT')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
-		game: {
+		activity: {
 			name: `on ${client.guilds.cache.size} servers! ${PREFIX}help`,
 		},
 	}).catch(e => {
