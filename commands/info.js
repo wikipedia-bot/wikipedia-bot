@@ -21,24 +21,33 @@ module.exports = {
 
 		message.channel.send({
 			embed: {
-				title: 'Wikipedia Bot Information',
+				author: {
+					name: message.client.user.username,
+					icon_url: 'https://cdn.discordapp.com/avatars/554751047030013953/29bda61e7319dd2b49961313b1256231.png',
+					url: 'https://julianyaman.de',
+				},
 				description: `*If you need help, type **${config.PREFIX}help***`,
 				color: 3447003,
 				fields: [
 					{
-						name: 'Official website:',
+						name: 'Website:',
 						value: 'https://www.julianyaman.de/',
 						inline: false,
 					},
 					{
-						name: 'Serving on .. servers in total',
-						value: message.client.guilds.size,
+						name: 'Servers',
+						value: message.client.guilds.cache.size,
 						inline: true,
 					},
 					{
-						name: 'Serving for .. members in total',
+						name: 'Users',
 						value: bot.totalMembers(),
 						inline: true,
+					},
+					{
+						name: 'Version',
+						value: config.VERSION,
+						inline: false,
 					},
 				],
 				timestamp: new Date(),

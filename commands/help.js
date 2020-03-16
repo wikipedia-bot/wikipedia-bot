@@ -7,7 +7,7 @@ const requests = require('./../modules/requests')
  * */
 module.exports = {
 	name: 'help',
-	alias: ['invite', 'bot'],
+	alias: ['invite', 'bot', 'donate'],
 	description: 'The help command shows a full list of all commands.',
 	execute(message, args, config) {
 		// Check in what type of channel the command was executed
@@ -35,7 +35,11 @@ module.exports = {
 					},
 					{
 						name: 'Donate',
-						value: 'You can [donate here](https://streamlabs.com/yaman071/tip). Thank you very much for your help :)',
+						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url). Thank you very much for your help :)',
+					},
+					{
+						name: 'Patreon',
+						value: 'Become a Patron [here](https://www.patreon.com/yaman071).',
 					},
 					{
 						name: 'Feedback & Support',

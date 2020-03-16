@@ -69,9 +69,8 @@ client.on('ready', async () => {
 	if (DEVELOPMENT === true) {
 		client.user.setPresence({
 			status: 'idle',
-			game: {
-				name: `on ${VERSION} | ${PREFIX}help`,
-				type: 'WATCHING',
+			activity: {
+				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
 			Util.betterError(e)
@@ -82,9 +81,8 @@ client.on('ready', async () => {
 	else {
 		client.user.setPresence({
 			status: 'online',
-			game: {
-				name: `on ${client.guilds.size} servers | ${PREFIX}help`,
-				type: 'WATCHING',
+			activity: {
+				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
 			Util.betterError(e)
@@ -92,7 +90,7 @@ client.on('ready', async () => {
 
 		// Interval for updating the amount of servers the bot is used on on DiscordBots.org every 30 minutes
 		setInterval(() => {
-			dbl.postStats(client.guilds.size);
+			dbl.postStats(client.guilds.cache.size);
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
@@ -104,7 +102,7 @@ client.on('ready', async () => {
 				json: true,
 				method: 'POST',
 				body: {
-					'guildCount': client.guilds.size,
+					'guildCount': client.guilds.cache.size,
 				},
 			}).then(res => {
 				if(res.statusCode !== 204) {
@@ -125,9 +123,9 @@ client.on('ready', async () => {
 				json: true,
 				method: 'POST',
 				body: {
-					'guilds': client.guilds.size,
+					'guilds': client.guilds.cache.size,
 					'users': bot.totalMembers(),
-					'voice_connections': client.voiceConnections.size,
+					'voice_connections': client.voice.connections.size,
 				},
 			}).then(res => {
 				if(res.statusCode !== 204) {
@@ -141,7 +139,7 @@ client.on('ready', async () => {
 
 	}
 
-	Util.log(`Ready to serve on ${client.guilds.size} servers for a total of ${this.totalMembers()} users.`)
+	Util.log(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
 })
 
 // DiscordBots.org events
@@ -201,7 +199,7 @@ client.on('guildDelete', guild => {
  * */
 // TODO: How to just return the "normal" users amount without the bots??
 exports.totalMembers = () => {
-	const totalMembersArray = client.guilds.map(guild => {
+	const totalMembersArray = client.guilds.cache.map(guild => {
 		return guild.memberCount
 	})
 	let total = 0;
@@ -218,7 +216,8 @@ exports.totalMembers = () => {
 /* COMMANDS */
 
 client.on('message', async message => {
-	if (message.isMentioned(client.user)) {
+	if (message.mentions.has(client.user)) {
+		// eslint-disable-next-line no-unused-vars
 		message.delete().catch(e => {
 			// TODO: How to handle this properly?
 			// console.error(e)
@@ -247,7 +246,7 @@ client.on('message', async message => {
 	}
 	catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		await message.reply('there was an error trying to execute that command!');
 	}
 
 })

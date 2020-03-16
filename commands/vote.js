@@ -24,9 +24,9 @@ module.exports = {
 		})
 
 		message.author.send('Hi, I\'m the developer of this bot you are using right now! Thank you for supporting the effort behind this project.\n\n' +
-      'Currently the bot is listed on three sites. With your help, the bot will reach a much greater popularity and will be used by more people.\n\n' +
-      'Please vote on one or on all of the three sites:\nhttps://bots.ondiscord.xyz/bots/554751047030013953 \nhttps://discordbots.org/bot/554751047030013953 \nhttps://discordbotlist.com/bots/554751047030013953/upvote \n\n' +
-      'Thank you very much!')
+      'With your help, the bot will reach a much greater popularity and will be used by more people.\n' +
+      'Please vote on one or on all of the three sites:\n* https://top.gg/bot/554751047030013953/vote **(recommended)** \n* https://discordbotlist.com/bots/554751047030013953/upvote \n* https://bots.ondiscord.xyz/bots/554751047030013953  \n\n' +
+      'Thank you very much! :)\n***~Julian | yaman#8901***')
 
 	},
 }
