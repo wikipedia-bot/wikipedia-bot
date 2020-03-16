@@ -26,13 +26,13 @@ module.exports = {
 				color: 3447003,
 				fields: [
 					{
-						name: 'Official website:',
+						name: 'Website:',
 						value: 'https://www.julianyaman.de/',
 						inline: false,
 					},
 					{
 						name: 'Serving on .. servers in total',
-						value: message.client.guilds.size,
+						value: message.client.guilds.cache.size,
 						inline: true,
 					},
 					{
