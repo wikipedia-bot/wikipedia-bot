@@ -35,6 +35,7 @@
     "eslint": "^6.6.0",
     "got": "^10.0.3",
     "lodash": "^4.17.11",
+    "node-opus": "^0.3.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "wikijs": "^6.0.0"
