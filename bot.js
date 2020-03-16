@@ -70,7 +70,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${PREFIX}wiki | ${PREFIX}help | ${client.guilds.cache.size} servers`,
+				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
 			Util.betterError(e)
@@ -82,7 +82,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${PREFIX}wiki | ${PREFIX}help | ${client.guilds.cache.size} servers`,
+				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
 			Util.betterError(e)
