@@ -165,9 +165,6 @@ client.on('message', async message => {
 			// console.error(e)
 			// message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
 		})
-
-		Util.log(`Got mentioned on ${message.guild.name} (${message.guild.id})`)
-
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
 	}
