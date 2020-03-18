@@ -10,6 +10,7 @@ const _ = require('lodash')
 const cheerio = require('cheerio')
 
 const rp = require('request-promise')
+const Logger = new Util.Logger()
 
 // All languages supported by the bot.
 // Before adding any additional API URLs, add an alias for this new language in commands/wiki.js.
@@ -69,24 +70,20 @@ exports.getWikipediaShortSummary = (msg, argument, lang) => {
 					})
 				}).catch(e => {
 					// Logging the error
-					Util.log('[3] An error occurred while requesting the data from Wikipedia', `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 1)
-					Util.betterError(msg, e)
+					Logger.error(`[3] An error at page.mainImage(): Searched for '${argument}' - Best Result: '${bestResult}'`)
+					Logger.errorChat(msg, e)
 					// Error handling 101
 					msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 				})
 			})
 		}).catch(e => {
-			// Logging the error
-			Util.log('[2] An error occurred while requesting the data from Wikipedia', `page.mainImage() - Searched for: ${argument} - Best Result: ${bestResult}`, 1)
-			Util.betterError(msg, e)
-			// Error handling 101
+			Logger.error(`[2] An error at page.mainImage(): Searched for '${argument}' - Best Result: '${bestResult}'`)
+			Logger.errorChat(msg, e)
 			msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 		})
 	}).catch(e => {
-		// Logging the error
-		Util.log('[1] An error occurred while requesting the data from Wikipedia', `page.mainImage() - Searched for: ${argument} - Best Result: failed to do that`, 1)
-		Util.betterError(msg, e)
-		// Error handling 101
+		Logger.error(`[1] An error at page.mainImage(): Searched for: '${argument}' - no result`)
+		Logger.errorChat(msg, e)
 		msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 	})
 
@@ -110,17 +107,13 @@ exports.getWikipediaShortInformation = (msg, argument) => {
 			page.fullInfo().then(info => console.log(info))
 
 		}).catch(e => {
-			// Logging the error
-			Util.log('[2] An error occurred while requesting the data from Wikipedia', ` Searched for: ${argument} - Best Result: ${bestResult}`, 1)
-			Util.betterError(msg, e)
-			// Error handling 101
+			Logger.error(`[2] An error occurred while requesting the data from Wikipedia - Searched for: '${argument}' - Best Result: '${bestResult}'`)
+			Logger.errorChat(msg, e)
 			msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 		})
 	}).catch(e => {
-		// Logging the error
-		Util.log('[1] An error occurred while requesting the data from Wikipedia', `Searched for: ${argument} - Best Result: failed to do that`, 1)
-		Util.betterError(msg, e)
-		// Error handling 101
+		Logger.error(`[1] An error occurred while requesting the data from Wikipedia - Searched for: '${argument}' - no result`)
+		Logger.errorChat(msg, e)
 		msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 	})
 
@@ -210,10 +203,10 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 								}
 							}).catch(err => {
 								if(err.statusCode) {
-									Util.log(`${err.name} ${err.statusCode} Error while trying to access: ${source}`, 'Sources Cmd - Request Error', 'err')
+									Logger.error(`References command: ${err.name} ${err.statusCode} Error while trying to access: ${source}`)
 								}
 								else{
-									Util.betterError(msg, err)
+									Logger.errorChat(msg, err)
 								}
 
 								sourceToUser[0] = {
@@ -280,10 +273,10 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 							}).catch(err => {
 								// any errors?
 								if(err.statusCode) {
-									Util.log(`${err.name} ${err.statusCode} Error while trying to access: ${sources[i]}`, 'Sources Cmd - Request Error', 'err')
+									Logger.error(`References command: ${err.name} ${err.statusCode} Error while trying to access: ${sources[i]}`)
 								}
 								else{
-									Util.betterError(msg, err)
+									Logger.errorChat(msg, err)
 								}
 
 								// Write into the embed field value that there was an error
@@ -316,27 +309,19 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 					}
 
 				}).catch(e => {
-					// Logging the error
-					Util.log('[3] An error occurred while requesting the sources from a Wikipedia article', ` Searched for: ${search} - Best Result: ${bestResult}`, 1)
-					Util.betterError(msg, e)
-					// Error handling 101
+					Logger.error(`[3] References command: An error occurred while requesting references from a Wikipedia - Searched for: '${search}' - Best Result: '${bestResult}'`)
+					Logger.errorChat(msg, e)
 					msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 				})
 
 			}).catch(e => {
-				// Logging the error
-				Util.log('[2] An error occurred before requesting the sources from a Wikipedia article while getting the page content',
-					` Searched for: ${search} - Best Result: ${bestResult}`, 1)
-				Util.betterError(msg, e)
-				// Error handling 101
+				Logger.error(`[2] References command: An error occurred while getting the page content from a Wikipedia - Searched for: '${search}' - Best Result: '${bestResult}'`)
+				Logger.errorChat(msg, e)
 				msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 			})
 		}).catch(e => {
-			// Logging the error
-			Util.log('[1] An error occurred before requesting the sources from a Wikipedia article while searching for the article the user wanted',
-				`Searched for: ${search} - Best Result: failed to do that`, 1)
-			Util.betterError(msg, e)
-			// Error handling 101
+			Logger.error(`[1] References command: An error occurred while searching for '${search}'`)
+			Logger.errorChat(msg, e)
 			msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
 		})
 
