@@ -33,7 +33,11 @@ exports.Logger = class {
 		console.log(`[DEBUG] [${dateTime({ local: true, showTimeZone: true })}] ${text}`.debug)
 	}
 
-	error(msg, text) {
+	error(text) {
+		console.log(`[ERR] [${dateTime({ local: true, showTimeZone: true })}] ${text}`.error)
+	}
+
+	errorChannel(msg, text) {
 		if(msg.channel.type === 'dm' || msg.channel.type === 'group') {
 			console.log(`[ERR] [${dateTime({ local: true, showTimeZone: true })}] DM Chat: ${text}`.error)
 		}
