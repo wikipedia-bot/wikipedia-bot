@@ -162,12 +162,6 @@ exports.totalMembers = () => {
 
 client.on('message', async message => {
 	if (message.mentions.has(client.user)) {
-		// eslint-disable-next-line no-unused-vars
-		message.delete().catch(e => {
-			// TODO: How to handle this properly?
-			// console.error(e)
-			// message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
-		})
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
 	}
