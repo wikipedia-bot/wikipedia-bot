@@ -1,5 +1,6 @@
 // Load up the discord.js library. Else throw an error.
 try {
+	// eslint-disable-next-line no-var
 	var Discord = require('discord.js')
 	if (process.version.slice(1).split('.')[0] < 12) {
 		throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
@@ -18,6 +19,7 @@ const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
 // Modules
 const Util = require('./modules/util')
+const Logger = new Util.Logger();
 const fs = require('fs');
 
 // Creating a collection for the commands
@@ -43,8 +45,9 @@ client.on('warn', console.warn)
 client.on('error', console.error)
 
 client.on('ready', async () => {
-	Util.log('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n', 'READY LOG')
-	Util.log('\nThis Bot is online! Running on version: ' + VERSION + '\n', 'READY LOG')
+
+	Logger.info('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
+	Logger.info('\nThis Bot is online! Running on version: ' + VERSION + '\n')
 
 	// Different user presences for different development stages
 	// TRUE -> Active development / debugging
@@ -57,9 +60,9 @@ client.on('ready', async () => {
 				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
-			Util.betterError(0, e)
+			console.error(e)
 		})
-		Util.log('Bot is currently set on DEVELOPMENT = true', 'Bot -> Warning', 1)
+		Logger.warn('Bot is currently set on DEVELOPMENT = true')
 
 	}
 	else {
@@ -69,7 +72,7 @@ client.on('ready', async () => {
 				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
-			Util.betterError(e)
+			console.error(e)
 		})
 
 		// Creating a new updater
@@ -92,20 +95,20 @@ client.on('ready', async () => {
 
 	}
 
-	Util.log(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
+	Logger.info(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
 })
 
 
 // Continuing with Discord client events
-client.on('disconnect', () => Util.log('Disconnected!'))
+client.on('disconnect', () => Logger.info('Disconnected!'))
 
-client.on('reconnecting', () => Util.log('Reconnecting...'))
+client.on('reconnecting', () => Logger.info('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', guild => {
 
 	// Logging the event
-	Util.log(`Joined a server with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`, 'EVENT')
+	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -125,7 +128,7 @@ client.on('guildCreate', guild => {
 client.on('guildDelete', guild => {
 
 	// Logging the event
-	Util.log(`Left a server. Total servers: ${client.guilds.cache.size}`, 'EVENT')
+	Logger.info(`Left a server. Total servers: ${client.guilds.cache.size}`)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
