@@ -1,4 +1,5 @@
 const Util = require('./../modules/util')
+const Logger = new Util.Logger();
 const requests = require('./../modules/requests')
 
 /**
@@ -27,17 +28,15 @@ module.exports = {
 
 		// Check in what type of channel the command was executed
 		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			// If it was in a dm or in a group dm, then log only that it was used in a DM channel without logging anything related to the user.
-			Util.log(`${config.PREFIX + command} (args: [${args}]) used in a private ${message.channel.type}.`, 'Feature: Wiki cmd')
+			Logger.info(`${config.PREFIX + this.name} (args: [${args}]) used in a private ${message.channel.type}.`)
 		}
 		else{
-			// If it was somewhere else, then log normally like before.
-			Util.log(`${config.PREFIX + command} (args: [${args}]) used on ${message.guild.name} (${message.guild.id})`, 'Feature: Wiki cmd')
+			Logger.info(`${config.PREFIX + this.name} (args: [${args}]) used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 
 		if (!args[1]) {
 			message.react('👎').catch((e) => {
-				Util.log(`Wiki Command -> !args[0] -> message.react -> catch e: ${e}`, `${message.guild.name} (${message.guild.id})`, 'err')
+				Logger.error(`Wiki Command -> !args[0] -> message.react -> catch e: ${e} | ${message.guild.name} (${message.guild.id})`)
 			})
 			message.reply('you forgot to search for something. -> \n``' + config.PREFIX + command + ' [topic] | Example ' + config.PREFIX + 'wiki Rocket League``')
 		}
