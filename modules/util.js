@@ -18,7 +18,6 @@ colors.setTheme({
  *
  * @param value - The number you want to round.
  * @param precision - Precision of the decimal number.
- * @since masterAfter-1.3
  *
  * @private
  */
@@ -33,7 +32,6 @@ exports.roundNumber = (/** Number */ value, /** Integer */ precision) => {
  *
  * @param msg - Message object
  * @param text - Text which should be sent in the console
- * @since master
  *
  * @public
  *

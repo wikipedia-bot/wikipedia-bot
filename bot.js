@@ -1,7 +1,7 @@
 // Load up the discord.js library. Else throw an error.
 try {
 	var Discord = require('discord.js')
-	if (process.version.slice(1).split('.')[0] < 10) {
+	if (process.version.slice(1).split('.')[0] < 12) {
 		throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
 	}
 }
