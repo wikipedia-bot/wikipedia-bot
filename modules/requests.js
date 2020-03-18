@@ -157,9 +157,6 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 			msg.reply('you can\'t set the minimum range under or equal 0 and the maximum range under 2.')
 		}
 
-		// "debugging" :D
-		console.log(search, ranges, minRange, maxRange)
-
 		// Search for the results
 		wiki().search(search).then(data => {
 			// Getting the first result of the search results

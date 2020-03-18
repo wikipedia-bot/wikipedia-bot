@@ -13,27 +13,11 @@ catch (e) {
 }
 
 const client = new Discord.Client();
-
-const devMode = require('./config').DEVELOPMENT
-
-// Checking if the bot is in production mode...
-if(devMode) {
-	var { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
-}
-else{
-	var { PREFIX, VERSION, TOKEN, DEVELOPMENT, DISCORDBOTS_TOKEN, ONDISCORDXYZ_BOTID, ONDISCORDXYZ_TOKEN, DISCORDBOTLIST_TOKEN } = require('./config')
-}
+const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
+const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
 // Modules
-const requests = require('./modules/requests')
 const Util = require('./modules/util')
-
-// DiscordBots.org API
-const DBL = require('dblapi.js');
-const dbl = new DBL(DISCORDBOTS_TOKEN, client);
-
-const _ = require('lodash')
-const got = require('got')
 const fs = require('fs');
 
 // Creating a collection for the commands
@@ -73,7 +57,7 @@ client.on('ready', async () => {
 				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
-			Util.betterError(e)
+			Util.betterError(0, e)
 		})
 		Util.log('Bot is currently set on DEVELOPMENT = true', 'Bot -> Warning', 1)
 
@@ -88,72 +72,29 @@ client.on('ready', async () => {
 			Util.betterError(e)
 		})
 
-		// Interval for updating the amount of servers the bot is used on on DiscordBots.org every 30 minutes
+		// Creating a new updater
+		const updater = new BotListUpdater()
+
+		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
 		setInterval(() => {
-			dbl.postStats(client.guilds.cache.size);
+			updater.updateTopGg(client.guilds.cache.size)
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
 		setInterval(() => {
-			got.post(`https://bots.ondiscord.xyz/bot-api/bots/${ONDISCORDXYZ_BOTID}/guilds`, {
-				headers: {
-					'Authorization': ONDISCORDXYZ_TOKEN,
-				},
-				json: true,
-				method: 'POST',
-				body: {
-					'guildCount': client.guilds.cache.size,
-				},
-			}).then(res => {
-				if(res.statusCode !== 204) {
-					Util.log('Error occured when trying to update the server amount on bots.ondiscord.com!', '', 'err', res)
-				}
-			}).catch(e => {
-				console.log(e)
-			})
+			updater.updateBotsXyz(client.guilds.cache.size)
 		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
 		setInterval(() => {
-			const bot = this
-			got.post(`https://discordbotlist.com/api/bots/${ONDISCORDXYZ_BOTID}/stats`, {
-				headers: {
-					'Authorization': 'Bot ' + DISCORDBOTLIST_TOKEN,
-				},
-				json: true,
-				method: 'POST',
-				body: {
-					'guilds': client.guilds.cache.size,
-					'users': bot.totalMembers(),
-					'voice_connections': client.voice.connections.size,
-				},
-			}).then(res => {
-				if(res.statusCode !== 204) {
-					Util.log('Error occured when trying to update the server amount on discordbotlist.com!', '', 'err', res)
-				}
-			}).catch(e => {
-				console.log(e)
-			})
+			updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
 		}, 300000);
-
 
 	}
 
 	Util.log(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
 })
 
-// DiscordBots.org events
-// dbl.on('posted', () => {
-//   if (DEVELOPMENT !== true) {
-//     Util.log("Server amount updated on discordbots.org!", `Bot List - discordbots.org`)
-//   }
-// })
-
-dbl.on('error', e => {
-	if (DEVELOPMENT !== true) {
-		Util.log('Error occurred while trying to update the server amount on discordbots.org!', 'Bot List - discordbots.org', 'err', e)
-	}
-})
 
 // Continuing with Discord client events
 client.on('disconnect', () => Util.log('Disconnected!'))
@@ -164,7 +105,7 @@ client.on('reconnecting', () => Util.log('Reconnecting...'))
 client.on('guildCreate', guild => {
 
 	// Logging the event
-	Util.log(`Joined a server. New guild amount: ${client.guilds.cache.size}`, 'BOT EVENT')
+	Util.log(`Joined a server with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`, 'EVENT')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -180,10 +121,11 @@ client.on('guildCreate', guild => {
 })
 
 // This event will be triggered when the bot is removed from a guild.
+// eslint-disable-next-line no-unused-vars
 client.on('guildDelete', guild => {
 
 	// Logging the event
-	Util.log(`Left a server. New guild amount: ${client.guilds.cache.size}`, 'BOT EVENT')
+	Util.log(`Left a server. Total servers: ${client.guilds.cache.size}`, 'EVENT')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -223,9 +165,6 @@ client.on('message', async message => {
 			// console.error(e)
 			// message.channel.send('❌ Message to the owner of the server: **Please give the right permissions to me so I can delete this message.**')
 		})
-
-		Util.log(`Got mentioned on ${message.guild.name} (${message.guild.id})`)
-
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
 	}
