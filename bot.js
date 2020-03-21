@@ -13,7 +13,7 @@ catch (e) {
 	process.exit()
 }
 
-const client = new Discord.Client();
+const client = new Discord.Client({ disableMentions: 'everyone' });
 const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
@@ -161,7 +161,7 @@ exports.totalMembers = () => {
 /* COMMANDS */
 
 client.on('message', async message => {
-	if (message.mentions.has(client.user)) {
+	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
 	}
