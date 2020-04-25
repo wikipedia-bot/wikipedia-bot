@@ -1,16 +1,10 @@
-// Load up the discord.js library. Else throw an error.
-try {
-	// eslint-disable-next-line no-var
-	var Discord = require('discord.js')
-	if (process.version.slice(1).split('.')[0] < 12) {
-		throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
-	}
-}
-catch (e) {
-	console.error(e.stack)
-	console.error('Current Node.js version: ' + process.version)
-	console.error('In case you´ve not installed any required module: \nPlease run \'npm install\' and ensure it passes with no errors!')
-	process.exit()
+/**
+ * Beginning of the main file
+ * */
+const Discord = require('discord.js')
+if (process.version.slice(1).split('.')[0] < 12) {
+	console.error('Node 12.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
+	process.exit(1)
 }
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
@@ -187,6 +181,8 @@ client.on('message', async message => {
 
 })
 
-client.login(TOKEN);
+client.login(TOKEN).then(r => console.log('Successfully logged in!'));
 
-process.on('unhandledRejection', (PromiseRejection) => console.error(`Promise Error -> ${PromiseRejection}`))
+process.on('unhandledRejection', PromiseRejection => {
+	console.error(PromiseRejection)
+})
