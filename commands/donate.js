@@ -21,11 +21,11 @@ module.exports = {
 		message.channel.send({
 			embed: {
 				color: 0xffffff,
-				title: message.client.user.username,
+				title: 'Support the developer with a donation',
 				fields: [
 					{
 						name: 'Donate',
-						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url). Thank you very much for your help :)',
+						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url).',
 					},
 					{
 						name: 'Patreon',
