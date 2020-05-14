@@ -48,10 +48,11 @@ client.on('ready', async () => {
 	// FALSE -> Production usage
 
 	if (DEVELOPMENT === true) {
+
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+				name: `${PREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -63,7 +64,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+				name: `${PREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -73,23 +74,23 @@ client.on('ready', async () => {
 		const updater = new BotListUpdater()
 
 		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
-		setInterval(() => {
-			updater.updateTopGg(client.guilds.cache.size)
+		setInterval(async () => {
+			updater.updateTopGg(await this.guildCount())
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
-		setInterval(() => {
-			updater.updateBotsXyz(client.guilds.cache.size)
+		setInterval(async () => {
+			updater.updateBotsXyz(await this.guildCount())
 		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
-		setInterval(() => {
-			updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
+		setInterval(async () => {
+			updater.updateDiscordBotList(await this.guildCount(), await this.totalMembers(), 0)
 		}, 300000);
 
 	}
 
-	Logger.info(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
+	Logger.info(`Ready to serve on ${await this.guildCount()} servers for a total of ${await this.totalMembers()} users.`)
 })
 
 
@@ -99,34 +100,34 @@ client.on('disconnect', () => Logger.info('Disconnected!'))
 client.on('reconnecting', () => Logger.info('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
-client.on('guildCreate', guild => {
+client.on('guildCreate', async guild => {
 
 	// Logging the event
-	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
+	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${await this.guildCount()}`)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+			name: `${PREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
 	})
 	// Sending a "Thank you" message to the owner of the guild
-	guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
+	await guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
 
 
 })
 
 // This event will be triggered when the bot is removed from a guild.
 // eslint-disable-next-line no-unused-vars
-client.on('guildDelete', guild => {
+client.on('guildDelete', async guild => {
 
 	// Logging the event
-	Logger.info(`Left a server. Total servers: ${client.guilds.cache.size}`)
+	Logger.info(`Left a server. Total servers: ${await this.guildCount()}`)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+			name: `${PREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -137,15 +138,18 @@ client.on('guildDelete', guild => {
  * Returns the total amount of users (including bots (sadly...)) who use the bot.
  * */
 // TODO: How to just return the "normal" users amount without the bots??
-exports.totalMembers = () => {
-	const totalMembersArray = client.guilds.cache.map(guild => {
-		return guild.memberCount
-	})
-	let total = 0;
-	for(let i = 0; i < totalMembersArray.length; i++) {
-		total = total + totalMembersArray[i]
-	}
-	return total
+exports.totalMembers = async () => {
+	return client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)')
+		.then(res => {
+			return res.reduce((prev, memberCount) => prev + memberCount, 0)
+		}).catch(console.error)
+}
+
+exports.guildCount = async () => {
+	return client.shard.fetchClientValues('guilds.cache.size')
+		.then(res => {
+			return res.reduce((prev, count) => prev + count, 0)
+		}).catch(console.error)
 }
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
