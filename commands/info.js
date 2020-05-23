@@ -59,7 +59,7 @@ module.exports = {
 						inline: true,
 					},
 					{
-						name: 'Used library',
+						name: 'Library',
 						value: 'discord.js',
 						inline: true,
 					},

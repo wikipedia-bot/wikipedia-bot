@@ -135,9 +135,8 @@ client.on('guildDelete', async guild => {
 })
 
 /**
- * Returns the total amount of users (including bots (sadly...)) who use the bot.
+ * Returns the total amount of users who use the bot.
  * */
-// TODO: How to just return the "normal" users amount without the bots??
 exports.totalMembers = async () => {
 	return client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)')
 		.then(res => {
@@ -145,6 +144,9 @@ exports.totalMembers = async () => {
 		}).catch(console.error)
 }
 
+/**
+ * Counting all guilds.
+ * */
 exports.guildCount = async () => {
 	return client.shard.fetchClientValues('guilds.cache.size')
 		.then(res => {
@@ -153,7 +155,7 @@ exports.guildCount = async () => {
 }
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
-// for the beginning of the development. After the main bugs are fixed (see Issues e.g. #1), logging may be turned off for
+// for the beginning of the development. Logging may be turned off for
 // the main features and commands. The data will only be used for analysis and to know what we may need to change and to fix.
 
 /* COMMANDS */
