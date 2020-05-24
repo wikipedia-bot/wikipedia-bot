@@ -14,8 +14,14 @@ catch (e) {
 }
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
+const Keyv = require('keyv');
 const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
+const db = new Keyv('sqlite://data/guilddata.sqlite')
+
+// DB error handler
+
+db.on('error', error => console.warn('Keyv Database Error', error))
 
 // Modules
 const Util = require('./modules/util')
@@ -120,6 +126,9 @@ client.on('guildCreate', guild => {
 	// Sending a "Thank you" message to the owner of the guild
 	guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
 
+	// saving the guild into the databse with standard prefix
+	db.set(`${guild.id}`, `${PREFIX}`)
+
 
 })
 
@@ -161,24 +170,28 @@ exports.totalMembers = () => {
 /* COMMANDS */
 
 client.on('message', async message => {
-	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
-		// Send the message of the help command as a response to the user
-		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
-	}
 
 	if (message.author.bot) return
-	if (!message.content.startsWith(PREFIX)) return undefined
+
+	let prefix = await db.get(`${message.guild.id}`) || PREFIX
+
+	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
+		// Send the message of the help command as a response to the user
+	 	client.commands.get('help').execute(message, null, { prefix, VERSION })
+	}
+
+	if (!message.content.startsWith(prefix)) return undefined
 
 	const args = message.content.split(' ')
 
 	let command = message.content.toLowerCase().split(' ')[0]
-	command = command.slice(PREFIX.length)
+	command = command.slice(prefix.length)
 
 	// What should the bot do with an unknown command?
 	if (!client.commands.has(command)) return;
 
 	try {
-		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
+		client.commands.get(command).execute(message, args, { prefix, VERSION });
 	}
 	catch (error) {
 		console.error(error);
