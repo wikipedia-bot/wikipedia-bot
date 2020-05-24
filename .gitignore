@@ -66,3 +66,7 @@ typings/
 # Project files:
 config.js
 package-lock.json
+
+# Guild settings:
+
+guilddata.sqlite
