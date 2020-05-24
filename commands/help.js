@@ -24,6 +24,10 @@ module.exports = {
 				title: message.client.user.username,
 				fields: [
 					{
+						name: 'Get Started',
+						value: 'Start by typing `' + config.PREFIX + 'wiki <keyword>`.',
+					},
+					{
 						name: 'Commands',
 						value: '[Click here](https://www.julianyaman.de/#commands) to see all commands.',
 					},
@@ -33,7 +37,7 @@ module.exports = {
 					},
 					{
 						name: 'Donate',
-						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url). Thank you very much for your help :)',
+						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url).',
 					},
 					{
 						name: 'Patreon',

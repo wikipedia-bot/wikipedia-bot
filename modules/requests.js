@@ -90,7 +90,7 @@ exports.getWikipediaShortSummary = async (msg, argument, lang) => {
 			timestamp: new Date(),
 			footer: {
 				icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
-				text: 'Content by wikipedia.org - Do you like the bot? Please use !vote to vote or !donate to donate',
+				text: 'Content by wikipedia.org - Do you like the bot? Please use !vote to vote or !donate to donate.',
 			},
 		},
 	})
