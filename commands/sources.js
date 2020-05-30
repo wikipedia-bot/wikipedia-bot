@@ -50,7 +50,7 @@ module.exports = {
 						},
 						{
 							name: '\nIf you leave the range empty or write *all* as the range, \nyou\'ll get the link to the Wikipedia article references',
-							value: '**Example:** ' + '`' + config.PREFIx + command + ' "Elon Musk" all`\n ',
+							value: '**Example:** ' + '`' + config.PREFIX + command + ' "Elon Musk" all`\n ',
 						},
 					],
 				},
