@@ -33,7 +33,7 @@ module.exports = {
                 let thisprefix = p
                 message.channel.send(embedder(`Your current prefix is: \`${thisprefix}\`\n\nChange it by using the \`${thisprefix}systemctl set\` command.`))
             } else {
-                message.channel.send(embedder(`Your current prefix is: \`${config.PREFIx}\`\n\nChange it by using the \`${config.PREFIx}systemctl set\` command.`))
+                message.channel.send(embedder(`Your current prefix is: \`${config.PREFIX}\`\n\nChange it by using the \`${config.PREFIX}systemctl set\` command.`))
             }
 
 
@@ -45,7 +45,7 @@ module.exports = {
 
             message.channel.send(embedder(`Success, I saved \`${args[2]}\` as your new prefix.`))
         } else {
-            return message.channel.send(embedder(`This command offers the following subcommands: \n> ${config.PREFIx}config view | Shows your current prefix. \n> ${config.PREFIx}config set <NEWPREFIX> | Change your prefix.`))
+            return message.channel.send(embedder(`This command offers the following subcommands: \n> ${config.PREFIX}config view | Shows your current prefix. \n> ${config.PREFIX}config set <NEWPREFIX> | Change your prefix.`))
         }
 
 
