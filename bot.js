@@ -11,7 +11,7 @@ const Keyv = require('keyv');
 const prefixcache = new Keyv('sqlite://modules/data/prefixes.sqlite')
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
+const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
 // Modules
@@ -58,7 +58,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${PREFIX}help | ${await this.guildCount()} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -70,7 +70,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${PREFIX}help | ${await this.guildCount()} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -111,12 +111,12 @@ client.on('guildCreate', async guild => {
 	// Logging the event
 	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${await this.guildCount()}`)
 
-	//saving guild to the database with standard prefix
-	await prefixcache.set(guild.id, PREFIX)
+	// saving guild to the database with standard prefix
+	await prefixcache.set(guild.id, DEFAULTPREFIX)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${await this.guildCount()} servers`,
+			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -139,7 +139,7 @@ client.on('guildDelete', async guild => {
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${await this.guildCount()} servers`,
+			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -176,27 +176,27 @@ client.on('message', async message => {
 
 	if (message.channel.type === "dm") return
 	
-	let PREFIx = await prefixcache.get(message.guild.id) || PREFIX
+	let PREFIX = await prefixcache.get(message.guild.id) || DEFAULTPREFIX
 	
 	
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
-		client.commands.get('help').execute(message, null, { PREFIx, VERSION })
+		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
 	}
 
 	if (message.author.bot) return
-	if (!message.content.startsWith(PREFIx)) return undefined
+	if (!message.content.startsWith(PREFIX)) return undefined
 
 	const args = message.content.split(' ')
 
 	let command = message.content.toLowerCase().split(' ')[0]
-	command = command.slice(PREFIx.length)
+	command = command.slice(PREFIX.length)
 
 	// What should the bot do with an unknown command?
 	if (!client.commands.has(command)) return;
 
 	try {
-		client.commands.get(command).execute(message, args, { PREFIx, VERSION });
+		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
 	}
 	catch (error) {
 		console.error(error);
