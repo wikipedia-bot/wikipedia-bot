@@ -7,6 +7,9 @@ if (process.version.slice(1).split('.')[0] < 12) {
 	process.exit(1)
 }
 
+const Keyv = require('keyv');
+const prefixcache = new Keyv('sqlite://modules/data/prefixes.sqlite')
+
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
@@ -15,6 +18,7 @@ const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 const Util = require('./modules/util')
 const Logger = new Util.Logger();
 const fs = require('fs');
+
 
 // Creating a collection for the commands
 client.commands = new Discord.Collection();
@@ -32,6 +36,8 @@ for (const file of commandFiles) {
 	}
 }
 
+// Handling prefixcache errors.
+prefixcache.on('error', e => console.log('There was an error with the keyv package, trace: ', e))
 
 // Handling client events
 client.on('warn', console.warn)
@@ -104,6 +110,9 @@ client.on('guildCreate', async guild => {
 
 	// Logging the event
 	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${await this.guildCount()}`)
+
+	//saving guild to the database with standard prefix
+	await prefixcache.set(guild.id, PREFIX)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -124,6 +133,9 @@ client.on('guildDelete', async guild => {
 
 	// Logging the event
 	Logger.info(`Left a server. Total servers: ${await this.guildCount()}`)
+
+	// remove guild from database cause we dont need no junk
+	prefixcache.delete(guild.id)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -161,24 +173,30 @@ exports.guildCount = async () => {
 /* COMMANDS */
 
 client.on('message', async message => {
+
+	if (message.channel.type === "dm") return
+	
+	let PREFIx = await prefixcache.get(message.guild.id) || PREFIX
+	
+	
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
-		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
+		client.commands.get('help').execute(message, null, { PREFIx, VERSION })
 	}
 
 	if (message.author.bot) return
-	if (!message.content.startsWith(PREFIX)) return undefined
+	if (!message.content.startsWith(PREFIx)) return undefined
 
 	const args = message.content.split(' ')
 
 	let command = message.content.toLowerCase().split(' ')[0]
-	command = command.slice(PREFIX.length)
+	command = command.slice(PREFIx.length)
 
 	// What should the bot do with an unknown command?
 	if (!client.commands.has(command)) return;
 
 	try {
-		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
+		client.commands.get(command).execute(message, args, { PREFIx, VERSION });
 	}
 	catch (error) {
 		console.error(error);

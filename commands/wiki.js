@@ -12,7 +12,7 @@ module.exports = {
 	description: 'Search something on Wikipedia with this command and get a short summary of it.',
 	execute(message, args, config) {
 
-		const command = args[0].slice(config.PREFIX.length)
+		const command = args[0].slice(config.PREFIx.length)
 
 		let requestLang = 'en';
 		// Checking if the main command was used.
@@ -28,10 +28,10 @@ module.exports = {
 
 		// Check in what type of channel the command was executed
 		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} (args: [${args}]) used in a private ${message.channel.type}.`)
+			Logger.info(`${config.PREFIx + this.name} (args: [${args}]) used in a private ${message.channel.type}.`)
 		}
 		else{
-			Logger.info(`${config.PREFIX + this.name} (args: [${args}]) used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
+			Logger.info(`${config.PREFIx + this.name} (args: [${args}]) used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 
 		if (!args[1]) {
@@ -41,7 +41,7 @@ module.exports = {
 					color: 0xe74c3c,
 					description: 'It seems like you forgot something!\n' +
 						'Please use the command like this:\n\n' +
-						'``' + config.PREFIX + command + ' [topic] | Example ' + config.PREFIX + 'wiki Rocket League``',
+						'``' + config.PREFIx + command + ' [topic] | Example ' + config.PREFIx + 'wiki Rocket League``',
 				},
 			})
 		}
