@@ -7,14 +7,18 @@ if (process.version.slice(1).split('.')[0] < 12) {
 	process.exit(1)
 }
 
+const Keyv = require('keyv');
+const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
+
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
+const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
 // Modules
 const Util = require('./modules/util')
 const Logger = new Util.Logger();
 const fs = require('fs');
+
 
 // Creating a collection for the commands
 client.commands = new Discord.Collection();
@@ -32,6 +36,8 @@ for (const file of commandFiles) {
 	}
 }
 
+// Handling prefixcache errors.
+prefixcache.on('error', e => console.log('There was an error with the keyv package, trace: ', e))
 
 // Handling client events
 client.on('warn', console.warn)
@@ -52,7 +58,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${PREFIX}help | ${await this.guildCount()} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -64,7 +70,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${PREFIX}help | ${await this.guildCount()} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -104,10 +110,13 @@ client.on('guildCreate', async guild => {
 
 	// Logging the event
 	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${await this.guildCount()}`)
+
+	// saving guild to the database with standard prefix
+	await prefixcache.set(guild.id, DEFAULTPREFIX)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${await this.guildCount()} servers`,
+			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -124,10 +133,13 @@ client.on('guildDelete', async guild => {
 
 	// Logging the event
 	Logger.info(`Left a server. Total servers: ${await this.guildCount()}`)
+
+	// remove guild from database cause we dont need no junk
+	prefixcache.delete(guild.id)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${await this.guildCount()} servers`,
+			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -161,6 +173,13 @@ exports.guildCount = async () => {
 /* COMMANDS */
 
 client.on('message', async message => {
+
+	if (message.channel.type === 'dm') return
+
+	// eslint-disable-next-line prefer-const
+	let PREFIX = await prefixcache.get(message.guild.id) || DEFAULTPREFIX
+
+
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })

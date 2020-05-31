@@ -66,3 +66,6 @@ typings/
 # Project files:
 config.js
 package-lock.json
+
+# Data:
+data/prefixes.sqlite
