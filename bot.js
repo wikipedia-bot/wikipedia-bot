@@ -1,26 +1,24 @@
-// Load up the discord.js library. Else throw an error.
-try {
-	// eslint-disable-next-line no-var
-	var Discord = require('discord.js')
-	if (process.version.slice(1).split('.')[0] < 12) {
-		throw new Error('Node 10.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
-	}
-}
-catch (e) {
-	console.error(e.stack)
-	console.error('Current Node.js version: ' + process.version)
-	console.error('In case you´ve not installed any required module: \nPlease run \'npm install\' and ensure it passes with no errors!')
-	process.exit()
+/**
+ * Beginning of the main file
+ * */
+const Discord = require('discord.js')
+if (process.version.slice(1).split('.')[0] < 12) {
+	console.error('Node 12.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
+	process.exit(1)
 }
 
+const Keyv = require('keyv');
+const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
+
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const { PREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
+const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
 // Modules
 const Util = require('./modules/util')
 const Logger = new Util.Logger();
 const fs = require('fs');
+
 
 // Creating a collection for the commands
 client.commands = new Discord.Collection();
@@ -38,6 +36,8 @@ for (const file of commandFiles) {
 	}
 }
 
+// Handling prefixcache errors.
+prefixcache.on('error', e => console.log('There was an error with the keyv package, trace: ', e))
 
 // Handling client events
 client.on('warn', console.warn)
@@ -54,10 +54,11 @@ client.on('ready', async () => {
 	// FALSE -> Production usage
 
 	if (DEVELOPMENT === true) {
+
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -69,7 +70,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -79,23 +80,23 @@ client.on('ready', async () => {
 		const updater = new BotListUpdater()
 
 		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
-		setInterval(() => {
-			updater.updateTopGg(client.guilds.cache.size)
+		setInterval(async () => {
+			updater.updateTopGg(await this.guildCount())
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
-		setInterval(() => {
-			updater.updateBotsXyz(client.guilds.cache.size)
+		setInterval(async () => {
+			updater.updateBotsXyz(await this.guildCount())
 		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
-		setInterval(() => {
-			updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
+		setInterval(async () => {
+			updater.updateDiscordBotList(await this.guildCount(), await this.totalMembers(), 0)
 		}, 300000);
 
 	}
 
-	Logger.info(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
+	Logger.info(`Ready to serve on ${await this.guildCount()} servers for a total of ${await this.totalMembers()} users.`)
 })
 
 
@@ -105,34 +106,40 @@ client.on('disconnect', () => Logger.info('Disconnected!'))
 client.on('reconnecting', () => Logger.info('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
-client.on('guildCreate', guild => {
+client.on('guildCreate', async guild => {
 
 	// Logging the event
-	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
+	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${await this.guildCount()}`)
+
+	// saving guild to the database with standard prefix
+	await prefixcache.set(guild.id, DEFAULTPREFIX)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
 	})
 	// Sending a "Thank you" message to the owner of the guild
-	guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
+	await guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
 
 
 })
 
 // This event will be triggered when the bot is removed from a guild.
 // eslint-disable-next-line no-unused-vars
-client.on('guildDelete', guild => {
+client.on('guildDelete', async guild => {
 
 	// Logging the event
-	Logger.info(`Left a server. Total servers: ${client.guilds.cache.size}`)
+	Logger.info(`Left a server. Total servers: ${await this.guildCount()}`)
+
+	// remove guild from database cause we dont need no junk
+	prefixcache.delete(guild.id)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
+			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -140,27 +147,39 @@ client.on('guildDelete', guild => {
 })
 
 /**
- * Returns the total amount of users (including bots (sadly...)) who use the bot.
+ * Returns the total amount of users who use the bot.
  * */
-// TODO: How to just return the "normal" users amount without the bots??
-exports.totalMembers = () => {
-	const totalMembersArray = client.guilds.cache.map(guild => {
-		return guild.memberCount
-	})
-	let total = 0;
-	for(let i = 0; i < totalMembersArray.length; i++) {
-		total = total + totalMembersArray[i]
-	}
-	return total
+exports.totalMembers = async () => {
+	return client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)')
+		.then(res => {
+			return res.reduce((prev, memberCount) => prev + memberCount, 0)
+		}).catch(console.error)
+}
+
+/**
+ * Counting all guilds.
+ * */
+exports.guildCount = async () => {
+	return client.shard.fetchClientValues('guilds.cache.size')
+		.then(res => {
+			return res.reduce((prev, count) => prev + count, 0)
+		}).catch(console.error)
 }
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
-// for the beginning of the development. After the main bugs are fixed (see Issues e.g. #1), logging may be turned off for
+// for the beginning of the development. Logging may be turned off for
 // the main features and commands. The data will only be used for analysis and to know what we may need to change and to fix.
 
 /* COMMANDS */
 
 client.on('message', async message => {
+
+	if (message.channel.type === 'dm') return
+
+	// eslint-disable-next-line prefer-const
+	let PREFIX = await prefixcache.get(message.guild.id) || DEFAULTPREFIX
+
+
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
@@ -187,6 +206,8 @@ client.on('message', async message => {
 
 })
 
-client.login(TOKEN);
+client.login(TOKEN).then(r => console.log('Successfully logged in!'));
 
-process.on('unhandledRejection', (PromiseRejection) => console.error(`Promise Error -> ${PromiseRejection}`))
+process.on('unhandledRejection', PromiseRejection => {
+	console.error(PromiseRejection)
+})

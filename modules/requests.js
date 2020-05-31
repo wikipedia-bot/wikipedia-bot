@@ -31,60 +31,68 @@ const apiUrl = {
  * @param {String} lang - Language in which the result should be sent.
  *
  * */
-exports.getWikipediaShortSummary = (msg, argument, lang) => {
+exports.getWikipediaShortSummary = async (msg, argument, lang) => {
 
-	// Searching for the article the user want
-	wiki({ apiUrl: apiUrl[lang] }).search(argument).then(data => {
-		// Getting the first result of the search results
-		// TODO: Find a way to handle disambiguation pages
-		const bestResult = data.results[0]
-		// Getting the summary of the first result's page
-		wiki({ apiUrl: apiUrl[lang] }).page(bestResult).then(page => {
-			page.summary().then(summary => {
-				// Shorten the summary to 768 chars...
-				let shortedSummary = summary.split('\n')
-				shortedSummary = _.take(shortedSummary, 2)
-				shortedSummary = shortedSummary.toString().substring(0, 768) + '...'
-				// Getting the image of the page
-				// TODO: Get the real (svg) thumbnail from some pages
-				page.mainImage().then(image => {
-					msg.channel.send({
-						embed: {
-							color: 3447003,
-							author: {
-								icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
-								name: 'Wikipedia',
-							},
-							thumbnail: {
-								url: image,
-							},
-							title: bestResult,
-							url: page.raw.fullurl,
-							description: shortedSummary,
-							timestamp: new Date(),
-							footer: {
-								icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
-								text: 'Content by Wikipedia - wikipedia.org',
-							},
-						},
-					})
-				}).catch(e => {
-					// Logging the error
-					Logger.error(`[3] An error at page.mainImage(): Searched for '${argument}' - Best Result: '${bestResult}'`)
-					Logger.errorChat(msg, e)
-					// Error handling 101
-					msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
-				})
-			})
-		}).catch(e => {
-			Logger.error(`[2] An error at page.mainImage(): Searched for '${argument}' - Best Result: '${bestResult}'`)
-			Logger.errorChat(msg, e)
-			msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
+	// Get all search result when searching the argument
+	const search = await wiki({
+		apiUrl: apiUrl[lang],
+		headers: {
+			'User-Agent': 'wikipedia-bot-requests (https://julianyaman.de; julianyaman@posteo.eu) requests.js',
+		},
+	}).search(argument)
+	// Get the wiki page of the first result
+	const wikiPage = await wiki({
+		apiUrl: apiUrl[lang],
+		headers: {
+			'User-Agent': 'wikipedia-bot-requests (https://julianyaman.de; julianyaman@posteo.eu) requests.js',
+		},
+	}).page(search.results[0]).catch(e => {
+		Logger.error(e)
+		msg.react('👎').catch(err => Logger.error(err))
+		msg.channel.send({
+			embed: {
+				color: 0xe74c3c,
+				description: 'Sorry, there was an error while trying to get the wiki page. ' +
+					'Please check your spelling or try another keyword.\n\n' +
+					'*Is the command still not working after many attempts?* \n' +
+					'*Please write an issue on GitHub or contact us on Discord! **(!info)***',
+			},
 		})
-	}).catch(e => {
-		Logger.error(`[1] An error at page.mainImage(): Searched for: '${argument}' - no result`)
-		Logger.errorChat(msg, e)
-		msg.reply('sorry, an error occurred while trying to execute your command. Please check your spelling or try another keyword.')
+	})
+
+	// Adding all information into one single array - all requests are now donw
+	const results = await Promise.all([
+		wikiPage.raw.title,
+		wikiPage.raw.fullurl,
+		wikiPage.mainImage(),
+		wikiPage.summary(),
+	])
+
+	// Shorten the summary to 768 chars...
+	let shortedSummary = results[3].split('\n')
+	shortedSummary = _.take(shortedSummary, 2)
+	shortedSummary = shortedSummary.toString().substring(0, 768) + '...'
+
+	// Sending the embed
+	await msg.channel.send({
+		embed: {
+			color: 3447003,
+			author: {
+				icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+				name: 'Wikipedia',
+			},
+			thumbnail: {
+				url: results[2],
+			},
+			title: results[0],
+			url: results[1],
+			description: shortedSummary,
+			timestamp: new Date(),
+			footer: {
+				icon_url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png',
+				text: 'Content by wikipedia.org - Do you like the bot? Please use !vote to vote or !donate to donate.',
+			},
+		},
 	})
 
 }

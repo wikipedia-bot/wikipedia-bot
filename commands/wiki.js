@@ -35,20 +35,21 @@ module.exports = {
 		}
 
 		if (!args[1]) {
-			message.react('👎').catch((e) => {
-				Logger.error(`Wiki Command -> !args[0] -> message.react -> catch e: ${e} | ${message.guild.name} (${message.guild.id})`)
+			message.react('👎').catch(e => Logger.error(e))
+			message.channel.send({
+				embed: {
+					color: 0xe74c3c,
+					description: 'It seems like you forgot something!\n' +
+						'Please use the command like this:\n\n' +
+						'``' + config.PREFIX + command + ' [topic] | Example ' + config.PREFIX + 'wiki Rocket League``',
+				},
 			})
-			message.reply('you forgot to search for something. -> \n``' + config.PREFIX + command + ' [topic] | Example ' + config.PREFIX + 'wiki Rocket League``')
 		}
 		else {
 			let searchValue = args.toString().replace(/,/g, ' ')
 			searchValue = searchValue.replace(config.PREFIX + command + ' ', '')
-			// console.log('search value -> ' + searchValue)
-			// searchValue = _.startCase(searchValue)
-			// console.log('search value -> ' + searchValue)
 
-			// console.log('search value: ' + searchValue)
-			requests.getWikipediaShortSummary(message, searchValue, requestLang)
+			requests.getWikipediaShortSummary(message, searchValue, requestLang).catch(e => Logger.error(e))
 		}
 
 	},

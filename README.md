@@ -1,6 +1,6 @@
 <h1 align="center"> Wikipedia Bot for Discord </h1>
 
-<h2 align="center"> <a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> > Invite the bot to your server < </a></h2>
+<h2> <a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> > Invite to your Server </a></h2>
 
 <p align="center">
 <a href="https://discordbots.org/bot/554751047030013953" >
@@ -16,7 +16,6 @@
 </a>
 </p>
 
-<p align="center">
 <a href="https://discord.gg/yAUmDNb">
     <img src="https://discordapp.com/api/guilds/358751806697897984/embed.png" alt="Discord Server Shield"/>
 </a>
@@ -26,7 +25,11 @@
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_shield" alt="FOSSA Status">
     <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=shield"/>
 </a>
-</p>
+  <a href="https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+  </a>
+
+### 🏠 [Homepage & Commands](https://julianyaman.de)
 
 ## Introduction
 
@@ -38,8 +41,7 @@ You can reach me out here:
 
 ### Short links
 
-- ### [Commands](https://github.com/julianYaman/wikipedia-bot/blob/master/COMMANDS.md)
-- **[License](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)**
+- [**License**](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE)
 - [**Contributing guidelines**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CONTRIBUTING.md)
 - [**Code of Conduct**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CODE_OF_CONDUCT.md)
 
@@ -54,7 +56,18 @@ You can quickly share the information about a topic on your Discord server, for 
 This bot is especially focusing one goal: to deliver and share information about the world.
 This bot always gets updates to provide a better service.
 
-In future updates, it will also read articles for you with text-to-speech support and it will be able to send you a list of the references used in a Wikipedia article.
+In future updates, it will also read articles for you with text-to-speech support.
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+You can support the work financially with a donation via [PayPal](https://www.paypal.me/julianyaman)
+
+<a href="https://www.patreon.com/user?u=23070184">
+  <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
 
 ## Contributing
 
@@ -66,5 +79,9 @@ does help a lot to improve the bot.
 
 Also, we recommend to read the [**Code of Conduct**](https://github.com/julianYaman/wikipedia-bot/blob/master/docs/CODE_OF_CONDUCT.md).
 
-## License status
+## 📝 License
+
+Copyright © 2019 [Julian Yaman <julianyaman@posteo.eu>](https://julianyaman.de).<br />
+This project is [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE) licensed.
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)
