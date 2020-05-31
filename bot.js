@@ -8,7 +8,7 @@ if (process.version.slice(1).split('.')[0] < 12) {
 }
 
 const Keyv = require('keyv');
-const prefixcache = new Keyv('sqlite://modules/data/prefixes.sqlite')
+const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
@@ -174,11 +174,12 @@ exports.guildCount = async () => {
 
 client.on('message', async message => {
 
-	if (message.channel.type === "dm") return
-	
+	if (message.channel.type === 'dm') return
+
+	// eslint-disable-next-line prefer-const
 	let PREFIX = await prefixcache.get(message.guild.id) || DEFAULTPREFIX
-	
-	
+
+
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
 		client.commands.get('help').execute(message, null, { PREFIX, VERSION })

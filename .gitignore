@@ -68,4 +68,4 @@ config.js
 package-lock.json
 
 # Data:
-prefixes.sqlite
+data/prefixes.sqlite
