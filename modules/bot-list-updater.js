@@ -60,7 +60,7 @@ exports.BotListUpdater = class {
 	 *
 	 * */
 	updateDiscordBotList(guildSize, memberAmount, voiceConnectionSize) {
-		got.post(`https://discordbotlist.com/api/bots/${config.ONDISCORDXYZ_BOTID}/stats`, {
+		got.post(`https://discordbotlist.com/api/v1/bots/${config.ONDISCORDXYZ_BOTID}/stats`, {
 			headers: {
 				'Authorization': 'Bot ' + config.DISCORDBOTLIST_TOKEN,
 			},
