@@ -122,7 +122,7 @@ client.on('guildCreate', async guild => {
 		console.error(e)
 	})
 	// Sending a "Thank you" message to the owner of the guild
-	await guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
+	await guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + DEFAULTPREFIX + 'vote** in this channel.')
 
 
 })
@@ -206,6 +206,7 @@ client.on('message', async message => {
 
 })
 
+// eslint-disable-next-line no-unused-vars
 client.login(TOKEN).then(r => console.log('Successfully logged in!'));
 
 process.on('unhandledRejection', PromiseRejection => {

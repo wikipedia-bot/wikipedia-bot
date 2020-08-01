@@ -21,7 +21,7 @@ module.exports = {
 		message.channel.send({
 			embed: {
 				color: 0xffffff,
-				title: 'Support the developer with a donation',
+				title: 'Support the development with a donation',
 				fields: [
 					{
 						name: 'Donate',
