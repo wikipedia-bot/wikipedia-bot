@@ -237,10 +237,6 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 									fields: sourceToUser,
 								},
 							})
-
-							// Then we should stop typing since we do nothing lol
-							msg.channel.stopTyping();
-
 						}
 						else {
 							msg.channel.send({
@@ -256,6 +252,9 @@ exports.getWikipediaReferences = async (msg, search, range = 'all') => {
 								},
 							})
 						}
+						
+						// Stop typing since no matter what the bot shouldn't be typing now
+						msg.channel.stopTyping();
 
 					}
 					else {

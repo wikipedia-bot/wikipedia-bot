@@ -204,6 +204,13 @@ client.on('message', async message => {
 		await message.reply('there was an error trying to execute that command!');
 	}
 
+	// If the bot is typing in channel after 5 min, bot stops typing
+	setTimeout(() => {
+		if (client.user.typingIn(message.channel)) {
+			message.channel.stopTyping();
+		}
+	}, 300000)
+
 })
 
 // eslint-disable-next-line no-unused-vars
