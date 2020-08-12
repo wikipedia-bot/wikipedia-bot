@@ -12,7 +12,7 @@ module.exports = {
 	name: 'sources',
 	alias: ['references'],
 	description: 'Sends you a full list of all sources of a Wikipedia article',
-	execute(message, args, config) {
+	async execute(message, args, config) {
 
 		const command = args[0].slice(config.PREFIX.length)
 
@@ -69,7 +69,7 @@ module.exports = {
 			const range = commandArgs[1]
 
 			// Do the request!
-			requests.getWikipediaReferences(message, searchValue, range)
+			await requests.getWikipediaReferences(message, searchValue, range)
 		}
 
 	},
