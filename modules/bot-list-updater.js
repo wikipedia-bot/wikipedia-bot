@@ -16,7 +16,7 @@ exports.BotListUpdater = class {
 	 *
 	 * */
 	updateTopGg(guildSize) {
-		this.dbl.postStats(guildSize)
+		this.dbl.postStats(guildSize).then(r => Logger.info('Updated guild amount on top.gg'))
 		this.dbl.on('error', e => {
 			if (config.DEVELOPMENT !== true) {
 				Logger.error('Error occurred while trying to update the server amount on top.gg!')
@@ -36,11 +36,10 @@ exports.BotListUpdater = class {
 			headers: {
 				'Authorization': config.ONDISCORDXYZ_TOKEN,
 			},
-			json: true,
-			method: 'POST',
-			body: {
+			json: {
 				'guildCount': guildSize,
 			},
+			responseType: 'json',
 		}).then(res => {
 			if(res.statusCode !== 204) {
 				Logger.error('Error occurred when trying to update the server amount on bots.ondiscord.xyz! Code: ' + res.statusCode)
@@ -64,13 +63,12 @@ exports.BotListUpdater = class {
 			headers: {
 				'Authorization': 'Bot ' + config.DISCORDBOTLIST_TOKEN,
 			},
-			json: true,
-			method: 'POST',
-			body: {
+			json: {
 				'guilds': guildSize,
 				'users': memberAmount,
 				'voice_connections': voiceConnectionSize,
 			},
+			responseType: 'json',
 		}).then(res => {
 			if(res.statusCode !== 204) {
 				Logger.error('Error occurred when trying to update the server amount on discordbotlist.com! Code: ' + res.statusCode)

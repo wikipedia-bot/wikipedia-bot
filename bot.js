@@ -135,7 +135,7 @@ client.on('guildDelete', async guild => {
 	Logger.info(`Left a server. Total servers: ${await this.guildCount()}`)
 
 	// remove guild from database cause we dont need no junk
-	prefixcache.delete(guild.id)
+	await prefixcache.delete(guild.id)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -178,7 +178,6 @@ client.on('message', async message => {
 
 	// eslint-disable-next-line prefer-const
 	let PREFIX = await prefixcache.get(message.guild.id) || DEFAULTPREFIX
-
 
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
