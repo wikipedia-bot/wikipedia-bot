@@ -36,7 +36,7 @@
 ### Want to give Feedback?
 You can reach me out here:
 - **[E-Mail](mailto:julianyaman@posteo.eu)** - julianyaman@posteo.eu 
-- **[Twitter: @yamanstudios](https://twitter.com/yamanstudios)**
+- **[Twitter: @julianyaman](https://twitter.com/julianyaman)**
 - **[Discord](https://discord.gg/yAUmDNb)**
 
 ### Short links
