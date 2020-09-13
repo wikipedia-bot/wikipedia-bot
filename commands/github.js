@@ -17,7 +17,7 @@ module.exports = {
 			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 
-		message.delete().catch(e => Logger.error(e))
+		if(message.deletable) message.delete();
 
 		message.author.send('Here\'s the link to the GitHub repository: https://github.com/julianYaman/wikipedia-bot')
 	},
