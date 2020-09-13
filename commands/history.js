@@ -17,9 +17,8 @@ module.exports = {
 			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 
-		message.delete().catch(e => {
-			// TODO: How to handle this properly and user-friendly?
-		})
+		if(message.deletable) message.delete();
+
 		message.author.send('You are interested in history? You would like to know more about historic events? \nThen **The History Discord** is ' +
       'the perfect place for you! -> https://discord.gg/XSG3YZ9 \nhttps://discordbots.org/servers/463373602687942667')
 	},

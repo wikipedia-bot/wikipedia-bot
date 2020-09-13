@@ -17,9 +17,7 @@ module.exports = {
 			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 
-		message.delete().catch(e => {
-			// TODO: How to handle this properly and user-friendly?
-		})
+		if(message.deletable) message.delete();
 
 		message.author.send('Hi, I\'m the developer of this bot you are using right now! Thank you for supporting the effort behind this project.\n\n' +
       'With your help, the bot will reach a much greater popularity and will be used by more people.\n' +
