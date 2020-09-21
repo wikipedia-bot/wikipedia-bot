@@ -21,6 +21,7 @@ const apiUrl = {
 	'fr': 'https://fr.wikipedia.org/w/api.php',
 	'ru': 'https://ru.wikipedia.org/w/api.php',
 	'sl': 'https://sl.wikipedia.org/w/api.php',
+	'tr': 'https://tr.wikipedia.org/w/api.php',
 }
 
 /**
