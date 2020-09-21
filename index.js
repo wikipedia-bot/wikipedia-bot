@@ -8,5 +8,5 @@ const Util = require('./modules/util')
 const Logger = new Util.Logger()
 
 // Spawning
-manager.spawn()
 manager.on('shardCreate', shard => Logger.info(`Launched shard ${shard.id}!`))
+manager.spawn().catch(console.error)

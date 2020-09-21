@@ -37,7 +37,7 @@ for (const file of commandFiles) {
 }
 
 // Handling prefixcache errors.
-prefixcache.on('error', e => console.log('There was an error with the keyv package, trace: ', e))
+prefixcache.on('error', e => Logger.error('There was an error with the keyv package, trace: ' + e))
 
 // Handling client events
 client.on('warn', console.warn)
@@ -46,12 +46,8 @@ client.on('error', console.error)
 
 client.on('ready', async () => {
 
-	Logger.info('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
-	Logger.info('\nThis Bot is online! Running on version: ' + VERSION + '\n')
-
-	// Different user presences for different development stages
-	// TRUE -> Active development / debugging
-	// FALSE -> Production usage
+	Logger.info('\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
+	Logger.info('This Bot is online! Running on version: ' + VERSION)
 
 	if (DEVELOPMENT === true) {
 
@@ -90,20 +86,27 @@ client.on('ready', async () => {
 		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
-		setInterval(async () => {
-			updater.updateDiscordBotList(await this.guildCount(), await this.totalMembers(), 0)
-		}, 300000);
+		// setInterval(async () => {
+		// 	updater.updateDiscordBotList(await this.guildCount(), await this.totalMembers(), 0)
+		// }, 300000);
 
 	}
 
 	Logger.info(`Ready to serve on ${await this.guildCount()} servers for a total of ${await this.totalMembers()} users.`)
 })
 
+// Sharding Events
+client.on('shardReady', (id) => Logger.info(`Shard ${id} is ready!`))
 
-// Continuing with Discord client events
+client.on('shardDisconnect', (event, id) => Logger.info(`Shard ${id} disconnected and does not reconnect`))
+
+client.on('shardError', (error, shardID) => Logger.error(`Shard ${shardID} encountered following error: ${error}`))
+
+client.on('shardReconnecting', (id) => Logger.info(`Shard ${id} reconnected`))
+
+client.on('shardResume', (id, replayedEvents) => Logger.info(`Shard ${id} resumed with ${replayedEvents} replayed events`))
+
 client.on('disconnect', () => Logger.info('Disconnected!'))
-
-client.on('reconnecting', () => Logger.info('Reconnecting...'))
 
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', async guild => {
@@ -128,7 +131,6 @@ client.on('guildCreate', async guild => {
 })
 
 // This event will be triggered when the bot is removed from a guild.
-// eslint-disable-next-line no-unused-vars
 client.on('guildDelete', async guild => {
 
 	// Logging the event
@@ -206,7 +208,7 @@ client.on('message', async message => {
 })
 
 // eslint-disable-next-line no-unused-vars
-client.login(TOKEN).then(r => console.log('Successfully logged in!'));
+client.login(TOKEN).catch(Logger.error);
 
 process.on('unhandledRejection', PromiseRejection => {
 	console.error(PromiseRejection)
