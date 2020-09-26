@@ -8,7 +8,7 @@ const requests = require('./../modules/requests')
  * */
 module.exports = {
 	name: 'wiki',
-	alias: ['wiki-de', 'wiki-es', 'wiki-fr', 'wiki-ru', 'wiki-sl', 'wiki-tr'],
+	alias: ['wiki-de', 'wiki-es', 'wiki-fr', 'wiki-ru', 'wiki-sl', 'wiki-tr' , 'wiki-yd'],
 	description: 'Search something on Wikipedia with this command and get a short summary of it.',
 	execute(message, args, config) {
 
