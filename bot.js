@@ -1,6 +1,3 @@
-/**
- * Beginning of the main file
- * */
 const Discord = require('discord.js')
 if (process.version.slice(1).split('.')[0] < 12) {
 	console.error('Node 12.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
