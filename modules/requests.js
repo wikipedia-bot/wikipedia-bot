@@ -17,7 +17,7 @@ const Logger = new Util.Logger()
 const apiUrl = {
 	// german
 	'de': 'https://de.wikipedia.org/w/api.php',
-	//english
+	// english
 	'en': 'https://en.wikipedia.org/w/api.php',
 	// spanish
 	'es': 'https://es.wikipedia.org/w/api.php',

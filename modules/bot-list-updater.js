@@ -16,7 +16,7 @@ exports.BotListUpdater = class {
 	 *
 	 * */
 	updateTopGg(guildSize) {
-		this.dbl.postStats(guildSize).then(r => Logger.info('Updated guild amount on top.gg'))
+		this.dbl.postStats(guildSize).then(r => Logger.info('Updated guild amount on top.gg', r))
 		this.dbl.on('error', e => {
 			if (config.DEVELOPMENT !== true) {
 				Logger.error('Error occurred while trying to update the server amount on top.gg!')
