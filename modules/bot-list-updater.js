@@ -4,19 +4,21 @@ const Util = require('./util')
 const Logger = new Util.Logger()
 
 exports.BotListUpdater = class {
-	constructor() {
+	constructor(shardId) {
 		this.DBL = require('dblapi.js')
 		this.dbl = new this.DBL(config.DISCORDBOTS_TOKEN, this.client)
+		this.shardId = shardId;
 	}
 
 	/**
 	 * Updates the numbers on top.gg
 	 *
 	 * @param {Number} guildSize - Amount of guilds where the server is on.
+	 * @param {Number} shards - Total amount of shards.
 	 *
 	 * */
-	updateTopGg(guildSize) {
-		this.dbl.postStats(guildSize).then(r => Logger.info('Updated guild amount on top.gg', r))
+	updateTopGg(guildSize, shards) {
+		this.dbl.postStats(guildSize, this.shardId, shards).then(r => Logger.info('Updated guild amount on top.gg', r))
 		this.dbl.on('error', e => {
 			if (config.DEVELOPMENT !== true) {
 				Logger.error('Error occurred while trying to update the server amount on top.gg!')
@@ -32,22 +34,27 @@ exports.BotListUpdater = class {
 	 *
 	 * */
 	updateBotsXyz(guildSize) {
-		got.post(`https://bots.ondiscord.xyz/bot-api/bots/${config.ONDISCORDXYZ_BOTID}/guilds`, {
-			headers: {
-				'Authorization': config.ONDISCORDXYZ_TOKEN,
-			},
-			json: {
-				'guildCount': guildSize,
-			},
-			responseType: 'json',
-		}).then(res => {
-			if(res.statusCode !== 204) {
-				Logger.error('Error occurred when trying to update the server amount on bots.ondiscord.xyz! Code: ' + res.statusCode)
-				console.error(res)
-			}
-		}).catch(e => {
-			console.log(e)
-		})
+		if (this.shardId === 0) {
+			got.post(`https://bots.ondiscord.xyz/bot-api/bots/${config.ONDISCORDXYZ_BOTID}/guilds`, {
+				headers: {
+					'Authorization': config.ONDISCORDXYZ_TOKEN,
+				},
+				json: {
+					'guildCount': guildSize,
+				},
+				responseType: 'json',
+			}).then(res => {
+				if (res.statusCode !== 204) {
+					Logger.error('Error occurred when trying to update the server amount on bots.ondiscord.xyz! Code: ' + res.statusCode)
+					console.error(res)
+				}
+				else {
+					Logger.info('Updated guild amount on bots.ondiscord.xyz')
+				}
+			}).catch(e => {
+				console.log(e)
+			})
+		}
 	}
 
 	/**
