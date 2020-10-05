@@ -16,6 +16,7 @@ const Util = require('./modules/util')
 const Logger = new Util.Logger();
 const fs = require('fs');
 
+let myShardId = undefined;
 
 // Creating a collection for the commands
 client.commands = new Discord.Collection();
@@ -36,6 +37,22 @@ for (const file of commandFiles) {
 // Handling prefixcache errors.
 prefixcache.on('error', e => Logger.error('There was an error with the keyv package, trace: ' + e))
 
+// Sharding Events
+client.on('shardReady', (id) => {
+	Logger.info(`Shard ${id} is ready!`)
+	myShardId = id;
+})
+
+client.on('shardDisconnect', (event, id) => Logger.info(`Shard ${id} disconnected and does not reconnect`))
+
+client.on('shardError', (error, shardID) => Logger.error(`Shard ${shardID} encountered following error: ${error}`))
+
+client.on('shardReconnecting', (id) => Logger.info(`Shard ${id} reconnected`))
+
+client.on('shardResume', (id, replayedEvents) => Logger.info(`Shard ${id} resumed with ${replayedEvents} replayed events`))
+
+client.on('disconnect', () => Logger.info('Disconnected!'))
+
 // Handling client events
 client.on('warn', console.warn)
 
@@ -43,8 +60,8 @@ client.on('error', console.error)
 
 client.on('ready', async () => {
 
-	Logger.info('\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
-	Logger.info('This Bot is online! Running on version: ' + VERSION)
+	Logger.info('\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version)
+	Logger.info('This Bot is online and it is running on version: ' + VERSION)
 
 	if (DEVELOPMENT === true) {
 
@@ -70,11 +87,11 @@ client.on('ready', async () => {
 		})
 
 		// Creating a new updater
-		const updater = new BotListUpdater()
+		const updater = new BotListUpdater(myShardId)
 
 		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
 		setInterval(async () => {
-			updater.updateTopGg(await this.guildCount())
+			updater.updateTopGg(await this.guildCount(), client.shard.count)
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
@@ -91,19 +108,6 @@ client.on('ready', async () => {
 
 	Logger.info(`Ready to serve on ${await this.guildCount()} servers for a total of ${await this.totalMembers()} users.`)
 })
-
-// Sharding Events
-client.on('shardReady', (id) => Logger.info(`Shard ${id} is ready!`))
-
-client.on('shardDisconnect', (event, id) => Logger.info(`Shard ${id} disconnected and does not reconnect`))
-
-client.on('shardError', (error, shardID) => Logger.error(`Shard ${shardID} encountered following error: ${error}`))
-
-client.on('shardReconnecting', (id) => Logger.info(`Shard ${id} reconnected`))
-
-client.on('shardResume', (id, replayedEvents) => Logger.info(`Shard ${id} resumed with ${replayedEvents} replayed events`))
-
-client.on('disconnect', () => Logger.info('Disconnected!'))
 
 // This event will be triggered when the bot joins a guild.
 client.on('guildCreate', async guild => {
