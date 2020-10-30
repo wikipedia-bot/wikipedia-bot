@@ -2,7 +2,7 @@
 const { ShardingManager } = require('discord.js')
 const { TOKEN } = require('./config')
 // Manager
-const manager = new ShardingManager('./bot.js', { token: TOKEN })
+const manager = new ShardingManager('./bot.js', { totalShards: 'auto', token: TOKEN })
 // Logger
 const Util = require('./modules/util')
 const Logger = new Util.Logger()

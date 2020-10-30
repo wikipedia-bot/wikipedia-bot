@@ -52,7 +52,7 @@ via [PayPal](https://www.paypal.me/julianyaman).
 With your help, it is now even more possible for me, to push projects and t
 o finance them (e.g. hosting the servers) and to keep the current projects online.
 
-<a href="https://www.buymeacoffee.com/julianyaman" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/julianyaman" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60px"></a>
 
 ## 👍 Sponsors & Partners
 There is now the possibility to sponsor this project on GitHub, on Buy Me A Coffee or to donate via PayPal.
