@@ -23,7 +23,7 @@ module.exports = {
 				author: {
 					name: message.client.user.username,
 					icon_url: 'https://cdn.discordapp.com/avatars/554751047030013953/29bda61e7319dd2b49961313b1256231.png',
-					url: 'https://julianyaman.de',
+					// url: 'https://julianyaman.de',
 				},
 				description: `Need help? Type **${config.PREFIX}help**`,
 				color: 3447003,
@@ -40,12 +40,12 @@ module.exports = {
 					},
 					{
 						name: 'Website',
-						value: '[julianyaman.de](https://www.julianyaman.de/)',
+						value: 'coming soon',
 						inline: true,
 					},
 					{
 						name: 'Owner',
-						value: 'yaman#8901',
+						value: 'yaman#0001',
 						inline: true,
 					},
 					{
@@ -54,7 +54,7 @@ module.exports = {
 						inline: true,
 					},
 					{
-						name: 'Discord',
+						name: 'Discord server',
 						value: '[Join](https://discord.gg/ccpgH3b)',
 						inline: true,
 					},
@@ -75,7 +75,7 @@ module.exports = {
 					},
 					{
 						name: 'Donate',
-						value: '[via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url)',
+						value: '[on Buy Me A Coffee](https://www.buymeacoffee.com/julianyaman)',
 						inline: true,
 					},
 				],
