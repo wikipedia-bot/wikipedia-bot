@@ -6,22 +6,33 @@
 
 - ``!help`` - You guessed it!
 - ``!wiki <search term>`` - Gives you a short summary of a Wikipedia article you searched for! 
-- ``!sources "<search>" <range>`` - This command sends you the references used in a Wikipedia article. (Example: ``!sources "GitHub" 1-5``) *(more help needed? -> Write ``!sources`` in a channel)*
+- ``!references "<search>" <range>`` - This command sends you the references used in a Wikipedia article. (Example: ``!sources "GitHub" 1-5``) *(more help needed? -> Write ``!sources`` in a channel)*
 
+## Configuration
+- ``!config or !systemctl`` - Customize the bots' behaviour for your server (currently you can only change the prefix)
+
+## Languages
+These commands work exactly like the `wiki` command, just with the language prefix added to the command.
+You can get summaries of Wikipedia articles in follwing language:
+- ``!wiki-de`` - German
+- ``!wiki-es`` - Spanish
+- ``!wiki-fr`` - French
+- ``!wiki-ru`` - Russian
+- ``!wiki-sl`` - Slovenian
+- ``!wiki-tr`` - Turkish
+- ``!wiki-yi`` - Yiddish
 
 ## Bot related commands:
-- ``!info`` - Information and stats about the bot.
-- ``!bot`` - Sends you a bot invite link with which you can invite the bot
-to your own server.
+- ``!info`` - Gives you some information about the bot.
 
 ## -- Support the developers effort by promoting --
-- ``!vote`` - Vote for the bot on the Discord Bot list sites the bot is listed on. 
+- ``!vote`` - Vote for the bot on the Discord Bot list sites where it is listed on. 
 
 ## Miscellaneous
-- ``!issue`` - Sends you a link to the Issues section of the repository of the bot.
+- ``!donate`` - Shows how you can support this, and many more projects, financially.
 - ``!github`` - Sends you a link to this GitHub repository
 
-## PROMOTION: The History Discord
+### Promotion: The History Discord
 
 The History Discord server is a place where you can talk and discuss about history and historical events or ask 
 people to help you for your school project about History and historical events or timelines.
