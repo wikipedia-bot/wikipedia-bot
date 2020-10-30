@@ -22,14 +22,15 @@ module.exports = {
 			embed: {
 				color: 0xffffff,
 				title: 'Support the development with a donation',
+				description: `If you donated, you will receive a special role on my Discord Server. Type ${config.PREFIX}info to get the invite link.`,
 				fields: [
 					{
-						name: 'Donate',
-						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url).',
+						name: '☕️ Buy Me A Coffee (best option)',
+						value: 'You can buy me a coffee [here](https://www.buymeacoffee.com/julianyaman).',
 					},
 					{
-						name: 'Patreon',
-						value: 'Become a Patron [here](https://www.patreon.com/yaman071).',
+						name: 'PayPal',
+						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url).',
 					},
 				],
 			},
