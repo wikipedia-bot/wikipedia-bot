@@ -29,7 +29,7 @@ module.exports = {
 					},
 					{
 						name: 'Commands',
-						value: '[Click here](https://www.julianyaman.de/#commands) to see all commands.',
+						value: '[Click here](https://www.notion.so/wikipediabot/Commands-37fa263b9af14332baf70197e4f33e3f) to see all commands.',
 					},
 					{
 						name: 'Invite',
