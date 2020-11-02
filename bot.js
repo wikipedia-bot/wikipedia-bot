@@ -68,7 +68,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -80,7 +80,7 @@ client.on('ready', async () => {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
+				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
 			},
 		}).catch(e => {
 			console.error(e)
