@@ -37,7 +37,7 @@ module.exports = {
 					},
 					{
 						name: 'Donate',
-						value: 'You can [donate here via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJHABMNBYCTBC&source=url).',
+						value: 'Type ' + config.PREFIX + 'donate .',
 					},
 					{
 						name: 'Patreon',
