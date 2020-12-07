@@ -8,7 +8,7 @@ const Keyv = require('keyv');
 const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT } = require('./config')
+const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT, OWNERID } = require('./config')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 
 // Modules
@@ -91,7 +91,7 @@ client.on('ready', async () => {
 
 		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
 		setInterval(async () => {
-			updater.updateTopGg(await this.guildCount(), client.shard.count)
+			updater.updateTopGg(client.guilds.cache.size, client.shard.count)
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
@@ -184,7 +184,7 @@ client.on('message', async message => {
 
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
-		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
+		client.commands.get('help').execute(message, null, { PREFIX, VERSION, OWNERID })
 	}
 
 	if (message.author.bot) return

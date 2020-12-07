@@ -13,20 +13,18 @@ exports.BotListUpdater = class {
 	/**
 	 * Updates the numbers on top.gg
 	 *
-	 * @param {Number} guildSize - Amount of guilds where the server is on.
+	 * @param {Number} clientGuilds - Amount of guilds where the server is on.
 	 * @param {Number} shards - Total amount of shards.
 	 *
 	 * */
-	updateTopGg(guildSize, shards) {
-		if (this.shardId === 0) {
-			this.dbl.postStats(guildSize, this.shardId, shards).then(r => Logger.info('Updated guild amount on top.gg', r))
-			this.dbl.on('error', e => {
-				if (config.DEVELOPMENT !== true) {
-					Logger.error('Error occurred while trying to update the server amount on top.gg!')
-					console.error(e)
-				}
-			})
-		}
+	updateTopGg(clientGuilds, shards) {
+		this.dbl.postStats(clientGuilds, this.shardId, shards).then(r => Logger.info('Updated guild amount on top.gg', r))
+		this.dbl.on('error', e => {
+			if (config.DEVELOPMENT !== true) {
+				Logger.error('Error occurred while trying to update the server amount on top.gg!')
+				console.error(e)
+			}
+		})
 	}
 
 	/**
