@@ -5,26 +5,7 @@ const Logger = new Util.Logger()
 
 exports.BotListUpdater = class {
 	constructor(shardId) {
-		this.DBL = require('dblapi.js')
-		this.dbl = new this.DBL(config.DISCORDBOTS_TOKEN, this.client)
 		this.shardId = shardId;
-	}
-
-	/**
-	 * Updates the numbers on top.gg
-	 *
-	 * @param {Number} clientGuilds - Amount of guilds where the server is on.
-	 * @param {Number} shards - Total amount of shards.
-	 *
-	 * */
-	updateTopGg(clientGuilds, shards) {
-		this.dbl.postStats(clientGuilds, this.shardId, shards).then(r => Logger.info('Updated guild amount on top.gg', r))
-		this.dbl.on('error', e => {
-			if (config.DEVELOPMENT !== true) {
-				Logger.error('Error occurred while trying to update the server amount on top.gg!')
-				console.error(e)
-			}
-		})
 	}
 
 	/**
@@ -58,6 +39,7 @@ exports.BotListUpdater = class {
 	}
 
 	/**
+	 * @deprecated
 	 * Updates the numbers on discordbotlist.com
 	 *
 	 * @param {Number} guildSize - Amount of guilds where the server is on.

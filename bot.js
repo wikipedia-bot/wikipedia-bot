@@ -89,11 +89,6 @@ client.on('ready', async () => {
 		// Creating a new updater
 		const updater = new BotListUpdater(myShardId)
 
-		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
-		setInterval(async () => {
-			updater.updateTopGg(client.guilds.cache.size, client.shard.count)
-		}, 1800000);
-
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
 		setInterval(async () => {
 			updater.updateBotsXyz(await this.guildCount())
