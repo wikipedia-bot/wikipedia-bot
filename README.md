@@ -101,7 +101,7 @@ You want to report a bug? You can do that on Discord or here on GitHub.
 
 ## 📝 License
 
-Copyright © 2019 [Julian Yaman <julianyaman@posteo.eu>](https://julianyaman.de).<br />
+Copyright © 2021 [Julian Yaman <julianyaman@posteo.eu>](https://julianyaman.de).<br />
 This project is [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE) licensed.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)
