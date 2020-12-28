@@ -1,4 +1,9 @@
-const config = require('./../config')
+require('dotenv').config()
+const config = {
+	BOT_ID: process.env.BOT_ID,
+	ONDISCORDXYZ_TOKEN: process.env.ONDISCORDXYZ_TOKEN,
+	DISCORDBOTLIST_TOKEN: process.env.DISCORDBOTLIST_TOKEN,
+}
 const got = require('got')
 const Util = require('./util')
 const Logger = new Util.Logger()
@@ -16,7 +21,7 @@ exports.BotListUpdater = class {
 	 * */
 	updateBotsXyz(guildSize) {
 		if (this.shardId === 0) {
-			got.post(`https://bots.ondiscord.xyz/bot-api/bots/${config.ONDISCORDXYZ_BOTID}/guilds`, {
+			got.post(`https://bots.ondiscord.xyz/bot-api/bots/${config.BOT_ID}/guilds`, {
 				headers: {
 					'Authorization': config.ONDISCORDXYZ_TOKEN,
 				},
@@ -48,7 +53,7 @@ exports.BotListUpdater = class {
 	 *
 	 * */
 	updateDiscordBotList(guildSize, memberAmount, voiceConnectionSize) {
-		got.post(`https://discordbotlist.com/api/v1/bots/${config.ONDISCORDXYZ_BOTID}/stats`, {
+		got.post(`https://discordbotlist.com/api/v1/bots/${config.BOT_ID}/stats`, {
 			headers: {
 				'Authorization': 'Bot ' + config.DISCORDBOTLIST_TOKEN,
 			},

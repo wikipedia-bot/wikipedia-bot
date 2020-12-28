@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Discord = require('discord.js')
 if (process.version.slice(1).split('.')[0] < 12) {
 	console.error('Node 12.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
@@ -8,11 +9,17 @@ const Keyv = require('keyv');
 const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const { DEFAULTPREFIX, VERSION, TOKEN, DEVELOPMENT, OWNERID } = require('./config')
-const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
+
+const config = {
+	ENVIRONMENT: process.env.NODE_ENV,
+	DEFAULTPREFIX: process.env.DEFAULTPREFIX,
+	VERSION: process.env.VERSION,
+	TOKEN: process.env.DISCORD_TOKEN,
+}
 
 // Modules
 const Util = require('./modules/util')
+const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 const Logger = new Util.Logger();
 const fs = require('fs');
 
@@ -61,26 +68,27 @@ client.on('error', console.error)
 client.on('ready', async () => {
 
 	Logger.info('\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version)
-	Logger.info('This Bot is online and it is running on version: ' + VERSION)
+	Logger.info('This Bot is online and it is running on version: ' + config.VERSION)
+	Logger.warn('The environment is currently set on ' + config.ENVIRONMENT)
 
-	if (DEVELOPMENT === true) {
+	if (config.ENVIRONMENT === 'development') {
 
 		client.user.setPresence({
 			status: 'idle',
 			activity: {
-				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
+				name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
 			},
 		}).catch(e => {
 			console.error(e)
 		})
-		Logger.warn('Bot is currently set on DEVELOPMENT = true')
+
 
 	}
 	else {
 		client.user.setPresence({
 			status: 'online',
 			activity: {
-				name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
+				name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
 			},
 		}).catch(e => {
 			console.error(e)
@@ -111,17 +119,17 @@ client.on('guildCreate', async guild => {
 	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${await this.guildCount()}`)
 
 	// saving guild to the database with standard prefix
-	await prefixcache.set(guild.id, DEFAULTPREFIX)
+	await prefixcache.set(guild.id, config.DEFAULTPREFIX)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
+			name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
 	})
 	// Sending a "Thank you" message to the owner of the guild
-	await guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + DEFAULTPREFIX + 'vote** in this channel.')
+	await guild.owner.send('Thank you for using Wikipedia Bot. :)')
 
 
 })
@@ -137,7 +145,7 @@ client.on('guildDelete', async guild => {
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
+			name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -175,11 +183,12 @@ client.on('message', async message => {
 	if (message.channel.type === 'dm') return
 
 	// eslint-disable-next-line prefer-const
-	let PREFIX = await prefixcache.get(message.guild.id) || DEFAULTPREFIX
+	let PREFIX = await prefixcache.get(message.guild.id) || config.DEFAULTPREFIX
+	const VERSION = config.VERSION;
 
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
-		client.commands.get('help').execute(message, null, { PREFIX, VERSION, OWNERID })
+		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
 	}
 
 	if (message.author.bot) return
@@ -204,7 +213,7 @@ client.on('message', async message => {
 })
 
 // eslint-disable-next-line no-unused-vars
-client.login(TOKEN).catch(Logger.error);
+client.login(config.TOKEN).catch(Logger.error);
 
 process.on('unhandledRejection', PromiseRejection => {
 	console.error(PromiseRejection)
