@@ -21,8 +21,8 @@ When you submit a pull request, please follow the template.
 
 ## What you need to consider when you code:
 
-In the root directory, you need to create a file called `config.js`, otherwise the bot won't start.
+In the root directory, you need to create a file called `.env`, otherwise the bot won't start.
 
-The template for this file can be found in `example-config.js`.
+A template for this file can be found in `.example.env`.
 
 
