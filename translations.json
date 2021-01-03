@@ -1,0 +1,37 @@
+{
+    "wiki_language_command_embed": {
+        "de": {
+            "embedBody": "Um Wikipedia-Artikel in dieser Sprache zu erhalten, musst du zuerst auf **top.gg** für den Bot voten. Danach kannst du für **12 Stunden** Wikipedia-Artikel in Deutsch anfragen. Damit unterstützt du den Entwickler und das Projekt. \n\n[**Klick hier um zu voten**](https://top.gg/bot/554751047030013953/vote)\n\nVielen Dank 😄",
+            "embedFooter": "Ist diese Übersetzung fehlerhaft? Bitte informiere die Entwickler auf GitHub oder auf Discord."
+        },
+        "en": {
+            "embedBody": "To receive Wikipedia articles in this language, you first have to vote for the bot on **top.gg**. Then you can request Wikipedia articles in English for **12 hours**. With this you support the developer and the project. \n\n[** Click here to vote **](https://top.gg/bot/554751047030013953/vote) \n\n Thank you 😄",
+            "embedFooter": "Is this translation incorrect? Please inform the developers on GitHub or on Discord."
+        },
+        "fr": {
+            "embedBody": "Pour recevoir des articles Wikipédia dans cette langue, vous devez d'abord voter pour le bot sur **top.gg**. Vous pouvez ensuite demander des articles Wikipédia en français pendant **12 heures**. Avec cela, vous soutenez le développeur et le projet. \n\n[**Cliquez ici pour voter**](https://top.gg/bot/554751047030013953/vote)\n\nMerci 😄",
+            "embedFooter": "Cette traduction est-elle incorrecte? Veuillez nous informer sur GitHub ou sur Discord."
+        },
+        "es": {
+            "embedBody": "Para recibir artículos de Wikipedia en este idioma, primero debe votar por el bot en **top.gg**. Luego puede solicitar artículos de Wikipedia en español durante **12 horas**. Con esto apoyas al desarrollador y al proyecto. \n\n[**Haga clic aquí para votar**](https://top.gg/bot/554751047030013953/vote) \n\nGracias 😄",
+            "embedFooter": "¿Esta traducción es incorrecta? Infórmanos en GitHub o en Discord."
+        },
+        "ru": {
+            "embedBody": "Чтобы получать статьи Википедии на этом языке, сначала нужно проголосовать за бота на **top.gg**. Затем вы можете запросить статьи из Википедии на испанском языке на **12 часов**. Этим вы поддерживаете разработчика и проект. \n\n[**Нажмите здесь, чтобы проголосовать**](https://top.gg/bot/554751047030013953/vote) \n\nСпасибо 😄",
+            "embedFooter": "Это неверный перевод? Сообщите нам об этом на GitHub или в Discord."
+        },
+        "sl": {
+            "embedBody": "Če želite prejemati članke iz Wikipedije v tem jeziku, morate najprej glasovati za bota na **top.gg**. Nato lahko za **12 ur** zahtevate članke iz Wikipedije v španščini. S tem podpirate razvijalca in projekt. \n\n[**Kliknite tukaj, če želite glasovati**](https://top.gg/bot/554751047030013953/vote) \n\nHvala 😄",
+            "embedFooter": "Ali je ta prevod napačen? Prosimo, obvestite nas na GitHub ali na Discord."
+        },
+        "tr": {
+            "embedBody": "Wikipedia makalelerini bu dilde almak için, önce **top.gg** üzerindeki bota oy vermeniz gerekir. Daha sonra İspanyolca Wikipedia makalelerini **12 saat** için isteyebilirsiniz. Bununla geliştiriciyi ve projeyi destekliyorsunuz. \n\n[**Oy vermek için burayı tıklayın**](https://top.gg/bot/554751047030013953/vote) \n\nTeşekkürler 😄",
+            "embedFooter": "Bu çeviri yanlış mı? Lütfen bizi GitHub veya Discord üzerinden bilgilendirin."
+        },
+        "yi": {
+            "embedBody": "צו באַקומען וויקיפּעדיע אַרטיקלען אין דעם שפּראַך, איר ערשטער מוזן שטימען פֿאַר די באָט אויף **top.gg**. דערנאָך איר קענען בעטן Wikipedia אַרטיקלען אין שפּאַניש פֿאַר **12 שעה**. מיט דעם איר שטיצן די דעוועלאָפּער און די פּרויעקט. \n\n [**קליקט דאָ צו שטימען**](https://top.gg/bot/554751047030013953/vote) \n\n א דאנק 😄",
+            "embedFooter": "איז די איבערזעצונג נישט ריכטיק? ביטע מיטטיילן אונדז אויף גיטהוב אָדער אויף דיסקאָרד."
+        }
+    }
+}
+    
