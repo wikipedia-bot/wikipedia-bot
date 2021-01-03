@@ -22,11 +22,11 @@ exports.BotListUpdater = class {
 	updateBotsXyz(guildSize) {
 		if (this.shardId === 0) {
 			got.post(`https://bots.ondiscord.xyz/bot-api/bots/${config.BOT_ID}/guilds`, {
-				headers: {
-					'Authorization': config.ONDISCORDXYZ_TOKEN,
-				},
 				json: {
-					'guildCount': guildSize,
+					guildCount: guildSize,
+				},
+				headers: {
+					Authorization: config.ONDISCORDXYZ_TOKEN.toString()
 				},
 				responseType: 'json',
 			}).then(res => {
