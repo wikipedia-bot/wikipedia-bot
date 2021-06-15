@@ -1,6 +1,6 @@
 {
   "name": "wikipedia-bot",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "A bot where you can search Wikipedia articles with it. Not affiliated with any service or product of the Wikimedia Foundation.",
   "main": "index.js",
   "scripts": {
