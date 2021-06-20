@@ -8,7 +8,19 @@ if (process.version.slice(1).split('.')[0] < 12) {
 const Keyv = require('keyv');
 const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
 
-const client = new Discord.Client({ disableMentions: 'everyone' });
+const client = new Discord.Client(
+	{
+		disableMentions: 'everyone',
+		ws: {
+			intents: [
+				'DIRECT_MESSAGES',
+				'GUILD_MEMBERS',
+				'GUILD_MESSAGE_REACTIONS',
+				'GUILD_MESSAGES',
+				'GUILDS',
+			],
+		},
+	});
 
 const config = {
 	ENVIRONMENT: process.env.NODE_ENV,
