@@ -10,13 +10,7 @@ module.exports = {
 	name: 'info',
 	description: 'Gives you some information about the bot.',
 	async execute(message, args, config) {
-		// Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+		Logger.info(`${config.PREFIX + this.name} used.`)
 
 		await message.channel.send({
 			embed: {
@@ -76,7 +70,7 @@ module.exports = {
 					{
 						name: 'GitHub',
 						value: '[Repository](https://github.com/julianYaman/wikipedia-bot)',
-						inline: true,
+						inline: false,
 					},
 					{
 						name: 'Donate',

@@ -25,6 +25,7 @@ const client = new Discord.Client(
 		},
 	});
 
+// Initializing Clustering
 client.cluster = new Cluster.Client(client)
 
 const config = {

@@ -87,13 +87,7 @@ module.exports = {
 			}
 		}
 
-		// Check in what type of channel the command was executed
-		if (message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} (args: [${args}]) used in a private ${message.channel.type}.`)
-		}
-		else {
-			Logger.info(`${config.PREFIX + this.name} (args: [${args}]) used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+		Logger.info(`${config.PREFIX + this.name} used.`)
 
 		if (!args[1]) {
 			message.react('👎').catch(e => Logger.error(e))

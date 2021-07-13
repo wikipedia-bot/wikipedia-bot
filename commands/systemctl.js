@@ -25,7 +25,7 @@ module.exports = {
 	async execute(message, args, config) {
 		// eslint-disable-next-line no-mixed-spaces-and-tabs
 
-		Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users).`)
+		Logger.info(`${config.PREFIX + this.name} used.`)
 
 		// eslint-disable-next-line no-mixed-spaces-and-tabs
 		if (!args[1] || args[1] !== 'set') {
