@@ -16,7 +16,7 @@ module.exports = {
 
 		const command = args[0].slice(config.PREFIX.length)
 
-		Logger.info(`${config.PREFIX + this.name} used.`)
+		Logger.info(`${config.PREFIX + this.name} was used.`)
 
 		if(!args[1]) {
 

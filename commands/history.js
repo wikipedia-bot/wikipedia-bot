@@ -9,7 +9,7 @@ module.exports = {
 	name: 'history',
 	description: 'Sends you an invite link to The History Discord as a private link.',
 	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} used.`)
+		Logger.info(`${config.PREFIX + this.name} was used.`)
 
 		if(message.deletable) message.delete();
 

@@ -10,7 +10,7 @@ module.exports = {
 	alias: ['patreon'],
 	description: '',
 	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} used.`)
+		Logger.info(`${config.PREFIX + this.name} was used.`)
 
 		message.channel.send({
 			embed: {

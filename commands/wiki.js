@@ -87,7 +87,7 @@ module.exports = {
 			}
 		}
 
-		Logger.info(`${config.PREFIX + this.name} used.`)
+		Logger.info(`${config.PREFIX + this.name} was used.`)
 
 		if (!args[1]) {
 			message.react('👎').catch(e => Logger.error(e))

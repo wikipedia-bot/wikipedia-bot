@@ -9,7 +9,7 @@ module.exports = {
 	name: 'vote',
 	description: '**SUPPORT US WITH A VOTE:** Vote for the bot on top.gg.',
 	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} used.`)
+		Logger.info(`${config.PREFIX + this.name} was used.`)
 
 		if(message.deletable) message.delete();
 

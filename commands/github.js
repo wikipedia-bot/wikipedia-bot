@@ -9,7 +9,7 @@ module.exports = {
 	name: 'github',
 	description: 'DESCRIPTION',
 	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} used.`)
+		Logger.info(`${config.PREFIX + this.name} was used.`)
 
 		if(message.deletable) message.delete();
 
