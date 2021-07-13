@@ -27,6 +27,9 @@ exports.roundNumber = (value, precision) => {
 	return Math.round(value * multiplier) / multiplier
 }
 
+/**
+ * @deprecated Should be replaced with pino or loglevel soon
+ * */
 exports.Logger = class {
 
 	debug(text) {

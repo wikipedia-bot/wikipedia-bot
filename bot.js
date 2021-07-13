@@ -40,6 +40,7 @@ const Util = require('./modules/util')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 const Logger = new Util.Logger();
 const fs = require('fs');
+const osu = require('node-os-utils')
 
 let myShardId = undefined;
 
@@ -86,7 +87,7 @@ client.on('error', console.error)
 client.on('ready', async () => {
 
 	Logger.info('\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version)
-	Logger.info('This Bot is online and it is running on version: ' + config.VERSION)
+	Logger.info('This Bot is online, running on version ' + config.VERSION)
 	Logger.warn('The environment is currently set on ' + config.ENVIRONMENT)
 
 	if (config.ENVIRONMENT === 'development') {
@@ -99,7 +100,6 @@ client.on('ready', async () => {
 		}).catch(e => {
 			console.error(e)
 		})
-
 
 	}
 	else {
@@ -128,6 +128,12 @@ client.on('ready', async () => {
 	}
 
 	Logger.info(`Ready to serve on ${await this.guildCount()} servers for a total of ${await this.totalMembers()} users.`)
+
+	this.logResourcesUsage()
+	// Log the usage of server resources every 30 minutes
+	setInterval(async () => {
+		this.logResourcesUsage()
+	}, 1800000);
 })
 
 // This event will be triggered when the bot joins a guild.
@@ -195,6 +201,24 @@ exports.guildCount = async () => {
  * */
 exports.clusterCount = async () => {
 	return client.cluster.count;
+}
+
+/**
+ * Log server resource usage
+ * */
+exports.logResourcesUsage = () => {
+	Logger.debug('*** Cluster ' + myShardId + ' ***')
+	osu.cpu.usage()
+		.then(cpuPercentage => {
+			Logger.debug('CPU Usage: ' + cpuPercentage + '%')
+		})
+	osu.mem.info()
+		.then(memoryInfo => {
+			const usedByProcess = process.memoryUsage().heapUsed / 1024 / 1024;
+			const usedServerMemoryInPercent = Math.round(((memoryInfo.usedMemMb / memoryInfo.totalMemMb) * 100) * 100) / 100 + ' %'
+			Logger.debug('RAM Usage of process: ' + Math.round(usedByProcess * 100) / 100 + ' MB')
+			Logger.debug('RAM Usage of server: ' + memoryInfo.usedMemMb + ' / ' + memoryInfo.totalMemMb + ' MB (' + usedServerMemoryInPercent + ')')
+		})
 }
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case
