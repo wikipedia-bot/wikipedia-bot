@@ -22,10 +22,10 @@ module.exports = {
 	name: 'systemctl',
 	alias: ['config'],
 	description: 'Displays your current settings and allows you to update your settings.',
-	async execute(message, args, config) {
+	async execute(message, args, config, clusterId) {
 		// eslint-disable-next-line no-mixed-spaces-and-tabs
 
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		// eslint-disable-next-line no-mixed-spaces-and-tabs
 		if (!args[1] || args[1] !== 'set') {

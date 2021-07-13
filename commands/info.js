@@ -9,8 +9,8 @@ const bot = require('../bot')
 module.exports = {
 	name: 'info',
 	description: 'Gives you some information about the bot.',
-	async execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+	async execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		await message.channel.send({
 			embed: {

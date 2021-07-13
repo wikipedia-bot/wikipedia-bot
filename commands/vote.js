@@ -8,8 +8,8 @@ const Logger = new Util.Logger();
 module.exports = {
 	name: 'vote',
 	description: '**SUPPORT US WITH A VOTE:** Vote for the bot on top.gg.',
-	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		if(message.deletable) message.delete();
 

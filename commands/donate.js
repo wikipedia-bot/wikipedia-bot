@@ -9,8 +9,8 @@ module.exports = {
 	name: 'donate',
 	alias: ['patreon'],
 	description: '',
-	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		message.channel.send({
 			embed: {

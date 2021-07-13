@@ -9,8 +9,8 @@ module.exports = {
 	name: 'help',
 	alias: ['invite', 'bot'],
 	description: 'The help command shows a full list of all commands.',
-	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		message.channel.send({
 			embed: {

@@ -14,7 +14,7 @@ module.exports = {
 	name: 'wiki',
 	alias: ['wiki-de', 'wiki-es', 'wiki-fr', 'wiki-ru', 'wiki-sl', 'wiki-tr', 'wiki-yi'],
 	description: 'Search something on Wikipedia with this command and get a short summary of it.',
-	async execute(message, args, config) {
+	async execute(message, args, config, clusterId) {
 
 		const command = args[0].slice(config.PREFIX.length)
 
@@ -87,7 +87,7 @@ module.exports = {
 			}
 		}
 
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		if (!args[1]) {
 			message.react('👎').catch(e => Logger.error(e))

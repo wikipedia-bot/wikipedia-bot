@@ -8,8 +8,8 @@ const Logger = new Util.Logger();
 module.exports = {
 	name: 'github',
 	description: 'DESCRIPTION',
-	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		if(message.deletable) message.delete();
 

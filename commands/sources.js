@@ -12,11 +12,11 @@ module.exports = {
 	name: 'sources',
 	alias: ['references'],
 	description: 'Sends you a full list of all sources of a Wikipedia article',
-	async execute(message, args, config) {
+	async execute(message, args, config, clusterId) {
 
 		const command = args[0].slice(config.PREFIX.length)
 
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		if(!args[1]) {
 

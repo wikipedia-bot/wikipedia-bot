@@ -8,8 +8,8 @@ const Logger = new Util.Logger();
 module.exports = {
 	name: 'history',
 	description: 'Sends you an invite link to The History Discord as a private link.',
-	execute(message, args, config) {
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		if(message.deletable) message.delete();
 

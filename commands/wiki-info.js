@@ -8,9 +8,9 @@ const Logger = new Util.Logger();
 module.exports = {
 	name: 'wiki-info',
 	description: 'It helps you to get specific information about a specific topic (e.g. dates, numbers, etc.)',
-	execute(message, args, config) {
+	execute(message, args, config, clusterId) {
 
-		Logger.info(`${config.PREFIX + this.name} was used.`)
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		message.react('👎').catch((e) => {
 			Logger.error(`wiki-info Command -> !args[0] -> message.react -> catch e: ${e} | ${message.guild.name} (${message.guild.id})`)
