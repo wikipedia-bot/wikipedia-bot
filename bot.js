@@ -14,7 +14,7 @@ const client = new Discord.Client(
 		disableMentions: 'everyone',
 		shards: Cluster.data.SHARD_LIST,
 		shardCount: Cluster.data.TOTAL_SHARDS,
-		ws: {
+		/*		ws: {
 			intents: [
 				'DIRECT_MESSAGES',
 				'GUILD_MEMBERS',
@@ -22,7 +22,7 @@ const client = new Discord.Client(
 				'GUILD_MESSAGES',
 				'GUILDS',
 			],
-		},
+		}, */
 	});
 
 // Initializing Clustering
