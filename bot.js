@@ -1,4 +1,5 @@
 require('dotenv').config()
+const Cluster = require('discord-hybrid-sharding');
 const Discord = require('discord.js')
 if (process.version.slice(1).split('.')[0] < 12) {
 	console.error('Node 12.0.0 or higher is required. Please upgrade Node.js on your computer / server.')
@@ -11,6 +12,8 @@ const prefixcache = new Keyv('sqlite://data/prefixes.sqlite')
 const client = new Discord.Client(
 	{
 		disableMentions: 'everyone',
+		shards: Cluster.data.SHARD_LIST,
+		shardCount: Cluster.data.TOTAL_SHARDS,
 		ws: {
 			intents: [
 				'DIRECT_MESSAGES',
@@ -21,6 +24,8 @@ const client = new Discord.Client(
 			],
 		},
 	});
+
+client.cluster = new Cluster.Client(client)
 
 const config = {
 	ENVIRONMENT: process.env.NODE_ENV,
@@ -58,7 +63,7 @@ prefixcache.on('error', e => Logger.error('There was an error with the keyv pack
 
 // Sharding Events
 client.on('shardReady', (id) => {
-	Logger.info(`Shard ${id} is ready!`)
+	Logger.info(`Cluster ${id} is ready!`)
 	myShardId = id;
 })
 
@@ -135,7 +140,7 @@ client.on('guildCreate', async guild => {
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
+			name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -157,7 +162,7 @@ client.on('guildDelete', async guild => {
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
-			name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers`,
+			name: `${config.DEFAULTPREFIX}help | ${await this.guildCount()} servers (${myShardId})`,
 		},
 	}).catch(e => {
 		console.error(e)
@@ -168,7 +173,7 @@ client.on('guildDelete', async guild => {
  * Returns the total amount of users who use the bot.
  * */
 exports.totalMembers = async () => {
-	return client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)')
+	return client.cluster.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)')
 		.then(res => {
 			return res.reduce((prev, memberCount) => prev + memberCount, 0)
 		}).catch(console.error)
@@ -178,10 +183,17 @@ exports.totalMembers = async () => {
  * Counting all guilds.
  * */
 exports.guildCount = async () => {
-	return client.shard.fetchClientValues('guilds.cache.size')
+	return client.cluster.fetchClientValues('guilds.cache.size')
 		.then(res => {
 			return res.reduce((prev, count) => prev + count, 0)
 		}).catch(console.error)
+}
+
+/**
+ * Counting all clusters.
+ * */
+exports.clusterCount = async () => {
+	return client.cluster.count;
 }
 
 // We're logging some commands or messages to make the bot better and to fix more bugs. This will be only the case

@@ -1,7 +1,7 @@
 module.exports = {
 	apps : [{
 		name: 'wikipedia-bot',
-		script: './index.js',
+		script: './cluster.js',
 		env: {
 			NODE_ENV: 'development',
 		},
