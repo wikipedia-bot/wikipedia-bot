@@ -8,14 +8,8 @@ const Logger = new Util.Logger();
 module.exports = {
 	name: 'vote',
 	description: '**SUPPORT US WITH A VOTE:** Vote for the bot on top.gg.',
-	execute(message, args, config) {
-		// Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		if(message.deletable) message.delete();
 

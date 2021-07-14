@@ -9,14 +9,8 @@ module.exports = {
 	name: 'help',
 	alias: ['invite', 'bot'],
 	description: 'The help command shows a full list of all commands.',
-	execute(message, args, config) {
-		// Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+	execute(message, args, config, clusterId) {
+		Logger.info(`${config.PREFIX + this.name} was used. (Cluster ${clusterId})`)
 
 		message.channel.send({
 			embed: {
