@@ -38,8 +38,8 @@ module.exports = {
 						inline: true,
 					},
 					{
-						name: 'Website',
-						value: 'coming soon',
+						name: '🆕 Website',
+						value: '[here](https://wikipediabot.yaman.pro/)',
 						inline: true,
 					},
 					{
@@ -64,13 +64,13 @@ module.exports = {
 					},
 					{
 						name: 'Invite the bot',
-						value: '[here](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328)',
+						value: '[Click to Invite](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328)',
 						inline: true,
 					},
 					{
 						name: 'GitHub',
 						value: '[Repository](https://github.com/julianYaman/wikipedia-bot)',
-						inline: false,
+						inline: true,
 					},
 					{
 						name: 'Donate',
