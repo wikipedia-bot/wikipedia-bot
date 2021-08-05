@@ -23,19 +23,15 @@ module.exports = {
 					},
 					{
 						name: 'Commands',
-						value: '[Click here](https://www.notion.so/wikipediabot/Commands-37fa263b9af14332baf70197e4f33e3f) to see all commands.',
+						value: '[Click here](https://wikipediabot.yaman.pro/commands) to see all commands.',
 					},
 					{
 						name: 'Invite',
 						value: '[Click here](https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328) to add the bot to your server.',
 					},
 					{
-						name: 'Donate',
+						name: 'Donate on Buy Me A Coffee',
 						value: 'Type ' + config.PREFIX + 'donate .',
-					},
-					{
-						name: 'Patreon',
-						value: 'Become a Patron [here](https://www.patreon.com/yaman071).',
 					},
 					{
 						name: 'Feedback & Support',
