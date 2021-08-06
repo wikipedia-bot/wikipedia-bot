@@ -3,6 +3,7 @@ const config = {
 	BOT_ID: process.env.BOT_ID,
 	ONDISCORDXYZ_TOKEN: process.env.ONDISCORDXYZ_TOKEN,
 	DISCORDBOTLIST_TOKEN: process.env.DISCORDBOTLIST_TOKEN,
+	TOPGG_TOKEN: process.env.TOPGG_TOKEN,
 }
 const got = require('got')
 const Util = require('./util')
@@ -11,6 +12,36 @@ const Logger = new Util.Logger()
 exports.BotListUpdater = class {
 	constructor(shardId) {
 		this.shardId = shardId;
+	}
+
+	/**
+	 * Updates the numbers on top.gg
+	 *
+	 * @param {Number} guildSize - Amount of guilds where the server is on.
+	 * @param {Number} shards - Amount of shards
+	 *
+	 * */
+	updateTopGG(guildSize, shards) {
+		got.post(`https://top.gg/api/bots/${config.BOT_ID}/stats`, {
+			json: {
+				server_count: guildSize,
+				shard_count: shards,
+			},
+			headers: {
+				Authorization: config.TOPGG_TOKEN.toString(),
+			},
+			responseType: 'json',
+		}).then(res => {
+			if (res.statusCode !== 204) {
+				Logger.error('Error occurred when trying to update the server amount on top.gg! Code: ' + res.statusCode)
+				console.error(res)
+			}
+			else {
+				Logger.info('Updated guild amount on top.gg')
+			}
+		}).catch(e => {
+			console.log(e)
+		})
 	}
 
 	/**
@@ -26,7 +57,7 @@ exports.BotListUpdater = class {
 					guildCount: guildSize,
 				},
 				headers: {
-					Authorization: config.ONDISCORDXYZ_TOKEN.toString()
+					Authorization: config.ONDISCORDXYZ_TOKEN.toString(),
 				},
 				responseType: 'json',
 			}).then(res => {

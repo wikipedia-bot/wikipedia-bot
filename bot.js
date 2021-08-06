@@ -119,6 +119,9 @@ client.on('ready', async () => {
 		setInterval(async () => {
 			updater.updateBotsXyz(await this.guildCount())
 		}, 600000);
+		setInterval(async () => {
+			updater.updateTopGG(await this.guildCount(), await this.shardCount())
+		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
 		// setInterval(async () => {
@@ -199,8 +202,15 @@ exports.guildCount = async () => {
 /**
  * Counting all clusters.
  * */
-exports.clusterCount = async () => {
+exports.clusterCount = () => {
 	return client.cluster.count;
+}
+
+/**
+ * Counting all shards.
+ * */
+exports.shardCount = () => {
+	return client.shard.count;
 }
 
 /**
