@@ -34,7 +34,7 @@ module.exports = {
 					},
 					{
 						name: 'Clusters',
-						value: await bot.clusterCount(),
+						value: bot.clusterCount(),
 						inline: true,
 					},
 					{
