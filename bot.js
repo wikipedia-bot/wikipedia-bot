@@ -209,8 +209,9 @@ exports.clusterCount = () => {
 /**
  * Counting all shards.
  * */
-exports.shardCount = () => {
-	return client.shard.count;
+exports.shardCount = async () => {
+	return client.cluster.broadcastEval(`this.cluster.ids.size`)
+		.then(res => { return res.reduce((prev, shardCount) => prev + shardCount, 0)}).catch(console.error);
 }
 
 /**
