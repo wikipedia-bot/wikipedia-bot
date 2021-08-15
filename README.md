@@ -1,7 +1,4 @@
 <h1 align="center">🌍 Wikipedia Bot for Discord 🌎</h1>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <h2 align="center"><a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> Invite to your Server </a></h2>
 
@@ -23,6 +20,10 @@
 <a href="https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE">
 <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
 </a>
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END --> 
 
 ### 🏠 [Homepage & Commands](https://julianyaman.de)
 
