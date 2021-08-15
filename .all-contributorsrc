@@ -25,6 +25,21 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "julianYaman",
+      "name": "Julian Yaman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20521320?v=4",
+      "profile": "https://bio.link/julianyaman",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "ideas",
+        "maintenance",
+        "question",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
