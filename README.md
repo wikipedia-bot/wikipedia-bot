@@ -1,4 +1,7 @@
 <h1 align="center">🌍 Wikipedia Bot for Discord 🌎</h1>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <h2 align="center"><a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> Invite to your Server </a></h2>
 
@@ -63,17 +66,25 @@ Here is a list of people already donated or sponsored:
 
 Thank you very much to every supporter who helped us to finance this, and many mores projects.
 
-## 👍 Contributors
+## ✨ Contributors
 
-All contributors of the project will be listed down here:
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-- Julian Yaman ([GitHub](https://github.com/julianYaman/)) ([Twitter](https://twitter.com/julianYaman)) **(creator)**
-- MeerBiene ([GitHub](https://github.com/MeerBiene)) **(Code Contributor, Issue Writer, Feature Proposer, Bug fixer)**
-- Giuliopime ([GitHub](https://github.com/Giuliopime) **(Code Contributor)**
-- Huskydog9988 ([GitHub](https://github.com/Huskydog9988)) **(Code Contributor, Bug fixer)**
-- Klemen Skerbiš ([GitHub](https://github.com/aha999)) **(Issue Writer, Feature Proposer)**
-- Artiom Neganov ([GitHub](https://github.com/OnkelTem)) **(Issue Writer, Feature Proposer)**
-- Jakey#5911 **(Feature Proposer)**
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/MeerBiene"><img src="https://avatars.githubusercontent.com/u/60227302?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MeerBiene</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=MeerBiene" title="Code">💻</a> <a href="#ideas-MeerBiene" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-MeerBiene" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## 🤝 Contributing
 

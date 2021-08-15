@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "MeerBiene",
+      "name": "MeerBiene",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60227302?v=4",
+      "profile": "https://github.com/MeerBiene",
+      "contributions": [
+        "code",
+        "ideas",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "wikipedia-bot",
+  "projectOwner": "wikipedia-bot",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
