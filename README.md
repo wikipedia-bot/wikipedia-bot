@@ -66,17 +66,25 @@ Here is a list of people already donated or sponsored:
 
 Thank you very much to every supporter who helped us to finance this, and many mores projects.
 
-## 👍 Contributors
+## ✨ Contributors
 
-All contributors of the project will be listed down here:
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-- Julian Yaman ([GitHub](https://github.com/julianYaman/)) ([Twitter](https://twitter.com/julianYaman)) **(creator)**
-- MeerBiene ([GitHub](https://github.com/MeerBiene)) **(Code Contributor, Issue Writer, Feature Proposer, Bug fixer)**
-- Giuliopime ([GitHub](https://github.com/Giuliopime) **(Code Contributor)**
-- Huskydog9988 ([GitHub](https://github.com/Huskydog9988)) **(Code Contributor, Bug fixer)**
-- Klemen Skerbiš ([GitHub](https://github.com/aha999)) **(Issue Writer, Feature Proposer)**
-- Artiom Neganov ([GitHub](https://github.com/OnkelTem)) **(Issue Writer, Feature Proposer)**
-- Jakey#5911 **(Feature Proposer)**
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/MeerBiene"><img src="https://avatars.githubusercontent.com/u/60227302?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MeerBiene</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=MeerBiene" title="Code">💻</a> <a href="#ideas-MeerBiene" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-MeerBiene" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## 🤝 Contributing
 
@@ -108,23 +116,3 @@ Copyright © 2021 [Julian Yaman <julianyaman@posteo.eu>](https://julianyaman.de)
 This project is [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE) licensed.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/MeerBiene"><img src="https://avatars.githubusercontent.com/u/60227302?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MeerBiene</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=MeerBiene" title="Code">💻</a> <a href="#ideas-MeerBiene" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-MeerBiene" title="Maintenance">🚧</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
