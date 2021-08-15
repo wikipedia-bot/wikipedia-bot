@@ -7,14 +7,12 @@
   "contributorsSortAlphabetically": true,
   "contributors": [
     {
-      "login": "MeerBiene",
-      "name": "MeerBiene",
-      "avatar_url": "https://avatars.githubusercontent.com/u/60227302?v=4",
-      "profile": "https://github.com/MeerBiene",
+      "login": "Giuliopime",
+      "name": "Giuliopime",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60524738?v=4",
+      "profile": "https://giuliopime.dev",
       "contributions": [
-        "code",
-        "ideas",
-        "maintenance"
+        "code"
       ]
     },
     {
@@ -28,7 +26,33 @@
         "ideas",
         "maintenance"
       ]
-    }
+    },
+    {
+      "login": "julianYaman",
+      "name": "Julian Yaman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20521320?v=4",
+      "profile": "https://bio.link/julianyaman",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "ideas",
+        "maintenance",
+        "question",
+        "review"
+      ]
+    },
+    {
+      "login": "MeerBiene",
+      "name": "MeerBiene",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60227302?v=4",
+      "profile": "https://github.com/MeerBiene",
+      "contributions": [
+        "code",
+        "ideas",
+        "maintenance"
+      ]
+     }
   ],
   "contributorsPerLine": 7,
   "projectName": "wikipedia-bot",
