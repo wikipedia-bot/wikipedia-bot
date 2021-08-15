@@ -1,4 +1,7 @@
 <h1 align="center">🌍 Wikipedia Bot for Discord 🌎</h1>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <h2 align="center"><a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> Invite to your Server </a></h2>
 
@@ -105,3 +108,23 @@ Copyright © 2021 [Julian Yaman <julianyaman@posteo.eu>](https://julianyaman.de)
 This project is [MIT](https://github.com/julianYaman/wikipedia-bot/blob/master/LICENSE) licensed.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FjulianYaman%2Fwikipedia-bot?ref=badge_large)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/MeerBiene"><img src="https://avatars.githubusercontent.com/u/60227302?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MeerBiene</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=MeerBiene" title="Code">💻</a> <a href="#ideas-MeerBiene" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-MeerBiene" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
