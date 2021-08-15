@@ -1,6 +1,6 @@
 <h1 align="center">🌍 Wikipedia Bot for Discord 🌎</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <h2 align="center"><a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> Invite to your Server </a></h2>
@@ -75,6 +75,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/Huskydog9988"><img src="https://avatars.githubusercontent.com/u/39809509?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Husky</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/issues?q=author%3AHuskydog9988" title="Bug reports">🐛</a> <a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=Huskydog9988" title="Code">💻</a> <a href="#ideas-Huskydog9988" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-Huskydog9988" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/MeerBiene"><img src="https://avatars.githubusercontent.com/u/60227302?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MeerBiene</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=MeerBiene" title="Code">💻</a> <a href="#ideas-MeerBiene" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-MeerBiene" title="Maintenance">🚧</a></td>
   </tr>
 </table>
