@@ -43,6 +43,15 @@
       ]
     },
     {
+      "login": "aha999",
+      "name": "Klemen Skerbiš",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50620416?v=4",
+      "profile": "https://github.com/aha999",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
       "login": "MeerBiene",
       "name": "MeerBiene",
       "avatar_url": "https://avatars.githubusercontent.com/u/60227302?v=4",
@@ -52,7 +61,7 @@
         "ideas",
         "maintenance"
       ]
-     }
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "wikipedia-bot",
