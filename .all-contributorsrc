@@ -7,14 +7,39 @@
   "contributorsSortAlphabetically": true,
   "contributors": [
     {
-      "login": "MeerBiene",
-      "name": "MeerBiene",
-      "avatar_url": "https://avatars.githubusercontent.com/u/60227302?v=4",
-      "profile": "https://github.com/MeerBiene",
+      "login": "Giuliopime",
+      "name": "Giuliopime",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60524738?v=4",
+      "profile": "https://giuliopime.dev",
       "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Huskydog9988",
+      "name": "Husky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39809509?v=4",
+      "profile": "https://github.com/Huskydog9988",
+      "contributions": [
+        "bug",
         "code",
         "ideas",
         "maintenance"
+      ]
+    },
+    {
+      "login": "julianYaman",
+      "name": "Julian Yaman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20521320?v=4",
+      "profile": "https://bio.link/julianyaman",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "ideas",
+        "maintenance",
+        "question",
+        "review"
       ]
     },
     {
@@ -24,6 +49,17 @@
       "profile": "https://github.com/aha999",
       "contributions": [
         "ideas"
+      ]
+    },
+    {
+      "login": "MeerBiene",
+      "name": "MeerBiene",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60227302?v=4",
+      "profile": "https://github.com/MeerBiene",
+      "contributions": [
+        "code",
+        "ideas",
+        "maintenance"
       ]
     }
   ],
