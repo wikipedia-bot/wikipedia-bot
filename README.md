@@ -75,6 +75,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="http://neganov.ru"><img src="https://avatars.githubusercontent.com/u/114060?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Artiom Neganov</b></sub></a><br /><a href="#ideas-OnkelTem" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/aha999"><img src="https://avatars.githubusercontent.com/u/50620416?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Klemen Skerbiš</b></sub></a><br /><a href="#ideas-aha999" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://giuliopime.dev"><img src="https://avatars.githubusercontent.com/u/60524738?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giuliopime</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=Giuliopime" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Huskydog9988"><img src="https://avatars.githubusercontent.com/u/39809509?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Husky</b></sub></a><br /><a href="https://github.com/wikipedia-bot/wikipedia-bot/issues?q=author%3AHuskydog9988" title="Bug reports">🐛</a> <a href="https://github.com/wikipedia-bot/wikipedia-bot/commits?author=Huskydog9988" title="Code">💻</a> <a href="#ideas-Huskydog9988" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-Huskydog9988" title="Maintenance">🚧</a></td>
