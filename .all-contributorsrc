@@ -16,6 +16,15 @@
         "ideas",
         "maintenance"
       ]
+    },
+    {
+      "login": "OnkelTem",
+      "name": "Artiom Neganov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114060?v=4",
+      "profile": "http://neganov.ru",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
