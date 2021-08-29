@@ -101,8 +101,9 @@ module.exports = {
 			})
 		}
 		else {
-			let searchValue = args.toString().replace(/,/g, ' ')
-			searchValue = searchValue.replace(config.PREFIX + command + ' ', '')
+			// let searchValue = args.toString().replace(/,/g, ' ')
+			// searchValue = searchValue.replace(config.PREFIX + command + ' ', '')
+			let searchValue = args.join(' ').slice(config.PREFIX.length + command.length + 1)
 
 			requests.getWikipediaShortSummary(message, searchValue, requestLang).catch(e => Logger.error(e))
 		}

@@ -43,13 +43,22 @@ const apiUrl = {
  * */
 exports.getWikipediaShortSummary = async (msg, argument, lang) => {
 
-	// Get all search result when searching the argument
-	const search = await wiki({
-		apiUrl: apiUrl[lang],
-		headers: {
-			'User-Agent': 'wikipedia-bot-requests (https://julianyaman.de; julianyaman@posteo.eu) requests.js',
-		},
-	}).search(argument)
+	if (argument == "-r" || argument == "--random") {
+		randomArticleName = await wiki().random()
+		const search = {
+			results: [randomArticleName]
+			// So search.results[0] still works below
+		}
+	} else {
+		// Get all search result when searching the argument
+		const search = await wiki({
+			apiUrl: apiUrl[lang],
+			headers: {
+				'User-Agent': 'wikipedia-bot-requests (https://julianyaman.de; julianyaman@posteo.eu) requests.js',
+			},
+		}).search(argument)
+	}
+
 	// Get the wiki page of the first result
 	const wikiPage = await wiki({
 		apiUrl: apiUrl[lang],
