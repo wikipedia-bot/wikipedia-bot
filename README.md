@@ -1,3 +1,5 @@
+> ⚠ **Attention:** The next generation of Wiki Bot can be found in our [canary repo](https://github.com/shitcorp/wikipedia-bot-canary/)
+
 <h1 align="center">🌍 Wikipedia Bot for Discord 🌎</h1>
 
 <h2 align="center"><a href="https://discordapp.com/oauth2/authorize?client_id=554751047030013953&scope=bot&permissions=3467328"> Invite to your Server </a></h2>
