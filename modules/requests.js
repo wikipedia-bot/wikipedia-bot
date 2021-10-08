@@ -44,9 +44,9 @@ const apiUrl = {
 exports.getWikipediaShortSummary = async (msg, argument, lang) => {
 
 	if (argument == "-r" || argument == "--random") {
-		randomArticleName = await wiki().random()
+		arrayOfOneRandomArticleName = await wiki().random()
 		const search = {
-			results: randomArticleName
+			results: arrayOfOneRandomArticleName
 			// So search.results[0] still works below
 		}
 	} else {
