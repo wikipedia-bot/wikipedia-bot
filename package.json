@@ -35,7 +35,7 @@
     "colors": "^1.4.0",
     "date-time": "^3.1.0",
     "discord-hybrid-sharding": "^1.1.1",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.4.0",
     "dotenv": "^10.0.0",
     "eslint": "^7.0.0",
     "express": "^4.17.1",
